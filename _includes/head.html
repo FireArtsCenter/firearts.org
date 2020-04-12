@@ -26,4 +26,7 @@
     {% capture css_block %}{% include styles.css %}{% endcapture %}
     <style amp-custom>{{ css_block }}</style>
     <!-- AMP Analytics --><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    {% if page.includeCMSScript %}
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    {% endif %}
 </head>
