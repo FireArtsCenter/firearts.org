@@ -1,3 +1,3 @@
 export default function Page() {
-	return <h1>Hello, Fire Arts Center</h1>
+	return <h1 className='font-raleway'>Hello, Fire Arts Center</h1>
 }

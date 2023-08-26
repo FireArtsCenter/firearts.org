@@ -1,8 +1,14 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
+/**
+ * TODO
+ * - add canonical url
+ *
+ */
+
 export default function Document() {
   return (
-    <Html>
+    <Html lang="en">
       <Head />
       <body>
         <Main />
