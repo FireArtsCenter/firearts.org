@@ -1,7 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
-import Header from "./components/header";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 
 /**
  * TODO
@@ -33,11 +35,13 @@ export default function RootLayout({
       >
         {/* GTM */}
         <div id="top" className="container grid grid-main mx-auto">
-          <Header title='Fire Arts Center' />
+          <Header />
+          <Navigation />
           <main id="content" className="px-4 sm:py-4 md:py-4">
             {children}
           </main>
         </div>
+        <Footer />
       </body>
     </html>
   );

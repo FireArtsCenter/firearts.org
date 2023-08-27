@@ -5,7 +5,9 @@ interface HeaderProps {
   title?: string;
 }
 
-export default function Header(props: HeaderProps) {
+export default function Header({
+  title = "Fire Arts Center of Chicago",
+}: HeaderProps) {
   return (
     <>
       <a
@@ -31,9 +33,7 @@ export default function Header(props: HeaderProps) {
         >
           <Image src="/fac-logo.svg" alt="" width={241} height={251} priority />
         </Link>
-        <h1 className="bg-fac-red m-0 py-1 px-4 text-right w-full">
-          {title ? title : "Fire Arts Center of Chicago"}
-        </h1>
+        <h1 className="bg-fac-red m-0 py-1 px-4 text-right w-full">{title}</h1>
       </header>
     </>
   );
