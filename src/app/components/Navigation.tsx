@@ -155,7 +155,7 @@ const mainNav = [
 
 export default function Navigation() {
   return (
-    <aside>
+    <aside className='col-start-1 col-span-1'>
       <nav className="navbar hidden md:block">
         <ul className="font-raleway font-bold list-none p-0 pl-4">
           {mainNav.map((item, index) => (

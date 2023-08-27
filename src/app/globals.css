@@ -25,3 +25,26 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+html {
+    text-rendering: optimizeLegibility;
+}
+
+html, body {
+    scroll-behavior: smooth;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+a {
+    @apply border-b border-dotted border-grey-lighter no-underline text-white;
+
+    &:focus,
+    &:hover {
+        @apply border-b border-solid border-fac-orange text-fac-orange;
+    }
+}

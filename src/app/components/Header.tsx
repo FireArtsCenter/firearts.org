@@ -12,13 +12,13 @@ export default function Header({
     <>
       <a
         id="skip"
-        className="text-screenreader hover:border-b-0 focus:border-b-0"
+        className="sr-only hover:border-b-0 focus:border-b-0"
         href="#content"
       >
         Skip to content
       </a>
 
-      <header className="grid grid-header mb-4 md:mb-0">
+      <header className="md:col-start-1 md:col-span-5 md:grid md:grid-cols-4 md:items-center mb-4 md:mb-0">
         <Image
           src="/images/bronze-pouring-header.jpg"
           className="block w-full md:w-auto"
@@ -31,9 +31,18 @@ export default function Header({
           className="border-b-0 hover:border-b-0 focus:border-b-0 hidden md:block hover:text-white focus:text-white"
           href="/"
         >
-          <Image src="/fac-logo.svg" alt="" width={241} height={251} priority />
+          <Image
+            className="md:col-start-1 md:col-span-3"
+            src="/fac-logo.svg"
+            alt=""
+            width={241}
+            height={251}
+            priority
+          />
         </Link>
-        <h1 className="bg-fac-red m-0 py-1 px-4 text-right w-full">{title}</h1>
+        <h1 className="font-raleway font-black text-white text-4xl md:col-start-1 md:col-span-5 bg-fac-red m-0 py-1 px-4 text-right w-full">
+          {title}
+        </h1>
       </header>
     </>
   );
