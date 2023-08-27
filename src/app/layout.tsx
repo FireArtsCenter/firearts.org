@@ -4,6 +4,7 @@ import { Raleway } from "next/font/google";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import GTM from "./components/GTM";
 
 /**
  * TODO
@@ -33,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${raleway.variable} bg-black-light font-sans text-gray`}
       >
-        {/* GTM */}
+        <GTM />
         <div id="top" className="container grid grid-main mx-auto">
           <Header />
           <Navigation />
@@ -46,21 +47,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// <Script id='gtm-head'>
-//   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-// new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-// j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-// 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-// })(window,document,'script','dataLayer','GTM-5BNZSL');
-// </Script>
-// <Script id="gtm-nosript">
-//   <noscript>
-//     <iframe
-//       src="https://www.googletagmanager.com/ns.html?id=GTM-5BNZSL"
-//       height="0"
-//       width="0"
-//       style="display:none;visibility:hidden"
-//     ></iframe>
-//   </noscript>
-// </Script>

@@ -158,7 +158,6 @@ export default function FooterNavFocused({
 }: {
   subNavClassName: string;
 }) {
-  console.log("trying it");
   const focusedNav = mainNav.find((item) => item.class === subNavClassName);
 
   if (!focusedNav) {
@@ -167,8 +166,8 @@ export default function FooterNavFocused({
 
   return (
     <ul className="list-none p-0 mt-4">
-      {focusedNav.subpages.map((subpage) => (
-        <li className={subpage.class}>
+      {focusedNav.subpages.map((subpage, index) => (
+        <li key={`footerSubnav${index}`} className={subpage.class}>
           <Link href={subpage.url}>{subpage.name}</Link>
         </li>
       ))}

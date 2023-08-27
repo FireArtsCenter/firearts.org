@@ -158,8 +158,8 @@ export default function Navigation() {
     <aside>
       <nav className="navbar hidden md:block">
         <ul className="font-raleway font-bold list-none p-0 pl-4">
-          {mainNav.map((item) => (
-            <li className={`${item.class} mt-4`}>
+          {mainNav.map((item, index) => (
+            <li key={`navItem${index}`} className={`${item.class} mt-4`}>
               <Link
                 className={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`}
                 href={item.url}
@@ -168,8 +168,11 @@ export default function Navigation() {
               </Link>
               {item.subpages && (
                 <ul className="font-sans font-normal hidden list-none p-0 pl-4 text-sm">
-                  {item.subpages.map((subpage) => (
-                    <li className={`${subpage.class} mt-4`}>
+                  {item.subpages.map((subpage, index) => (
+                    <li
+                      key={`subNavItem${index}`}
+                      className={`${subpage.class} mt-4`}
+                    >
                       <Link
                         className="border-b-0 hover:border-b-0 focus:border-b-0"
                         href={subpage.url}
