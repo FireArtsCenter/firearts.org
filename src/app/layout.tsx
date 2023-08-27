@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
+import Header from "./components/header";
 
 /**
  * TODO
@@ -27,7 +28,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={raleway.variable}>{children}</body>
+      <body
+        className={`${raleway.variable} bg-black-light font-sans text-gray`}
+      >
+        {/* GTM */}
+        <div id="top" className="container grid grid-main mx-auto">
+          <Header title='Fire Arts Center' />
+          <main id="content" className="px-4 sm:py-4 md:py-4">
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }

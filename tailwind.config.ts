@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "fac-red": "#990000",
+        "fac-orange": "#ff9900",
+      },
       fontFamily: {
         raleway: ["var(--font-raleway)"],
       },
