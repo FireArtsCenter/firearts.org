@@ -12,7 +12,7 @@ export default function Header({
     <>
       <a
         id="skip"
-        className="sr-only hover:border-b-0 focus:border-b-0"
+        className="absolute border-0 no-underline overflow-hidden h-px -m-px p-0 w-px text-xs focus:h-auto focus:w-auto focus:top-2 focus:left-2 focus:p-4 focus:border-0"
         href="#content"
       >
         Skip to content
