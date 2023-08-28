@@ -35,10 +35,16 @@ export default function RootLayout({
         className={`${raleway.variable} bg-black-light font-sans text-gray`}
       >
         <GTM />
-        <div id="top" className="md:container md:grid md:gap-4 md:grid-cols-4 mx-auto">
+        <div
+          id="top"
+          className="max-w-3xl md:grid md:gap-4 md:grid-cols-4 mx-auto"
+        >
           <Header />
           <Navigation />
-          <main id="content" className="md:col-start-2 md:col-span-3 px-4 sm:py-4 md:py-4">
+          <main
+            id="content"
+            className="md:col-start-2 md:col-span-3 px-4 sm:py-4 md:py-4"
+          >
             {children}
           </main>
         </div>

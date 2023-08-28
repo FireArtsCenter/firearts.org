@@ -19,20 +19,21 @@ export default function Header({
       </a>
 
       <header className="md:col-start-1 md:col-span-5 md:grid md:grid-cols-4 md:items-center mb-4 md:mb-0">
-        <Image
-          src="/images/bronze-pouring-header.jpg"
-          className="block w-full md:w-auto"
-          alt="A crucible of molten bronze being poured in a ceramic mold"
-          width="720"
-          height="263"
-        />
+        <div className="md:col-start-1 md:col-span-3">
+          <Image
+            src="/images/bronze-pouring-header.jpg"
+            className="block md:w-full md:w-auto"
+            alt="A crucible of molten bronze being poured in a ceramic mold"
+            width="720"
+            height="263"
+          />
+        </div>
 
         <Link
-          className="border-b-0 hover:border-b-0 focus:border-b-0 hidden md:block hover:text-white focus:text-white"
+          className="border-b-0 hover:border-b-0 focus:border-b-0 hidden md:block"
           href="/"
         >
           <Image
-            className="md:col-start-1 md:col-span-3"
             src="/fac-logo.svg"
             alt=""
             width={241}
