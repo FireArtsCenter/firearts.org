@@ -24,6 +24,7 @@ export default function Header({
             src="/images/bronze-pouring-header.jpg"
             className="block md:w-full md:w-auto"
             alt="A crucible of molten bronze being poured in a ceramic mold"
+            priority={true}
             width="720"
             height="263"
           />
@@ -33,15 +34,9 @@ export default function Header({
           className="border-b-0 hover:border-b-0 focus:border-b-0 hidden md:block"
           href="/"
         >
-          <Image
-            src="/fac-logo.svg"
-            alt=""
-            width={241}
-            height={251}
-            priority
-          />
+          <Image src="/fac-logo.svg" alt="" width={241} height={251} priority />
         </Link>
-        <h1 className="font-raleway font-black text-white text-4xl md:col-start-1 md:col-span-5 bg-fac-red m-0 py-1 px-4 text-right w-full">
+        <h1 className="font-raleway font-black text-white text-4xl md:col-start-1 md:col-span-5 bg-fac-red m-0 py-2 px-4 text-right w-full">
           {title}
         </h1>
       </header>

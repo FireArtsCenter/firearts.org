@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 const sections = [
   {
     headline: "Fire Arts Mission",
@@ -30,7 +32,9 @@ export const metadata: Metadata = {
 export default function AboutUs() {
   return sections.map((section) => (
     <section className="border-b border-dotted border-grey-lighter mb-4 pb-4">
-      <h2 className="font-raleway text-3xl font-black text-white my-4">{section.headline}</h2>
+      <h2 className="font-raleway text-3xl font-black text-white my-4">
+        {section.headline}
+      </h2>
       <p dangerouslySetInnerHTML={{ __html: section.text }} />
     </section>
   ));

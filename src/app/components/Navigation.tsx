@@ -159,9 +159,15 @@ const mainNav = [
 
 export default function Navigation() {
   const currentRoute = usePathname();
+  const isHomepage = currentRoute === "/";
+  const isRegisterPage = currentRoute === "/register/";
   return (
     <aside className="col-start-1 col-span-1">
-      <nav className="navbar hidden md:block">
+      <nav
+        className={`${isHomepage ? "home" : ""} ${
+          isRegisterPage ? "register" : ""
+        } navbar hidden md:block`}
+      >
         <ul className="font-raleway font-bold list-none p-0 pl-4">
           {mainNav.map((item, index) => {
             const subpagesUrls = item.subpages
@@ -184,7 +190,11 @@ export default function Navigation() {
                   {item.name}
                 </Link>
                 {item.subpages && (
-                  <ul className={`${hasActiveSubpage ? 'block' : 'hidden'} font-sans font-normal list-none p-0 pl-4 text-sm`}>
+                  <ul
+                    className={`${
+                      hasActiveSubpage ? "block" : "hidden"
+                    } font-sans font-normal list-none p-0 pl-4 text-sm`}
+                  >
                     {item.subpages.map((subpage, index) => (
                       <li
                         key={`subNavItem${index}`}

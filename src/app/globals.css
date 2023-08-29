@@ -52,14 +52,19 @@ a:hover {
 
 /* ************* Naviation ************** */
 
-.register .navbar .register {
-  @apply hidden;
+.register.navbar .register {
+  display: none;
+}
+
+.home .home > ul {
+  display: block;
 }
 
 .active-subpage a {
   @apply cursor-default text-white;
 }
 
+.home .home a::after,
 .active-subpage a::after {
   @apply pl-1;
 

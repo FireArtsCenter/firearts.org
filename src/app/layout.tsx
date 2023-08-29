@@ -18,12 +18,6 @@ const raleway = Raleway({
   variable: "--font-raleway",
 });
 
-export const metadata: Metadata = {
-  title: "Fire Arts Center of Chicago",
-  description:
-    "The Fire Arts Center of Chicago provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.",
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -37,7 +31,7 @@ export default function RootLayout({
         <GTM />
         <div
           id="top"
-          className="max-w-3xl md:grid md:gap-4 md:grid-cols-4 mx-auto"
+          className="max-w-4xl md:grid md:gap-4 md:grid-cols-4 mx-auto"
         >
           <Header />
           <Navigation />
