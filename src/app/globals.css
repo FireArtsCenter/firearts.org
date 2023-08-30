@@ -3,77 +3,72 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 html {
-  text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
 }
 
 html,
 body {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 *,
 ::before,
 ::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 a {
-  @apply border-b-2 border-dotted border-grey-lighter no-underline text-white;
+	@apply border-b-2 border-dotted border-grey-lighter no-underline text-white;
 }
 
 a:focus,
 a:hover {
-  @apply border-b-2 border-solid border-fac-orange text-fac-orange;
+	@apply border-b-2 border-solid border-fac-orange text-fac-orange;
 }
 
 /* ************* Naviation ************** */
 
 .register.navbar .register {
-  display: none;
+	display: none;
 }
 
 .home .home > ul {
-  display: block;
+	display: block;
 }
 
 .active-subpage a {
-  @apply cursor-default text-white;
+	@apply cursor-default text-white;
 }
 
 .home .home a::after,
 .active-subpage a::after {
-  @apply pl-1;
+	@apply pl-1;
 
-  content: "\203A";
+	content: '\203A';
 }
 
 .navbar li a:not(.button):hover::after,
 .navbar li a:not(.button):focus::after {
-  @apply pl-1;
+	@apply pl-1;
 
-  content: "\203A";
+	content: '\203A';
 }
