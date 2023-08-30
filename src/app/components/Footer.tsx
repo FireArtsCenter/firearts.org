@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {type TypeNavItem} from './Navigation/types';
 import FooterNavFocused from './FooterNavFocused';
 
 const org = {
@@ -11,7 +12,17 @@ const org = {
 	email: 'info@firearts.org',
 	founded: '1997-04-04T00:00:00.000Z',
 };
-export default function Footer() {
+
+export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
+	function getSubnavItemsByClass(navItemClass: string) {
+		const navItem = navItems.find((item) => item.class === navItemClass);
+		return navItem?.subpages;
+	}
+
+	const homeSubPages = getSubnavItemsByClass('home');
+	const classesSubPages = getSubnavItemsByClass('classes');
+	const gallerySubPages = getSubnavItemsByClass('gallery');
+
 	return (
 		<footer className='md:col-start-1 md:col-span-5 bg-black border-grey-darkest border-t mt-12 py-8 px-4'>
 			<div className='container mx-auto'>
@@ -20,19 +31,19 @@ export default function Footer() {
 						<h3>
 							<Link href='/'>Home</Link>
 						</h3>
-						<FooterNavFocused subNavClassName='home' />
+						{homeSubPages && <FooterNavFocused subNavItems={homeSubPages} />}
 					</div>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>
 							<Link href='/classes/'>Classes</Link>
 						</h3>
-						<FooterNavFocused subNavClassName='classes' />
+						{classesSubPages && <FooterNavFocused subNavItems={classesSubPages} />}
 					</div>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>
 							<Link href='/galleries/'>Gallery</Link>
 						</h3>
-						<FooterNavFocused subNavClassName='gallery' />
+						{gallerySubPages && <FooterNavFocused subNavItems={gallerySubPages} />}
 					</div>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>Other Links</h3>
