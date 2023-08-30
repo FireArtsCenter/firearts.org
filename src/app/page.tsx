@@ -108,7 +108,7 @@ export default function HomePage() {
 						need.
 					</p>
 					<p className='mt-2'>
-						<Link href='/classes/'>Click here to check out all of our classes.</Link>
+						<Link href='/classes/'>Check out all of our classes.</Link>
 					</p>
 				</div>
 			</section>
