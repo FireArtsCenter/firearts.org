@@ -25,7 +25,7 @@ export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
 
 	return (
 		<footer className='md:col-start-1 md:col-span-5 bg-black border-grey-darkest border-t mt-12 py-8 px-4'>
-			<div className='container mx-auto'>
+			<div className='max-w-4xl mx-auto'>
 				<nav className='flex flex-wrap justify-between'>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>
