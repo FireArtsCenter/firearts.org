@@ -21,7 +21,7 @@ export type TypeScheduleIds =
 	| 'sa-12+15'
 	| 'sa-12'
 	| 'su-12+15';
-type TypePageImage = {
+export type TypeImage = {
 	src: string;
 	className?: string;
 	alt: string;
@@ -35,7 +35,10 @@ export type TypePageData = {
 	schedule: TypeScheduleIds[];
 	description: string[];
 	fee: string;
-	image?: TypePageImage;
+	images: {
+		thumbnail: TypeImage;
+		detail?: TypeImage;
+	};
 	rolling: boolean;
 	disclaimer?: string;
 };
@@ -54,12 +57,20 @@ export const classes: TypePageData[] = [
 		title: 'Bronze Casting and Mold Making',
 		instructors: instructors.MICHAEL_BENNET,
 		schedule: ['we-19', 'sa-15'],
-		image: {
-			src: '/images/found1.jpg',
-			className: 'float-left mb-4 mr-4',
-			width: 140,
-			height: 187,
-			alt: 'Bronze Sculpture Casting at the Fire Arts Center',
+		images: {
+			detail: {
+				src: '/images/found1.jpg',
+				className: 'float-left mb-4 mr-4',
+				width: 140,
+				height: 187,
+				alt: 'Bronze Sculpture Casting at the Fire Arts Center',
+			},
+			thumbnail: {
+				src: '/images/foundry-bronze-pour-md.jpg',
+				alt: '',
+				width: 720,
+				height: 405,
+			},
 		},
 		description: [
 			'This class is designed to familiarize students with the basics of lost wax casting process. Depending on the project students will learn wax casting and working technique, gating and venting, ceramic shell and investment molding techniques. Students will be required to complete at least 3 finished projects.',
@@ -73,6 +84,14 @@ export const classes: TypePageData[] = [
 		title: 'Metal Furniture Studio',
 		instructors: 'Michael Bennett',
 		schedule: ['we-10+19', 'sa-12'],
+		images: {
+			thumbnail: {
+				src: '/images/bench-sm.jpg',
+				alt: '',
+				width: 720,
+				height: 405,
+			},
+		},
 		description: [
 			'Students will learn how to design and create basic table top furnishings in metal using basic techniques of metal fabrication and brazing.',
 			'Repetition of this class will provide more advanced metal-working lessons.',
@@ -83,12 +102,20 @@ export const classes: TypePageData[] = [
 		fee: DEFAULT_FEE,
 		title: 'Metal Sculpture Studio',
 		rolling: true,
-		image: {
-			src: '/images/ms.jpg',
-			className: 'float-right mb-4 ml-4',
-			alt: 'Metal Sculpture/Fabrication at the Fire Arts Center',
-			width: 140,
-			height: 171,
+		images: {
+			detail: {
+				src: '/images/welding-md.jpg',
+				className: 'float-right mb-4 ml-4',
+				alt: 'Metal Sculpture/Fabrication at the Fire Arts Center',
+				width: 140,
+				height: 171,
+			},
+			thumbnail: {
+				src: '/images/welding-md.jpg',
+				alt: '',
+				width: 720,
+				height: 405,
+			},
 		},
 		schedule: ['we-10+19', 'sa-12'],
 		description: [
@@ -106,17 +133,33 @@ export const classes: TypePageData[] = [
 		description: [
 			'Learn the sacred craft of forging functional blades out of steel. In this class students will learn how to design and forge knives and swords as well as designing and making ornate hilts and scabbards. Skills learned in this class include forging technique, tempering, gas and coke forge operations, and surfacing techniques.',
 		],
+		images: {
+			thumbnail: {
+				src: '/images/forging-md.jpg',
+				alt: '',
+				width: 720,
+				height: 405,
+			},
+		},
 	},
 	{
 		id: 'figure-study-sculpture',
 		title: 'Figure Study and Sculpture Workshop',
 		rolling: false,
-		image: {
-			src: 'figure-sculpture2.jpg',
-			className: 'float-left mb-4 mr-4',
-			alt: 'Fire Arts Center Figure Sculpture student sculpting in clay',
-			width: 200,
-			height: 172,
+		images: {
+			detail: {
+				src: '/images/figure-sculpture2.jpg',
+				className: 'float-left mb-4 mr-4',
+				alt: 'Fire Arts Center figure sculpture student sculpting in clay',
+				width: 200,
+				height: 172,
+			},
+			thumbnail: {
+				src: '/images/figure-study-md.jpg',
+				alt: '',
+				width: 720,
+				height: 405,
+			},
 		},
 		schedule: ['su-10'],
 		fee: '$200 for 8 weeks',
@@ -135,5 +178,13 @@ export const classes: TypePageData[] = [
 			'With repetition of this course students will learn how to work with medium hardness stones like sandstones and lime stones. Students can carve small sculpture projects in a stone of medium hardness or can learn to carve larger project in soft stones.',
 		],
 		disclaimer: 'This class is not recommended for students with back problems or arthritis.',
+		images: {
+			thumbnail: {
+				src: '/images/stone-carving-hammer-chisel-md.jpg',
+				alt: '',
+				width: 720,
+				height: 405,
+			},
+		},
 	},
 ];

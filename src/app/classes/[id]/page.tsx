@@ -4,7 +4,6 @@ import Link from 'next/link';
 import {type TypeClassPageProps, type TypePageData, type TypeClassPageIds} from '../../api/classes/constants';
 
 async function getClassById(pageId: TypeClassPageIds): Promise<TypePageData> {
-	console.log(pageId);
 	const response = await fetch(`http:localhost:3000/api/classes/${pageId}`);
 	if (!response.ok) {
 		throw new Error('No post found');
@@ -20,12 +19,12 @@ export default async function Page({params}: TypeClassPageProps) {
 
 	if (!classData) return <p>There was a problem accessing this class info (class id requested: {params.id})</p>;
 
-	const {title, image, instructors, schedule, fee, description, disclaimer}: TypePageData = classData;
+	const {title, images, instructors, schedule, fee, description, disclaimer}: TypePageData = classData;
 
 	return (
 		<div className='note'>
 			<h2 className='font-raleway font-black text-white my-4 text-3xl'>{title}</h2>
-			{image && <Image {...image} />}
+			{images?.detail && <Image {...images.detail} />}
 			{instructors && (
 				<>
 					<h3 className='mt-4'>Instructors</h3>
