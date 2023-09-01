@@ -51,7 +51,8 @@ a:hover {
 	display: none;
 }
 
-.home .home > ul {
+.home .home > ul,
+.classes .classes > ul {
 	display: block;
 }
 
@@ -60,6 +61,7 @@ a:hover {
 }
 
 .home .home a::after,
+.classes .classes a::after,
 .active-subpage a::after {
 	@apply pl-1;
 

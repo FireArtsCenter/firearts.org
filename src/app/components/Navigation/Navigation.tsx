@@ -9,9 +9,10 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 	const currentRoute = usePathname();
 	const isHomepage = currentRoute === '/';
 	const isRegisterPage = currentRoute === '/register/';
+	const isClassPage = currentRoute.startsWith('/classes/');
 	return (
 		<aside className='col-start-1 col-span-1'>
-			<nav className={`${isHomepage ? 'home' : ''} ${isRegisterPage ? 'register' : ''} navbar hidden md:block`}>
+			<nav className={`${isHomepage ? 'home' : ''} ${isRegisterPage ? 'register' : ''} ${isClassPage ? 'classes' : ''} navbar hidden md:block`}>
 				<ul className='font-raleway font-bold list-none p-0 pl-4'>
 					{navItems.map((item, index) => {
 						const subpagesUrls = item.subpages ? item.subpages.map((subpage) => subpage.url) : [];

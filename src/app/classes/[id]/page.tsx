@@ -6,7 +6,7 @@ import {type TypeClassPageProps, type TypePageData, type TypeClassPageIds} from 
 async function getClassById(pageId: TypeClassPageIds): Promise<TypePageData> {
 	const response = await fetch(`http:localhost:3000/api/classes/${pageId}`);
 	if (!response.ok) {
-		throw new Error('No post found');
+		return;
 	}
 	const classData = await response.json();
 	return classData.class;
@@ -16,7 +16,6 @@ export default async function Page({params}: TypeClassPageProps) {
 	const {id} = params;
 
 	const classData = await getClassById(id);
-
 	if (!classData) return <p>There was a problem accessing this class info (class id requested: {params.id})</p>;
 
 	const {title, images, instructors, schedule, fee, description, disclaimer}: TypePageData = classData;

@@ -29,7 +29,7 @@ export const mainNav = [
 			{
 				name: 'Foundry',
 				class: 'foundry',
-				url: '/classes/foundry/',
+				url: '/classes/bronze-casting-foundry/',
 			},
 			{
 				name: 'Furniture',
@@ -44,22 +44,17 @@ export const mainNav = [
 			{
 				name: 'Forging',
 				class: 'forging',
-				url: '/classes/forge/',
+				url: '/classes/blade-smithing-forging/',
 			},
 			{
 				name: 'Figure Study',
 				class: 'figure',
-				url: '/classes/figure-study/',
+				url: '/classes/figure-study-sculpture/',
 			},
 			{
 				name: 'Stone',
 				class: 'stone',
 				url: '/classes/stone-carving/',
-			},
-			{
-				name: 'Full Class List',
-				class: 'full-list',
-				url: '/classes/full-list/',
 			},
 		],
 	},

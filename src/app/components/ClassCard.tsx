@@ -6,7 +6,7 @@ export default function ClassCard({title, link, image}: {title: string; link: st
 	return (
 		<Link
 			className='block hover:bg-black border-b-0 hover:border-b-0 focus:border-b-0 overflow-hidden rounded shadow-lg shadow-black hover:shadow-grey-darkest'
-			href='{link}'
+			href={link}
 		>
 			<div className='h-full'>
 				{image?.src && (
