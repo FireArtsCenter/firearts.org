@@ -1,42 +1,58 @@
 import TimeString from '@/app/components/TimeString';
 import Image from 'next/image';
 import Link from 'next/link';
-import {classPages, type TypeClassPageProps, type TypePageData, type TypeClassPageIds} from '../constants';
+import {type TypeClassPageProps, type TypePageData, type TypeClassPageIds} from '../../api/classes/constants';
 
-function getPageData(pageId: TypeClassPageIds): TypePageData {
-	return classPages[pageId];
+async function getClassById(pageId: TypeClassPageIds): Promise<TypePageData> {
+	console.log(pageId);
+	const response = await fetch(`http:localhost:3000/api/classes/${pageId}`);
+	if (!response.ok) {
+		throw new Error('No post found');
+	}
+	const classData = await response.json();
+	return classData.class;
 }
 
-export default function Page({params}: TypeClassPageProps) {
-	const pageData = getPageData(params.id);
-	if (!pageData) return <p>There was a problem accessing this class info (class id requested: {params.id})</p>
+export default async function Page({params}: TypeClassPageProps) {
+	const {id} = params;
+
+	const classData = await getClassById(id);
+
+	if (!classData) return <p>There was a problem accessing this class info (class id requested: {params.id})</p>;
+
+	const {title, image, instructors, schedule, fee, description, disclaimer}: TypePageData = classData;
+
 	return (
 		<div className='note'>
-			<h2 className='font-raleway font-black text-white my-4 text-3xl'>{pageData.title}</h2>
-			{pageData.image && <Image {...pageData.image} />}
-			{pageData.instructors && (
-				<p className="mt-4">
-					<strong>Instructors:</strong> {pageData.instructors}
-				</p>
-			)}
-			{pageData.schedule && (
+			<h2 className='font-raleway font-black text-white my-4 text-3xl'>{title}</h2>
+			{image && <Image {...image} />}
+			{instructors && (
 				<>
-					<p className="mt-4">
-						<strong>Times:</strong>
-					</p>
+					<h3 className='mt-4'>Instructors</h3>
+					<p>{instructors}</p>
+				</>
+			)}
+			{schedule && (
+				<>
+					<h3 className='mt-4'>Times</h3>
 					<ul>
-						{pageData.schedule.map((time, index) => (
+						{schedule.map((time, index) => (
 							<TimeString key={`schedule-${index}`} weirdString={time} />
 						))}
 					</ul>
 				</>
 			)}
-			<p className="mt-4">
-				<strong>Fee:</strong> {pageData.fee ? pageData.fee : '$400 for 16 weeks, $285 for 10 weeks'}
-			</p>
-			{pageData.description.map((p, index) => (
-				<p key={`desc-${index}`} className='mt-4'>{p}</p>
-			))}
+
+			<h3 className='mt-4'>Fee</h3>
+			<p>{fee}</p>
+
+			{description &&
+				description.map((p, index) => (
+					<p key={`desc-${index}`} className='mt-4'>
+						{p}
+					</p>
+				))}
+			{disclaimer && <p className='mt-4'>{disclaimer}</p>}
 			<Link className='button button--primary my-4' href='/register/'>
 				Register Now
 			</Link>
