@@ -106,19 +106,17 @@ p {
 
 .button {
 	@apply border-b-0 font-semibold inline-block px-8 py-3 no-underline;
-
-	&:focus,
-	&:hover {
-		@apply border-b-0;
-	}
 }
 
+.button:focus,
+.button:hover {
+	@apply border-b-0;
+}
 .button--primary {
 	@apply bg-fac-red text-white;
-
-	&:focus,
-	&:hover {
-		background-color: color(theme('colors.fac-red') shade(20%));
-		color: theme('colors.white');
-	}
+}
+.button--primary:focus,
+.button--primary:hover {
+	background-color: color(theme('colors.fac-red') shade(20%));
+	color: theme('colors.white');
 }
