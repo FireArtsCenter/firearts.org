@@ -1,5 +1,6 @@
 'use client';
 
+import getURL from '@/utils/getUrl';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 
@@ -24,7 +25,7 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 								key={`navItem${index}`}
 								className={`${item.class} ${isActivePage || hasActiveSubpage ? 'active-page' : ''} mt-4`}
 							>
-								<Link className={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`} href={item.url}>
+								<Link className={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`} href={getURL(item.url)}>
 									{item.name}
 								</Link>
 								{item.subpages && (
@@ -38,7 +39,7 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 												key={`subNavItem${index}`}
 												className={`${subpage.class} ${currentRoute === subpage.url ? 'active-subpage' : ''} mt-4`}
 											>
-												<Link className='border-b-0 hover:border-b-0 focus:border-b-0' href={subpage.url}>
+												<Link className='border-b-0 hover:border-b-0 focus:border-b-0' href={getURL(subpage.url)}>
 													{subpage.name}
 												</Link>
 											</li>

@@ -81,25 +81,44 @@ h1,
 h2,
 h3,
 h4 {
-    @apply font-raleway font-black text-white my-4;
+	@apply font-raleway font-black text-white my-4;
 }
 
 h1 {
-    @apply text-4xl;
+	@apply text-4xl;
 }
 
 h2 {
-    @apply text-3xl;
+	@apply text-3xl;
 }
 
 h3 {
-    @apply text-2xl font-bold;
+	@apply text-2xl font-bold;
 }
 
 h4 {
-    @apply text-xl font-bold;
+	@apply text-xl font-bold;
 }
 
 p {
-    @apply text-lg;
+	@apply text-lg;
+}
+
+.button {
+	@apply border-b-0 font-semibold inline-block px-8 py-3 no-underline;
+
+	&:focus,
+	&:hover {
+		@apply border-b-0;
+	}
+}
+
+.button--primary {
+	@apply bg-fac-red text-white;
+
+	&:focus,
+	&:hover {
+		background-color: color(theme('colors.fac-red') shade(20%));
+		color: theme('colors.white');
+	}
 }

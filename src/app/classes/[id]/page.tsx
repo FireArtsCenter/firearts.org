@@ -1,10 +1,12 @@
 import TimeString from '@/app/components/TimeString';
+import getURL from '@/utils/getUrl';
 import Image from 'next/image';
 import Link from 'next/link';
 import {type TypeClassPageProps, type TypePageData, type TypeClassPageIds} from '../../api/classes/constants';
 
-async function getClassById(pageId: TypeClassPageIds): Promise<TypePageData> {
-	const response = await fetch(`http:localhost:3000/api/classes/${pageId}`);
+async function getClassById(pageId: TypeClassPageIds): Promise<TypePageData | undefined> {
+	
+	const response = await fetch(getURL(`/api/classes/${pageId}`));
 	if (!response.ok) {
 		return;
 	}
@@ -51,7 +53,7 @@ export default async function Page({params}: TypeClassPageProps) {
 					</p>
 				))}
 			{disclaimer && <p className='mt-4'>{disclaimer}</p>}
-			<Link className='button button--primary my-4' href='/register/'>
+			<Link className='button button--primary my-4' href={getURL('/register/')}>
 				Register Now
 			</Link>
 		</div>

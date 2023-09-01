@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import Link from 'next/link';
+import getURL from '@/utils/getUrl';
 
 export const metadata: Metadata = {
 	title: 'Fire Arts Center of Chicago',
@@ -26,7 +27,7 @@ export default function HomePage() {
 					as well as technical advice and facilities to artists and institutions.
 				</p>
 				<p className='mt-2'>
-					<Link href='/about-us/'>Read more about the Fire Arts Center of Chicago</Link>
+					<Link href={getURL('/about-us/')}>Read more about the Fire Arts Center of Chicago</Link>
 				</p>
 				<div className='w-full mt-4 relative'>
 					<iframe
@@ -59,13 +60,13 @@ export default function HomePage() {
 					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>One-Year Intensive Programs</h3>
 					<p>
 						Check out our{' '}
-						<Link href='/classes/year-intensive/'>
+						<Link href={getURL('/classes/year-intensive/')}>
 							<strong>new</strong> one-year intensive programs
 						</Link>{' '}
 						which offer you the chance to immerse yourself in the study of traditional methods and techniques of
 						sculptors as well as the technical skills relevant to those just looking to develop a new trade. Check out
-						the <Link href='/classes/year-intensive/'>program page</Link> for more information or{' '}
-						<Link href='/contact-us/'>contact us</Link> with questions.
+						the <Link href={getURL('/classes/year-intensive/')}>program page</Link> for more information or{' '}
+						<Link href={getURL('/contact-us/')}>contact us</Link> with questions.
 					</p>
 				</div>
 
@@ -110,7 +111,7 @@ export default function HomePage() {
 						need.
 					</p>
 					<p className='mt-2'>
-						<Link href='/classes/'>Check out all of our classes.</Link>
+						<Link href={getURL('/classes/')}>Check out all of our classes.</Link>
 					</p>
 				</div>
 			</section>
