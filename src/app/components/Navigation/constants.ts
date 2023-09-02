@@ -139,10 +139,4 @@ export const mainNav = [
 			},
 		],
 	},
-	{
-		name: 'Register',
-		class: 'register mt-4',
-		linkClasses: 'button button--primary mt1',
-		url: '/register/',
-	},
 ];

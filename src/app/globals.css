@@ -45,36 +45,6 @@ a:hover {
 	@apply border-b-2 border-solid border-fac-orange text-fac-orange;
 }
 
-/* ************* Naviation ************** */
-
-.register.navbar .register {
-	display: none;
-}
-
-.home .home > ul,
-.classes .classes > ul {
-	display: block;
-}
-
-.active-subpage a {
-	@apply cursor-default text-white;
-}
-
-.home .home a::after,
-.classes .classes a::after,
-.active-subpage a::after {
-	@apply pl-1;
-
-	content: '\203A';
-}
-
-.navbar li a:not(.button):hover::after,
-.navbar li a:not(.button):focus::after {
-	@apply pl-1;
-
-	content: '\203A';
-}
-
 /* ******** Typography ********** */
 
 h1,
@@ -104,19 +74,33 @@ p {
 	@apply text-lg;
 }
 
-.button {
-	@apply border-b-0 font-semibold inline-block px-8 py-3 no-underline;
+/* ************* Navigation ************** */
+
+.register.navbar .register {
+	display: none;
 }
 
-.button:focus,
-.button:hover {
-	@apply border-b-0;
+.home .home > ul,
+.classes .classes > ul {
+	display: block;
 }
-.button--primary {
-	@apply bg-fac-red text-white;
+
+.active-subpage a {
+	@apply cursor-default text-white;
 }
-.button--primary:focus,
-.button--primary:hover {
-	background-color: color(theme('colors.fac-red') shade(20%));
-	color: theme('colors.white');
+
+.home .home a::after,
+.classes .classes a::after,
+.active-subpage a::after {
+	@apply pl-1;
+
+	content: '\203A';
 }
+
+.navbar li a:not(.button):hover::after,
+.navbar li a:not(.button):focus::after {
+	@apply pl-1;
+
+	content: '\203A';
+}
+

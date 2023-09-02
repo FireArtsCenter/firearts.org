@@ -3,6 +3,7 @@
 import getURL from '@/utils/getUrl';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
+import Button from '../Button';
 
 import {type TypeNavItem} from './types';
 
@@ -13,7 +14,11 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 	const isClassPage = currentRoute.startsWith('/classes/');
 	return (
 		<aside className='col-start-1 col-span-1'>
-			<nav className={`${isHomepage ? 'home' : ''} ${isRegisterPage ? 'register' : ''} ${isClassPage ? 'classes' : ''} navbar hidden md:block`}>
+			<nav
+				className={`${isHomepage ? 'home' : ''} ${isRegisterPage ? 'register' : ''} ${
+					isClassPage ? 'classes' : ''
+				} navbar hidden md:block`}
+			>
 				<ul className='font-raleway font-bold list-none p-0 pl-4'>
 					{navItems.map((item, index) => {
 						const subpagesUrls = item.subpages ? item.subpages.map((subpage) => subpage.url) : [];
@@ -25,7 +30,10 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 								key={`navItem${index}`}
 								className={`${item.class} ${isActivePage || hasActiveSubpage ? 'active-page' : ''} mt-4`}
 							>
-								<Link className={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`} href={getURL(item.url)}>
+								<Link
+									className={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`}
+									href={getURL(item.url)}
+								>
 									{item.name}
 								</Link>
 								{item.subpages && (
@@ -49,6 +57,13 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 							</li>
 						);
 					})}
+					{!isRegisterPage && (
+						<li>
+							<Button className='mt-4' styleType='primary' href={getURL('/register')}>
+								Register
+							</Button>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</aside>
