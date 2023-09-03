@@ -24,6 +24,7 @@ export default async function Page({params}: TypeClassPageProps) {
 	return (
 		<div className='note'>
 			<h2 className='font-raleway font-black text-white my-4 text-3xl'>{title}</h2>
+			{/* eslint-disable-next-line jsx-a11y/alt-text */}
 			{images?.detail && <Image {...images.detail} />}
 			{instructors && (
 				<>
