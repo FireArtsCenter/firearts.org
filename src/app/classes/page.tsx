@@ -1,5 +1,4 @@
 import ClassCard from '@/app/components/ClassCard';
-import getBaseUrl from '@/utils/getBaseUrl';
 import {getAllClasses} from '@/lib/classes';
 
 export default async function ClassHomepage() {
@@ -13,7 +12,7 @@ export default async function ClassHomepage() {
 			{classes && (
 				<div className='grid gap-4 grid-row-auto grid-cols-3 items-stretch'>
 					{classes.map(({id, title, images: {thumbnail}}) => (
-						<ClassCard key={id} title={title} link={`${getBaseUrl()}/classes/${id}/`} image={thumbnail} />
+						<ClassCard key={id} title={title} link={`/classes/${id}/`} image={thumbnail} />
 					))}
 				</div>
 			)}

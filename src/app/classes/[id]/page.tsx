@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import getBaseUrl from '@/utils/getBaseUrl';
 import TimeString from '@/app/components/TimeString';
 import Button from '@/app/components/Button';
 import {getClassById} from '@/lib/classes';
@@ -45,7 +44,7 @@ export default async function Page({params}: TypeClassPageProps) {
 					</p>
 				))}
 			{disclaimer && <p className='mt-4'>{disclaimer}</p>}
-			<Button styleType='primary' as='link' className='mt-4' href={`${getBaseUrl()}/register/`}>
+			<Button styleType='primary' as='link' className='mt-4' href='/register/'>
 				<span>Register Now</span>
 			</Button>
 		</div>
