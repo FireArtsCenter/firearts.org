@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import getURL from '@/utils/getUrl';
+import getBaseUrl from '@/utils/getBaseUrl';
 
 interface HeaderProps {
 	title?: string;
@@ -29,7 +29,7 @@ export default function Header({title = 'Fire Arts Center of Chicago'}: HeaderPr
 					/>
 				</div>
 
-				<Link className='border-b-0 hover:border-b-0 focus:border-b-0 hidden md:block' href={getURL('/')}>
+				<Link className='border-b-0 hover:border-b-0 focus:border-b-0 hidden md:block' href={`${getBaseUrl()}/`}>
 					<Image src='/fac-logo.svg' alt='' width={241} height={251} priority />
 				</Link>
 				<h1 className='font-raleway font-black text-white text-4xl md:col-start-1 md:col-span-5 bg-fac-red m-0 py-2 px-4 text-right w-full'>

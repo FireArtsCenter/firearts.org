@@ -1,8 +1,9 @@
 import ClassCard from '../components/ClassCard';
 import {type TypePageData} from '../api/classes/constants';
+import getBaseUrl from '@/utils/getBaseUrl';
 
 async function getAllClasses(): Promise<TypePageData[]> {
-	const response = await fetch('http://localhost:3000/api/classes/');
+	const response = await fetch(`${getBaseUrl()}/api/classes/`);
 	if (!response.ok) {
 		throw new Error('No post found');
 	}
@@ -21,7 +22,7 @@ export default async function ClassHomepage() {
 			{classes && (
 				<div className='grid gap-4 grid-row-auto grid-cols-3 items-stretch'>
 					{classes.map(({id, title, images: {thumbnail}}) => (
-						<ClassCard key={id} title={title} link={`/classes/${id}`} image={thumbnail} />
+						<ClassCard key={id} title={title} link={`${getBaseUrl()}/classes/${id}/`} image={thumbnail} />
 					))}
 				</div>
 			)}

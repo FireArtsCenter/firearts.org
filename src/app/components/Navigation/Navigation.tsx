@@ -1,6 +1,6 @@
 'use client';
 
-import getURL from '@/utils/getUrl';
+import getBaseUrl from '@/utils/getBaseUrl';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import Button from '../Button';
@@ -32,7 +32,7 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 							>
 								<Link
 									className={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`}
-									href={getURL(item.url)}
+									href={`${getBaseUrl()}${item.url}`}
 								>
 									{item.name}
 								</Link>
@@ -47,7 +47,10 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 												key={`subNavItem${index}`}
 												className={`${subpage.class} ${currentRoute === subpage.url ? 'active-subpage' : ''} mt-4`}
 											>
-												<Link className='border-b-0 hover:border-b-0 focus:border-b-0' href={getURL(subpage.url)}>
+												<Link
+													className='border-b-0 hover:border-b-0 focus:border-b-0'
+													href={`${getBaseUrl()}${subpage.url}`}
+												>
 													{subpage.name}
 												</Link>
 											</li>
@@ -59,7 +62,7 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 					})}
 					{!isRegisterPage && (
 						<li>
-							<Button className='mt-4' styleType='primary' href={getURL('/register')}>
+							<Button className='mt-4' styleType='primary' href={`${getBaseUrl()}/register/'`}>
 								Register
 							</Button>
 						</li>

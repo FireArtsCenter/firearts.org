@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import getURL from '@/utils/getUrl';
+import getBaseUrl from '@/utils/getBaseUrl';
 import {type TypeNavItem} from './Navigation/types';
 import FooterNavFocused from './FooterNavFocused';
 
@@ -30,19 +30,19 @@ export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
 				<nav className='flex flex-wrap justify-between'>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>
-							<Link href={getURL('/')}>Home</Link>
+							<Link href={`${getBaseUrl()}/`}>Home</Link>
 						</h3>
 						{homeSubPages && <FooterNavFocused subNavItems={homeSubPages} />}
 					</div>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>
-							<Link href={getURL('/classes/')}>Classes</Link>
+							<Link href={`${getBaseUrl()}/classes/`}>Classes</Link>
 						</h3>
 						{classesSubPages && <FooterNavFocused subNavItems={classesSubPages} />}
 					</div>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>
-							<Link href={getURL('/galleries/')}>Gallery</Link>
+							<Link href={`${getBaseUrl()}/galleries/`}>Gallery</Link>
 						</h3>
 						{gallerySubPages && <FooterNavFocused subNavItems={gallerySubPages} />}
 					</div>
@@ -50,16 +50,16 @@ export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
 						<h3>Other Links</h3>
 						<ul className='list-none p-0'>
 							<li>
-								<Link href={getURL('/events/')}>Events</Link>
+								<Link href={`${getBaseUrl()}/events/`}>Events</Link>
 							</li>
 							<li>
-								<Link href={getURL('/contact-us/')}>Contact Us</Link>
+								<Link href={`${getBaseUrl()}/contact-us/`}>Contact Us</Link>
 							</li>
 							<li>
-								<Link href={getURL('/donate/')}>Donate</Link>
+								<Link href={`${getBaseUrl()}/donate/`}>Donate</Link>
 							</li>
 							<li>
-								<Link href={getURL('/register/')}>Register</Link>
+								<Link href={`${getBaseUrl()}/register/`}>Register</Link>
 							</li>
 						</ul>
 					</div>
@@ -67,7 +67,8 @@ export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
 				<p className='text-sm border-grey-darkest border-t mt-8 pt-4 w-full'>
 					{org.name} | {org.address} | {org.city}, {org.state} {org.zip}
 					<br />
-					Tel: {org.phone} | Email: <a href='mailto:{org.email}'>{org.email}</a> | <Link href={getURL('/sitemap/')}>Sitemap</Link>
+					Tel: {org.phone} | Email: <a href='mailto:{org.email}'>{org.email}</a> |{' '}
+					<Link href={`${getBaseUrl()}/sitemap/`}>Sitemap</Link>
 				</p>
 			</div>
 		</footer>
