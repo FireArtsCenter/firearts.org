@@ -1,22 +1,14 @@
-import TimeString from '@/app/components/TimeString';
-import getBaseUrl from '@/utils/getBaseUrl';
 import Image from 'next/image';
-import Button from '../../components/Button';
-import {type TypeClassPageProps, type TypePageData, type TypeClassPageIds} from '../../api/classes/constants';
-
-async function getClassById(pageId: TypeClassPageIds): Promise<TypePageData | undefined> {
-	const response = await fetch(`${getBaseUrl()}/api/classes/${pageId}`);
-	if (!response.ok) {
-		return;
-	}
-	const classData = await response.json();
-	return classData.class;
-}
+import getBaseUrl from '@/utils/getBaseUrl';
+import TimeString from '@/app/components/TimeString';
+import Button from '@/app/components/Button';
+import {getClassById} from '@/lib/classes';
+import {type TypeClassPageProps, type TypePageData} from '@/lib/classes/constants';
 
 export default async function Page({params}: TypeClassPageProps) {
 	const {id} = params;
 
-	const classData = await getClassById(id);
+	const classData = getClassById(id);
 	if (!classData) return <p>There was a problem accessing this class info (class id requested: {params.id})</p>;
 
 	const {title, images, instructors, schedule, fee, description, disclaimer}: TypePageData = classData;

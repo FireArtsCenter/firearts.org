@@ -1,18 +1,9 @@
-import ClassCard from '../components/ClassCard';
-import {type TypePageData} from '../api/classes/constants';
+import ClassCard from '@/app/components/ClassCard';
 import getBaseUrl from '@/utils/getBaseUrl';
-
-async function getAllClasses(): Promise<TypePageData[]> {
-	const response = await fetch(`${getBaseUrl()}/api/classes/`);
-	if (!response.ok) {
-		throw new Error('No post found');
-	}
-	const classesList = await response.json();
-	return classesList?.classes;
-}
+import {getAllClasses} from '@/lib/classes';
 
 export default async function ClassHomepage() {
-	const classes = await getAllClasses();
+	const classes = getAllClasses();
 
 	if (!classes) return <p>There was a problem getting the class list. Please try again later.</p>;
 

@@ -1,4 +1,4 @@
-import {type TypeScheduleIds} from '../api/classes/constants';
+import {type TypeScheduleIds} from '@/lib/classes/constants';
 
 const scheduler: {days: Record<string, string>} = {
 	days: {

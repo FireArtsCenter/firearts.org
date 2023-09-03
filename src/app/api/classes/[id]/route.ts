@@ -1,10 +1,5 @@
 import {NextResponse} from 'next/server';
-import {classes} from '../constants';
-
-function getClassById(id: string) {
-	// in the future grab this data from contentful or other headless cms with try/catch block
-	return classes.find((classData) => classData.id === id);
-}
+import {getClassById} from '@/lib/classes';
 
 export async function GET(request: Request, context: {params: {id: string}}) {
 	const {id} = context.params;

@@ -1,22 +1,3 @@
-// export default function Button({type = 'default', children, href}: TypeButton) {
-// 	let buttonTypeClassNames = '';
-//
-// 	const ButtonTag = href ? 'button' : Link;
-//
-// 	switch (type) {
-// 		case 'primary':
-// 			buttonTypeClassNames = 'bg-fac-red text-white';
-// 			break;
-// 	}
-// 	return (
-// 		<ButtonTag
-// 			className={`${buttonTypeClassNames}`}
-// 		>
-// 			{children}
-// </ButtonTag>
-// 	);
-// }
-
 import Link, {type LinkProps} from 'next/link';
 
 type BaseProps = {

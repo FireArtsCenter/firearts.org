@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import getBaseUrl from '@/utils/getBaseUrl';
-import {type TypeNavItem} from './Navigation/types';
-import FooterNavFocused from './FooterNavFocused';
+import {type TypeNavItem} from '@/app/components/Navigation/types';
+import FooterNavFocused from '@/app/components/FooterNavFocused';
 
 const org = {
 	name: 'Fire Arts Center of Chicago',

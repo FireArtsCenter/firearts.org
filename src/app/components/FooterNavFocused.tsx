@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import getBaseUrl from '@/utils/getBaseUrl';
-import {type TypeNavItemDetail} from './Navigation/types';
+import {type TypeNavItemDetail} from '@/app/components/Navigation/types';
 
 export default function FooterNavFocused({subNavItems}: {subNavItems: TypeNavItemDetail[]}) {
 	return (

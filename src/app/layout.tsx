@@ -1,10 +1,10 @@
-import './globals.css';
+import '@/app/globals.css';
 import {Raleway} from 'next/font/google';
-import Header from './components/Header';
-import Navigation from './components/Navigation/Navigation';
-import Footer from './components/Footer';
-import GTM from './components/GTM';
-import {mainNav} from './components/Navigation/constants';
+import Header from '@/app/components/Header';
+import Navigation from '@/app/components/Navigation/Navigation';
+import Footer from '@/app/components/Footer';
+import GTM from '@/app/components/GTM';
+import {mainNav} from '@/app/components/Navigation/constants';
 
 /**
  * TODO

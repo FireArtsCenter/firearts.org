@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {type TypeImage} from '../api/classes/constants';
+import {type TypeImage} from '@/lib/classes/constants';
 
 export default function ClassCard({title, link, image}: {title: string; link: string; image?: TypeImage}) {
 	return (
