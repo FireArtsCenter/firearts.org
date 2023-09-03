@@ -6,8 +6,8 @@ function getClassById(id: string) {
 	return classes.find((classData) => classData.id === id);
 }
 
-export async function GET(request: Request, {params}) {
-	const {id} = params;
+export async function GET(request: Request, context: {params: {id: string}}) {
+	const {id} = context.params;
 	try {
 		const foundClass = getClassById(id);
 		if (!foundClass) {
