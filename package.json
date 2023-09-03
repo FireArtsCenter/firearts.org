@@ -9,7 +9,9 @@
 		"lint": "next lint",
 		"prepare": "husky install",
 		"precommit": "lint-staged",
-        "test": "npm run lint"
+		"test": "npm run lint && npm run ts:lint-commit-hook",
+		"ts:watch": "tsc --noEmit --incremental --watch",
+		"ts:lint-commit-hook": "tsc --noEmit --incremental"
 	},
 	"dependencies": {
 		"@types/node": "20.5.6",
@@ -27,7 +29,7 @@
 	},
 	"devDependencies": {
 		"eslint-config-prettier": "^9.0.0",
-		"husky": "^8.0.3",
+		"husky": "^8.0.0",
 		"lint-staged": "^14.0.1",
 		"prettier": "3.0.3"
 	}
