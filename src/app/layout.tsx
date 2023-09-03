@@ -15,13 +15,14 @@ import {mainNav} from './components/Navigation/constants';
 const raleway = Raleway({
 	weight: ['700', '900'],
 	subsets: ['latin'],
+	display: 'swap',
 	variable: '--font-raleway',
 });
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
 	return (
-		<html lang='en'>
-			<body className={`${raleway.variable} bg-black-light font-sans text-gray`}>
+		<html lang='en' className={raleway.variable}>
+			<body className='bg-black-light font-sans text-gray'>
 				<GTM />
 				<div id='top' className='max-w-4xl md:grid md:gap-4 md:grid-cols-4 mx-auto'>
 					<Header />
