@@ -61,7 +61,7 @@ export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
 					})}
 					{!isRegisterPage && (
 						<li>
-							<Button className='mt-4' styleType='primary' href='/register/'>
+							<Button as='link' className='mt-4' styleType='primary' href='/register/'>
 								Register
 							</Button>
 						</li>

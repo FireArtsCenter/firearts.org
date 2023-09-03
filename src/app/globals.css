@@ -76,31 +76,13 @@ p {
 
 /* ************* Navigation ************** */
 
-.register.navbar .register {
-	display: none;
-}
-
-.home .home > ul,
-.classes .classes > ul {
+.active-page > ul {
 	display: block;
 }
 
-.active-subpage a {
-	@apply cursor-default text-white;
-}
-
-.home .home a::after,
-.classes .classes a::after,
-.active-subpage a::after {
+.active-page > a::after,
+.active-subpage > a::after {
 	@apply pl-1;
 
 	content: '\203A';
 }
-
-.navbar li a:not(.button):hover::after,
-.navbar li a:not(.button):focus::after {
-	@apply pl-1;
-
-	content: '\203A';
-}
-

@@ -149,7 +149,7 @@ export const classes: TypePageData[] = [
 		images: {
 			detail: {
 				src: '/images/figure-sculpture2.jpg',
-				className: 'float-left mb-4 mr-4',
+				className: 'float-right mb-4 mr-4',
 				alt: 'Fire Arts Center figure sculpture student sculpting in clay',
 				width: 200,
 				height: 172,
