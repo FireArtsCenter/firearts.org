@@ -1,6 +1,6 @@
-import {type TypeScheduleIds} from '../classes/constants';
+import {type TypeScheduleIds} from '../api/classes/constants';
 
-const scheduler = {
+const scheduler: {days: Record<string, string>} = {
 	days: {
 		mo: 'Monday',
 		tu: 'Tuesday',
@@ -19,7 +19,7 @@ export default function TimeString({weirdString}: {weirdString: TypeScheduleIds}
 	const moreTimes = times.includes('+') ? times.split('+') : [times];
 
 	const generateTimeString = (times: string[]) => {
-		const availableTimes = {
+		const availableTimes: Record<string, string> = {
 			'10': '10:00 a.m.–1:00 p.m.',
 			'12': '12:00 p.m.–3:00 p.m.',
 			'15': '3:00 p.m.–6:00 p.m.',
