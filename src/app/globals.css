@@ -90,3 +90,15 @@ p {
 .note {
 	@apply border-b border-dotted border-grey-lighter mb-4 pb-4;
 }
+
+/* *** styles for sawyer app *** */
+.sawyer-scroll-wrapper {
+	-webkit-overflow-scrolling: touch;
+	overflow: scroll;
+	height: 500px;
+}
+@media only screen and (max-width: 35.5em) {
+	.sawyer_frame {
+		width: 90vw;
+	}
+}
