@@ -9,6 +9,7 @@ import {mainNav} from '@/app/components/Navigation/constants';
 /**
  * TODO
  * - add canonical url
+ * - fix h1 tag to include page name
  *
  */
 

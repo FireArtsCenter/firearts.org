@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 const FOUNDED_YEAR = 1997; // 04-04
 const currentYear = new Date().getFullYear();
 
-const NOTE_STYLES = 'border-b border-dotted border-grey-lighter mb-4 pb-4';
-
 const calculatedYearsSinceFounded = currentYear - FOUNDED_YEAR;
 
 export default function HomePage() {
@@ -43,7 +41,7 @@ export default function HomePage() {
 
 			<section>
 				<h2 className='font-raleway font-black text-white my-4 text-3xl'>What’s New</h2>
-				<div className={NOTE_STYLES}>
+				<div className='note'>
 					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>We’ve got a new address</h3>
 					<p>The Fire Arts Center of Chicago has moved to a new location. Our new address is</p>
 					<p className='font-raleway font-black text-white my-4 text-xl font-bold ml-4'>
@@ -55,7 +53,7 @@ export default function HomePage() {
 					<p>Stop by and visit us and check out the great new space.</p>
 				</div>
 
-				<div className={NOTE_STYLES}>
+				<div className='note'>
 					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>One-Year Intensive Programs</h3>
 					<p>
 						Check out our{' '}
@@ -69,7 +67,7 @@ export default function HomePage() {
 					</p>
 				</div>
 
-				<div className={NOTE_STYLES}>
+				<div className='note'>
 					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>Payment Plans and Discounts</h3>
 					<p>
 						We at the Fire Arts Center of Chicago are not immune to the challenges of a difficult economy. Our mission
@@ -96,7 +94,7 @@ export default function HomePage() {
 					</p>
 				</div>
 
-				<div className={NOTE_STYLES}>
+				<div className='note'>
 					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>Class Length Changes</h3>
 					<p>
 						We are now offering various class lengths to accommodate your schedule better. Now you can choose between{' '}
