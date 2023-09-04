@@ -1,4 +1,5 @@
-'use client'
+'use client' 
+
 import Script from 'next/script';
 
 type TypeIFrameResizeProps = {
@@ -20,6 +21,9 @@ declare global {
 }
 
 export default function SawyerRegisterEmbed() {
+	if (typeof window === 'undefined') {
+		throw Error('Chat should only render on the client.');
+	}
 	return (
 		<>
 			<div id='scroll_wrapper' className='sawyer-scroll-wrapper mt-4'>
