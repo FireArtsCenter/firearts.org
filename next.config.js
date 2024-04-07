@@ -29,9 +29,24 @@ const nextConfig = {
 				permanent: true,
 			},
 			{
+				source: '/galleries/student-work/',
+				destination: '/artists/',
+				permanent: true,
+			},
+			{
 				source: '/galleries/:slug',
 				destination: '/artists/:slug/',
-				permanent: false,
+				permanent: true,
+			},
+			{
+				source: '/classes/figure-study/',
+				destination: '/classes/figure-study-sculpture/',
+				permanent: true,
+			},
+			{
+				source: '/artists/student-work/',
+				destination: '/artists/',
+				permanent: true,
 			},
 		];
 	},
