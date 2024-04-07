@@ -1,6 +1,5 @@
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 [build]
-    command = "yarn build"
-    environment = { PHP_VERSION = "7.4", NODE_VERSION = "10", RUBY_VERSION = "2.6.2", YARN_VERSION = "1.19.2" }
-
-[context.staging]
-    command = "yarn build:staging"
+  command = "npm run build"
+  publish = "build"

@@ -1,0 +1,131 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
+export default function YearIntensivePage() {
+	return (
+		<section>
+			<div className='note'>
+				<Image
+					className='float-right ml-4 mb-4'
+					src='/images/vincent-hawkins-teaching-md.jpg'
+					alt='Director and instructor, Vincent Hawkins, teaching figure sculpture'
+					width={350}
+					height={224}
+				/>
+				<p>
+					The purpose of the Fire Arts Center of Chicago School of Sculpture is to preserve and promote traditional
+					sculpture technique. To achieve this goal, we offer high quality sculpture training.
+				</p>
+				<p>
+					Technical knowledge and the language of aesthetics has always defined the narrative of art. Thus, a grounding
+					in both of these areas gives each artist the tools to progress their ideas to unmapped areas of meaning. The
+					fine arts have always had a positive synergistic relationship with business, philosophy and science. Our
+					educational program reinforces this view by encouraging technical proficiency and scientific understanding, as
+					well as conceptual and marketing skills at all levels.
+				</p>
+				<p>
+					<a href='/contact-us/'>Contact the Fire Arts Center</a> if you are interested in the One-Year Intensive
+					Program or have any questions.
+				</p>
+
+				<h2 className='border-b border-fac-red mt-12'>Course Duration</h2>
+				<p>Four 12-week sessions (or three 16-week sessions)</p>
+
+				<h2 className='border-b border-fac-red mt-12'>Class Operational Costs</h2>
+
+				<p>
+					$281.25 per semester ($375 per 16 week semester) = $1,125 for the full term (not including material costs and
+					lab fees which will vary depending on the class)
+				</p>
+
+				<h2 className='border-b border-fac-red mt-12'>Technical I: Metal Smithing (three 16 week sessions)</h2>
+
+				<h3>Metal Smithing I - Introduction to Metal Smithing</h3>
+				<p>
+					This class will introduce students to a wide range of basic jewelry techniques, including shaping, soldering,
+					stone setting and finishing. Students will learn to design rings, pendants, necklaces and bracelets, and will
+					take these projects from raw materials to finished product.
+				</p>
+
+				<h3>Metal Smithing II - Creating Volume</h3>
+				<p>
+					This class will cover the many ways of shaping metal into fully three-dimensional forms. We will address
+					traditional techniques like forging, chasing and repouss&#233;, as well as more recent developments like
+					anticlastic raising and fold-forming. Students will be able to use these skills to complete a series of
+					jewelry or small sculpture projects.
+				</p>
+
+				<h3>Metal Smithing III - Casting</h3>
+				<p>
+					This class will teach several methods of small-scale casting, appropriate for both jewelry and sculpture. We
+					will work our way from cuttle bone casting to lost wax, and learn good mold design, wax modeling and modern
+					reproduction techniques along the way.
+				</p>
+
+				<h2 className='border-b border-fac-red mt-12'>Technical II: Metal Furniture</h2>
+
+				<h3>Semester 1 - Metal Furniture Design I - Simple Steel Furniture</h3>
+				<p>
+					The Student project for the semester will be designing and building an end table and a night table. This
+					section will cover reading and drawing up blueprints, basic design elements and systems and basic steel
+					fabrication.
+				</p>
+
+				<h3>Semester 2 - Metal Furniture Design 2 - Intermediate</h3>
+				<p>
+					During this semester, students will design and build a book shelf, a coffee table or a dining room table. In
+					this section, metallurgy and advanced techniques of tig, mig and arc welding will be covered.
+				</p>
+
+				<h3>Semester 3 - Metal Furniture Design 3</h3>
+				<p>
+					During this semester, our students will design and build a desk, with at least one drawer, that incorporates
+					at least one non-metallic or exotic element into its design. This section will cover methods of working with
+					multimedia components such as stone and wood in conjunction with metal.
+				</p>
+
+				<h3>Semester 4 - Metal Furniture Design 4 - Complex Furniture Designs</h3>
+				<p>
+					In this semester, students will create a desk, cabinet or dresser with multiple drawers, and a hinged door
+					that can be easily mass-produced. This section will cover interior design and the manufacture of
+					custom-designed furniture. We will also cover contracts, studio set-up and marketing.
+				</p>
+
+				<h2 className='border-b border-fac-red mt-12'>Technical III: Foundry/Mold Making</h2>
+
+				<h3>Semester 1 - Plaster Piece Molding &amp; Rubber Molding</h3>
+				<p>
+					In this semester, students will be required to complete three molds. Students will learn the basics of plaster
+					piece molding and rubber molding . This involves open-face, two-piece, three-piece and mulch-piece
+					brush-and-pour rubber molds.
+				</p>
+
+				<h3>Semester 2 - Foundry 1 - Wax Working and Burnout</h3>
+				<p>
+					In this semester, students will mold three small projects or one large project for later casting in bronze or
+					aluminum. Students will learn wax chemistry, wax working, wax chasing, ceramic shell, cement shell and
+					classical investment. Students will also learn burnout procedure.
+				</p>
+
+				<h3>Semester 3 - Foundry 2 - Bronze Casting, Welding, Chasing</h3>
+				<p>
+					In this semester, students will learn how to cast at least three small projects or one large project. Students
+					will learn basic metallurgy and furnace operations (including skimming). Students will also learn DE-vesting
+					and bronze-chasing techniques for bronze castings, and basic surfacing and patination techniques.
+				</p>
+
+				<h3>Semester 4 - Foundry 3 - Furnace Design and Operation</h3>
+				<p>
+					In this semester, students will cast at least three small projects. Students will learn ferrous metallurgy and
+					crucible steel casting, furnace and kiln design and operation, shell mixing and maintenance, shop design and
+					operation, as well as basic sand casting techniques.
+				</p>
+
+				<p>
+					<Link href='/contact-us/'>Contact us</Link> if you are interested in the One-Year Intensive Program or have
+					any questions.
+				</p>
+			</div>
+		</section>
+	);
+}
