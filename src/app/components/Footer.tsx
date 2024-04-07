@@ -11,7 +11,7 @@ export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
 
 	const homeSubPages = getSubnavItemsByClass('home');
 	const classesSubPages = getSubnavItemsByClass('classes');
-	const gallerySubPages = getSubnavItemsByClass('gallery');
+	const gallerySubPages = getSubnavItemsByClass('artists');
 
 	return (
 		<footer className='md:col-start-1 md:col-span-5 bg-black border-grey-darkest border-t mt-12 py-8 px-4'>
@@ -31,7 +31,7 @@ export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
 					</div>
 					<div className='w-1/2 md:w-1/4'>
 						<h3>
-							<Link href='/galleries/'>Gallery</Link>
+							<Link href='/artists/'>Artists</Link>
 						</h3>
 						{gallerySubPages && <FooterNavFocused subNavItems={gallerySubPages} />}
 					</div>

@@ -59,43 +59,43 @@ export const mainNav = [
 		],
 	},
 	{
-		name: 'Gallery',
-		class: 'gallery',
-		url: '/galleries/',
+		name: 'Artists',
+		class: 'artists',
+		url: '/artists/',
 		subpages: [
 			{
 				class: 'vince',
-				url: '/galleries/vincent-hawkins/',
+				url: '/artists/vincent-hawkins/',
 				name: 'Vince Hawkins',
 			},
 			{
 				class: 'bryce',
-				url: '/galleries/bryce-de-reynier/',
+				url: '/artists/bryce-de-reynier/',
 				name: 'Bryce de Reynier',
 			},
 			{
 				class: 'kristin',
-				url: '/galleries/kristin-komorowski/',
+				url: '/artists/kristin-komorowski/',
 				name: 'Kristin Komorowski',
 			},
 			{
 				class: 'john-gruber',
-				url: '/galleries/john-gruber/',
+				url: '/artists/john-gruber/',
 				name: 'John Gruber',
 			},
 			{
 				class: 'kristian',
-				url: '/galleries/kristian-damholt/',
+				url: '/artists/kristian-damholt/',
 				name: 'Kristian Damholt',
 			},
 			{
 				class: 'elisotelo',
-				url: '/galleries/eli-sotelo/',
+				url: '/artists/eli-sotelo/',
 				name: 'Eli Sotelo',
 			},
 			{
 				class: 'student',
-				url: '/galleries/student-work/',
+				url: '/artists/student-work/',
 				name: 'Student Work',
 			},
 		],
