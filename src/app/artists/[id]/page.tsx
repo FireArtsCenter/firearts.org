@@ -15,9 +15,6 @@ export default async function Page({params}: TypeArtistPageProps) {
 		);
 	return (
 		<>
-			<nav>
-				<ul></ul>
-			</nav>
 			<h1>About {artistData.name}</h1>
 			{artistData.about &&
 				artistData.about.map((paragraph, index) => (

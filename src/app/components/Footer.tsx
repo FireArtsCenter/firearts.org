@@ -56,7 +56,7 @@ export default function Footer({navItems}: {navItems: TypeNavItem[]}) {
 				<p className='text-sm border-grey-darkest border-t mt-8 pt-4 w-full'>
 					{org.name} | {org.address} | {org.city}, {org.state} {org.zip}
 					<br />
-					Tel: {org.phone} | Email: <a href='mailto:{org.email}'>{org.email}</a> | <Link href='/sitemap/'>Sitemap</Link>
+					Tel: {org.phone} | Email: <a href='mailto:{org.email}'>{org.email}</a>
 				</p>
 			</div>
 		</footer>
