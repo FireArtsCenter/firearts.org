@@ -11,7 +11,7 @@ export default function ContactPage() {
 				Chicago’s studio, please contact us and let us know.
 			</p>
 			<div className='flex justify-around mt-6'>
-				<Button styleType='primary' href={`mailto:${org.email}`}>
+				<Button as='link' styleType='primary' href={`mailto:${org.email}`}>
 					Email the Fire Arts Center
 				</Button>
 				<Button href={`tel:+1${org.phone.split('.').join('')}`} styleType='secondary'>
