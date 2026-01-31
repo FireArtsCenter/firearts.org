@@ -12,15 +12,14 @@ export type TypeClassPageProps = {
 };
 export type TypeScheduleIds =
 	| 'sa-15'
-	| 'su-10'
 	| 'we-19'
-	| 'we-10+19'
 	| 'mo-19'
 	| 'tu-19'
 	| 'th-19'
 	| 'sa-12+15'
 	| 'sa-12'
-	| 'su-12+15';
+	| 'sa-930'
+	| 'call';
 export type TypeImage = {
 	src: string;
 	className?: string;
@@ -43,7 +42,7 @@ export type TypePageData = {
 	disclaimer?: string;
 };
 
-const DEFAULT_FEE = '$400 for 16 weeks, $285 for 10 weeks';
+const DEFAULT_FEE = '$350 for 10 weeks, $450 for 16 weeks';
 
 const instructors = {
 	MICHAEL_BENNET: 'Michael Bennett',
@@ -56,7 +55,7 @@ export const classes: TypePageData[] = [
 		rolling: true,
 		title: 'Bronze Casting and Mold Making',
 		instructors: instructors.MICHAEL_BENNET,
-		schedule: ['we-19', 'sa-15'],
+		schedule: ['we-19', 'sa-12'],
 		images: {
 			detail: {
 				src: '/images/found1.jpg',
@@ -83,7 +82,7 @@ export const classes: TypePageData[] = [
 		rolling: true,
 		title: 'Metal Furniture Studio',
 		instructors: 'Michael Bennett',
-		schedule: ['we-10+19', 'sa-12'],
+		schedule: ['sa-12'],
 		images: {
 			thumbnail: {
 				src: '/images/bench-sm.jpg',
@@ -117,7 +116,7 @@ export const classes: TypePageData[] = [
 				height: 405,
 			},
 		},
-		schedule: ['we-10+19', 'sa-12'],
+		schedule: ['sa-12'],
 		description: [
 			'This class focuses on how to work sculptural concepts from the drawing board to the scale model stage of construction. Students will be expected to keep a sketchbook of ideas which will be critiqued and refined at each class session. Students will learn basic metal fabrication technique.',
 			'Repetition of this class extends to deal with fabrication of large scale metal sculpture from models or free-form. Students will learn advanced metal fabrication technique, gas forging, acetylene welding, and gas and arc welding techniques as well as brazing and chasing techniques.',
@@ -125,13 +124,14 @@ export const classes: TypePageData[] = [
 	},
 	{
 		id: 'blade-smithing-forging',
-		title: 'Blade Smithing: Knife and Sword Forging',
+		title: 'Metal Smithing: Knife and Sword Forging',
 		rolling: true,
 		instructors: 'Michael Bennett, Vincent Hawkins, Jake-McNaughton &amp; Nick Schleiter',
-		schedule: ['mo-19', 'tu-19', 'we-10+19', 'th-19', 'sa-12+15', 'su-12+15'],
+		schedule: ['mo-19', 'tu-19', 'th-19', 'sa-12'],
 		fee: '$400 for 16 weeks, $285 for 10 weeks, $100 for 3 weeks',
 		description: [
 			'Learn the sacred craft of forging functional blades out of steel. In this class students will learn how to design and forge knives and swords as well as designing and making ornate hilts and scabbards. Skills learned in this class include forging technique, tempering, gas and coke forge operations, and surfacing techniques.',
+			'Students are required to bring their own propane for this course.',
 		],
 		images: {
 			thumbnail: {
@@ -161,9 +161,11 @@ export const classes: TypePageData[] = [
 				height: 405,
 			},
 		},
-		schedule: ['su-10'],
-		fee: '$200 for 8 weeks',
+		schedule: ['sa-930'],
+
+		fee: '$350 for 8 weeks',
 		description: [
+			'Not a rolling class.',
 			'In this multi-level class students will learn to master the classical figure sculpture technique from a live model. We will cover the use of clay tools, clay body chemistry, basic armature construction, anatomy, and clay hollowing and firing technique.',
 		],
 	},
@@ -171,7 +173,7 @@ export const classes: TypePageData[] = [
 		id: 'stone-carving',
 		fee: DEFAULT_FEE,
 		title: 'Stone Carving Workshop',
-		schedule: ['sa-15'],
+		schedule: ['call'],
 		rolling: true,
 		description: [
 			'In stone carving students will learn the basic techniques for composing and carving small sculpture out of alabaster and other soft stones. Students will need to purchase carving tools and materials.',

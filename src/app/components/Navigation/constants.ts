@@ -106,23 +106,6 @@ export const mainNav = [
 		class: 'events',
 	},
 	{
-		name: 'Links',
-		url: '/links/',
-		class: 'links',
-		subpages: [
-			{
-				class: 'facartists',
-				url: '/links/fire-arts-artists/',
-				name: 'Fire Arts Artists',
-			},
-			{
-				class: 'chicagoart',
-				url: '/links/chicago-art/',
-				name: 'Chicago Art',
-			},
-		],
-	},
-	{
 		name: 'Contact Us',
 		url: '/contact-us/',
 		class: 'contact',
