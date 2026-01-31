@@ -1,30 +1,28 @@
 import type {Metadata} from 'next';
 import Link from 'next/link';
+import {org} from './constants';
+import {getYearsSinceFounding} from './utils/orgData';
 
 export const metadata: Metadata = {
-	title: 'Fire Arts Center of Chicago',
-	description:
-		'The Fire Arts Center of Chicago provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.',
+	title: org.name,
+	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
 };
 
-const FOUNDED_YEAR = 1997; // 04-04
-const currentYear = new Date().getFullYear();
-
-const calculatedYearsSinceFounded = currentYear - FOUNDED_YEAR;
+const yearsSinceFounding = getYearsSinceFounding();
 
 export default function HomePage() {
 	return (
 		<>
 			<section>
 				<p>
-					The Fire Arts Center of Chicago began {calculatedYearsSinceFounded} years ago as a not-for-profit school for
-					sculptors. Our primary mission is the <strong>preservation of traditional sculpture technique</strong> by
-					offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our
-					secondary mission is to <strong>provide teaching, working, and exhibition opportunities for artists</strong>,
-					as well as technical advice and facilities to artists and institutions.
+					The {org.name} began {yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary
+					mission is the <strong>preservation of traditional sculpture technique</strong> by offering high-quality
+					training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to{' '}
+					<strong>provide teaching, working, and exhibition opportunities for artists</strong>, as well as technical
+					advice and facilities to artists and institutions.
 				</p>
 				<p className='mt-2'>
-					<Link href='/about-us/'>Read more about the Fire Arts Center of Chicago</Link>
+					<Link href='/about-us/'>Read more about the {org.name}</Link>
 				</p>
 				<div className='w-full mt-4 relative'>
 					<iframe
@@ -43,7 +41,7 @@ export default function HomePage() {
 				<h2 className='font-raleway font-black text-white my-4 text-3xl'>What’s New</h2>
 				<div className='note'>
 					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>We’ve got a new address</h3>
-					<p>The Fire Arts Center of Chicago has moved to a new location. Our new address is</p>
+					<p>The {org.name} has moved to a new location. Our new address is</p>
 					<p className='font-raleway font-black text-white my-4 text-xl font-bold ml-4'>
 						1830 N Kostner
 						<br />
@@ -54,36 +52,22 @@ export default function HomePage() {
 				</div>
 
 				<div className='note'>
-					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>One-Year Intensive Programs</h3>
-					<p>
-						Check out our{' '}
-						<Link href='/classes/year-intensive/'>
-							<strong>new</strong> one-year intensive programs
-						</Link>{' '}
-						which offer you the chance to immerse yourself in the study of traditional methods and techniques of
-						sculptors as well as the technical skills relevant to those just looking to develop a new trade. Check out
-						the <Link href='/classes/year-intensive/'>program page</Link> for more information or{' '}
-						<Link href='/contact-us/'>contact us</Link> with questions.
-					</p>
-				</div>
-
-				<div className='note'>
 					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>Payment Plans and Discounts</h3>
 					<p>
-						We at the Fire Arts Center of Chicago are not immune to the challenges of a difficult economy. Our mission
-						has always been to preserve the traditional methods and techniques of sculptors as well as the technical
-						skills relevant to those just looking to develop a new trade. In order for us to meet that mission we need
-						to provide our classes to as many people as we can. However, when times are tough, finding the money to pay
-						for classes like this is hard. For that reason we have been offering a 1/2-down payment plan to make it
-						easier to pay for classes. Now, in addition to that discount, we are introducing a bartered services option
-						to reduce class prices.
+						We at the {org.name} are not immune to the challenges of a difficult economy. Our mission has always been to
+						preserve the traditional methods and techniques of sculptors as well as the technical skills relevant to
+						those just looking to develop a new trade. In order for us to meet that mission we need to provide our
+						classes to as many people as we can. However, when times are tough, finding the money to pay for classes
+						like this is hard. For that reason we have been offering a 1/2-down payment plan to make it easier to pay
+						for classes. Now, in addition to that discount, we are introducing a bartered services option to reduce
+						class prices.
 					</p>
 					<h4 className='font-raleway font-black text-white my-4 text-xl font-bold'>How does it work?</h4>
 					<p>
 						Do you have experience with fund-raising and think you can lend a hand? Maybe accounting or legal
 						experience? Do you work somewhere that tosses out scrap metal which could be reused by us? The possibilties
-						are endless. The Fire Arts Center is always looking for tips and materials to help us grow, and we want to
-						offer you ways to learn for less.
+						are endless. The {org.name} is always looking for tips and materials to help us grow, and we want to offer
+						you ways to learn for less.
 					</p>
 					<h4 className='font-raleway font-black text-white my-4 text-xl font-bold'>
 						How do I take advantage of the payment plans and discounts?
@@ -95,17 +79,10 @@ export default function HomePage() {
 				</div>
 
 				<div className='note'>
-					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>Class Length Changes</h3>
+					<h3 className='font-raleway font-black text-white my-4 text-2xl font-bold'>Class Lengths</h3>
 					<p>
-						We are now offering various class lengths to accommodate your schedule better. Now you can choose between{' '}
-						<strong>8 week</strong> and <strong>16 week</strong> courses in forging, jewelry, foundry, furniture, and
-						metal sculpture.
-					</p>
-					<p>
-						As always our class registration is rolling which means you can join at any time. The classes are small and
-						the instructors help you work at your pace. So no matter when you start you will be walked step-by-step
-						through the process with the personal attention you need. Join when you want and stay for as long as you
-						need.
+						We offer various class lengths to accommodate your schedule better. For most classes, you can choose between{' '}
+						<strong>10 week</strong> and <strong>16 week</strong> courses.
 					</p>
 					<p className='mt-2'>
 						<Link href='/classes/'>Check out all of our classes.</Link>

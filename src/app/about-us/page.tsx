@@ -1,10 +1,6 @@
-import type {Metadata} from 'next';
 import {org} from '../constants';
-const getYearsSinceFounding = () => {
-	const now = new Date();
-	const founded = new Date(org.founded);
-	return now.getFullYear() - founded.getFullYear();
-};
+import {getYearsSinceFounding} from '../utils/orgData';
+import type {Metadata} from 'next';
 const yearsSinceFounding = getYearsSinceFounding();
 
 const sections = [
