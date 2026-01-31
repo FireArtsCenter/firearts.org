@@ -42,7 +42,7 @@ export type TypePageData = {
 	disclaimer?: string;
 };
 
-const DEFAULT_FEE = '$350 for 10 weeks, $450 for 16 weeks';
+const DEFAULT_FEE = '$350 for 10 weeks, $450 for 16 weeks' as const;
 
 const instructors = {
 	MICHAEL_BENNET: 'Michael Bennett',
@@ -128,10 +128,10 @@ export const classes: TypePageData[] = [
 		rolling: true,
 		instructors: 'Michael Bennett, Vincent Hawkins, Jake-McNaughton &amp; Nick Schleiter',
 		schedule: ['mo-19', 'tu-19', 'th-19', 'sa-12'],
-		fee: '$400 for 16 weeks, $285 for 10 weeks, $100 for 3 weeks',
+		fee: DEFAULT_FEE,
 		description: [
 			'Learn the sacred craft of forging functional blades out of steel. In this class students will learn how to design and forge knives and swords as well as designing and making ornate hilts and scabbards. Skills learned in this class include forging technique, tempering, gas and coke forge operations, and surfacing techniques.',
-			'Students are required to bring their own propane for this course.',
+			'Students are required to supply their own propane for this course.',
 		],
 		images: {
 			thumbnail: {

@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+> Going to convert to Astro with CMS backend to make this easier to update
+
 ## Getting Started
 
 1. Install devDependencies with `npm install`
