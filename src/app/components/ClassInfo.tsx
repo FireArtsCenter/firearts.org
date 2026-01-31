@@ -35,7 +35,11 @@ export default function ClassInfo({title, images, instructors, schedule, fee, de
 						{p}
 					</p>
 				))}
-			{disclaimer && <p className='mt-4'>{disclaimer}</p>}
+			{disclaimer && (
+				<div className='bg-orange-700 border-l-4 border-orange-300 text-white py-2 px-4 my-4' role='alert'>
+					<p>{disclaimer}</p>
+				</div>
+			)}
 			<Button styleType='primary' as='link' className='mt-4' href='/register/'>
 				<span>Register Now</span>
 			</Button>
