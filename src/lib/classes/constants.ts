@@ -131,8 +131,8 @@ export const classes: TypePageData[] = [
 		fee: DEFAULT_FEE,
 		description: [
 			'Learn the sacred craft of forging functional blades out of steel. In this class students will learn how to design and forge knives and swords as well as designing and making ornate hilts and scabbards. Skills learned in this class include forging technique, tempering, gas and coke forge operations, and surfacing techniques.',
-			'Students are required to supply their own propane for this course.',
 		],
+		disclaimer: 'Students are required to supply their own propane for this course.',
 		images: {
 			thumbnail: {
 				src: '/images/forging-md.jpg',
@@ -165,9 +165,9 @@ export const classes: TypePageData[] = [
 
 		fee: '$350 for 8 weeks',
 		description: [
-			'Not a rolling class.',
 			'In this multi-level class students will learn to master the classical figure sculpture technique from a live model. We will cover the use of clay tools, clay body chemistry, basic armature construction, anatomy, and clay hollowing and firing technique.',
 		],
+		disclaimer: 'This is not a rolling class. Contact us to find out when new sessions are starting.',
 	},
 	{
 		id: 'stone-carving',
