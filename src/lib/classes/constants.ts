@@ -10,16 +10,7 @@ export type TypeClassPageProps = {
 		id: TypeClassPageIds;
 	};
 };
-export type TypeScheduleIds =
-	| 'sa-15'
-	| 'we-19'
-	| 'mo-19'
-	| 'tu-19'
-	| 'th-19'
-	| 'sa-12+15'
-	| 'sa-12'
-	| 'sa-930'
-	| 'call';
+export type TypeScheduleIds = 'we-19' | 'mo-19' | 'tu-19' | 'th-19' | 'sa-12' | 'sa-930' | 'call';
 export type TypeImage = {
 	src: string;
 	className?: string;
@@ -126,7 +117,7 @@ export const classes: TypePageData[] = [
 		id: 'blade-smithing-forging',
 		title: 'Metal Smithing: Knife and Sword Forging',
 		rolling: true,
-		instructors: 'Michael Bennett, Vincent Hawkins, Jake-McNaughton &amp; Nick Schleiter',
+		instructors: 'Michael Bennett, Vincent Hawkins, Jake McNaughton &amp; Nick Schleiter',
 		schedule: ['mo-19', 'tu-19', 'th-19', 'sa-12'],
 		fee: DEFAULT_FEE,
 		description: [
