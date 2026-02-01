@@ -26,7 +26,6 @@ export default function TimeString({weirdString}: {weirdString: TypeScheduleIds}
 			'15': '3:00 p.m.–6:00 p.m.',
 			'19': '7:00 p.m.–10:00 p.m.',
 			'20': '8:00 p.m.–10:00 p.m.',
-			'1830': '6:30 p.m.–9:30 p.m.',
 			'930': '9:30 a.m.–12:30 p.m.',
 		};
 		return times.length === 1
