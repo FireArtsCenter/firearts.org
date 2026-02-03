@@ -1,7 +1,7 @@
 ---
 interface Props {
 	href: string;
-	class: string;
+	class?: string;
 	isExternal?: boolean;
 }
 const { href, isExternal = false, class: overrideClasses } = Astro.props;

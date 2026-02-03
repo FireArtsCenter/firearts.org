@@ -1,0 +1,27 @@
+---
+import Link from '@/components/Link.astro';
+interface Props {
+	href?: string;
+	isExternal?: boolean;
+	appearance?: 'primary' | 'secondary';
+}
+const { href, appearance = 'primary', isExternal = false } = Astro.props;
+const appearanceClassNames =
+	appearance === 'primary'
+		? 'bg-fac-red text-white hover:text-white focus:text-white hover:brightness-150'
+		: 'bg-grey-darkest text-white hover:text-white focus:text-white hover:brightness-150';
+const buttonStyles = `border-b-0 font-semibold inline-block px-8 py-3 no-underline hover:border-b-0 focus:border-b-0 ${appearanceClassNames}`;
+if (!href) {
+	throw new Error(
+		'I do not have a real button yet. Supply an href or add one below'
+	);
+}
+---
+
+{
+	href && (
+		<Link class={buttonStyles} href={href} isExternal={isExternal}>
+			<slot />
+		</Link>
+	)
+}

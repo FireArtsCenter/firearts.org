@@ -1,4 +1,4 @@
-export const mainNav = [
+export const navItems = [
 	{
 		name: 'Home',
 		class: 'home',

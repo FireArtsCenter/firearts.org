@@ -1,73 +1,76 @@
 ---
-import Link from 'next/link';
-import {usePathname} from 'next/navigation';
-import Button from '../Button';
+import Link from '@/components/Link.astro';
+import Button from '@/components/Button.astro';
+import { navItems } from './constants';
 
-import {type TypeNavItem} from './types';
+import { type TypeNavItem } from './types';
+
+const currentPath = Astro.url.pathname;
+
+const currentRoute = currentPath;
+const isHomepage = currentRoute === '/';
+const isRegisterPage = currentRoute === '/register/';
+const isClassPage = currentRoute.startsWith('/classes/');
 ---
 
-export default function Navigation({navItems}: {navItems: TypeNavItem[]}) {
-	const currentRoute = usePathname();
-	const isHomepage = currentRoute === '/';
-	const isRegisterPage = currentRoute === '/register/';
-	const isClassPage = currentRoute.startsWith('/classes/');
-	return (
-		<aside className='col-start-1 col-span-1'>
-			<nav
-				className={`${isHomepage ? 'home' : ''} ${isRegisterPage ? 'register' : ''} ${
-					isClassPage ? 'classes' : ''
-				} navbar hidden md:block`}
-			>
-				<ul className='font-raleway font-bold list-none p-0 pl-4'>
-					{navItems.map((item, index) => {
-						const subpagesUrls = item.subpages ? item.subpages.map((subpage) => subpage.url) : [];
+<aside class='col-span-1 col-start-1'>
+	<nav
+		class={`${isHomepage ? 'home' : ''} ${isRegisterPage ? 'register' : ''} ${
+			isClassPage ? 'classes' : ''
+		} navbar hidden md:block`}
+	>
+		<ul class='list-none p-0 pl-4 font-serif font-bold'>
+			{
+				navItems.map((item, index) => {
+					const subpagesUrls = item.subpages
+						? item.subpages.map((subpage) => subpage.url)
+						: [];
 
-						const isActivePage = currentRoute === item.url;
-						const hasActiveSubpage = subpagesUrls.includes(currentRoute);
-						return (
-							<li
-								key={`navItem${index}`}
-								className={`${item.class} ${isActivePage || hasActiveSubpage ? 'active-page' : ''} mt-4`}
+					const isActivePage = currentRoute === item.url;
+					const hasActiveSubpage = subpagesUrls.includes(currentRoute);
+					return (
+						<li
+							key={`navItem${index}`}
+							class={`${item.class} ${isActivePage || hasActiveSubpage ? 'active-page' : ''} mt-4`}
+						>
+							<Link
+								class={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`}
+								href={item.url}
 							>
-								<Link
-									className={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`}
-									href={item.url}
+								{item.name}
+							</Link>
+							{item.subpages && (
+								<ul
+									class={`${
+										hasActiveSubpage ? 'block' : 'hidden'
+									} list-none p-0 pl-4 font-sans text-sm font-normal`}
 								>
-									{item.name}
-								</Link>
-								{item.subpages && (
-									<ul
-										className={`${
-											hasActiveSubpage ? 'block' : 'hidden'
-										} font-sans font-normal list-none p-0 pl-4 text-sm`}
-									>
-										{item.subpages.map((subpage, index) => (
-											<li
-												key={`subNavItem${index}`}
-												className={`${subpage.class} ${currentRoute === subpage.url ? 'active-subpage' : ''} mt-4`}
+									{item.subpages.map((subpage, index) => (
+										<li
+											key={`subNavItem${index}`}
+											class={`${subpage.class} ${currentRoute === subpage.url ? 'active-subpage' : ''} mt-4`}
+										>
+											<Link
+												class='border-b-0 hover:border-b-0 focus:border-b-0'
+												href={subpage.url}
 											>
-												<Link
-													className='border-b-0 hover:border-b-0 focus:border-b-0'
-													href={subpage.url}
-												>
-													{subpage.name}
-												</Link>
-											</li>
-										))}
-									</ul>
-								)}
-							</li>
-						);
-					})}
-					{!isRegisterPage && (
-						<li>
-							<Button as='link' className='mt-4' styleType='primary' href='/register/'>
-								Register
-							</Button>
+												{subpage.name}
+											</Link>
+										</li>
+									))}
+								</ul>
+							)}
 						</li>
-					)}
-				</ul>
-			</nav>
-		</aside>
-	);
-}
+					);
+				})
+			}
+			{
+				!isRegisterPage && (
+					<li class='pt-4'>
+						<Button href='/register/'>Register</Button>
+					</li>
+				)
+			}
+		</ul>
+	</nav>
+</aside>
