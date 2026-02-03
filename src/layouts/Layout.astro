@@ -2,7 +2,7 @@
 import HTMLHead from '../components/HTMLHead.astro';
 // import '@/app/globals.css';
 // import {Raleway} from 'next/font/google';
-// import Header from '@/app/components/Header';
+import Header from '@/components/Header.astro';
 // import Navigation from '@/app/components/Navigation/Navigation';
 // import Footer from '@/app/components/Footer';
 // import GTM from '@/app/components/GTM';
@@ -27,10 +27,12 @@ import HTMLHead from '../components/HTMLHead.astro';
 	<head>
 		<HTMLHead />
 	</head>
-	<body class='bg-black-light text-gray font-sans'>
+	<body
+		class='bg-[#d6dbdc] bg-gradient-to-b from-transparent to-white text-black dark:bg-black dark:to-black dark:text-white'
+	>
 		{/*<GTM />*/}
 		<div id='top' class='mx-auto max-w-4xl md:grid md:grid-cols-4 md:gap-4'>
-			{/*<Header />*/}
+			<Header />
 			{/*<Navigation navItems={mainNav} />*/}
 			<main
 				id='content'
