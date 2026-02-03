@@ -1,0 +1,38 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import { org } from '../constants/constants.ts';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImageUrl?: string;
+	type?: 'website' | 'article';
+}
+
+const { title = org.name, type = 'website' } = Astro.props;
+
+const canonicalUrl = Astro.url.href;
+---
+
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<meta name='generator' content={Astro.generator} />
+
+<Font cssVariable='--font-raleway' preload />
+
+<title></title>
+<meta name='title' content={title} />
+
+<link rel='canonical' href={canonicalUrl} />
+
+<script>
+	// Default to dark mode and only alter if user has a theme in local storage or prefers light mode
+	if (
+		localStorage.theme === 'light' ||
+		(!('theme' in localStorage) &&
+			window.matchMedia('(prefers-color-scheme: light)').matches)
+	) {
+		document.body.removeAttribute('data-theme');
+	}
+</script>

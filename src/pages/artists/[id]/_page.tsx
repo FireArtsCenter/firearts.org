@@ -1,16 +1,19 @@
 import ClassCard from '@/app/components/ClassCard';
-import {getArtistById} from '@/lib/artists';
-import {TypeArtistPageProps} from '@/lib/artists/constants';
-import {getClassById} from '@/lib/classes';
+import { getArtistById } from '@/lib/artists';
+import { TypeArtistPageProps } from '@/lib/artists/constants';
+import { getClassById } from '@/lib/classes';
 import Link from 'next/link';
 
-export default async function Page({params}: TypeArtistPageProps) {
-	const {id} = params;
+export default async function Page({ params }: TypeArtistPageProps) {
+	const { id } = params;
 	const artistData = getArtistById(id);
 	if (!artistData)
 		return (
 			<p>
-				<strong>There was a problem accessing this artist info (artist id requested: {params.id})</strong>
+				<strong>
+					There was a problem accessing this artist info (artist id requested:{' '}
+					{params.id})
+				</strong>
 			</p>
 		);
 	return (
@@ -25,7 +28,7 @@ export default async function Page({params}: TypeArtistPageProps) {
 			{artistData.classes && (
 				<section id='classes'>
 					<h2>Classes</h2>
-					<div className='grid gap-4 grid-row-auto grid-cols-3 items-stretch'>
+					<div className='grid-row-auto grid grid-cols-3 items-stretch gap-4'>
 						{artistData.classes.map((classId) => {
 							const classData = getClassById(classId);
 							if (!classData) return null;
@@ -44,8 +47,8 @@ export default async function Page({params}: TypeArtistPageProps) {
 			{artistData.links && (
 				<section id='links'>
 					<h2>Additional Links</h2>
-					<ul className='list-disc pl-4 mt-4'>
-						{artistData.links.map(({text, href}) => (
+					<ul className='mt-4 list-disc pl-4'>
+						{artistData.links.map(({ text, href }) => (
 							<li key={href}>
 								<Link href={href}>{text}</Link>
 							</li>

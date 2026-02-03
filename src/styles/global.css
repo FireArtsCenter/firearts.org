@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+	--color-fac-red: "#990000";
+	--color-fac-orange: "#ff9900";
+	/* black: '#000000', */
+	/* 'black-light': '#222222', */
+	/* 'grey-darkest': '#3d4852', */
+	/* 'grey-darker': '#606f7b', */
+	/* 'grey-dark': '#8795a1', */
+	/* grey: '#c9c9c9', */
+	/* 'grey-light': '#dae1e7', */
+	/* 'grey-lighter': '#f1f5f8', */
+	/* 'grey-lightest': '#f8fafc', */
+	/* white: '#ffffff', */
+}
 
 :root {
 	--foreground-rgb: 0, 0, 0;
@@ -18,7 +31,12 @@
 
 body {
 	color: rgb(var(--foreground-rgb));
-	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb));
 }
 
 html {
@@ -36,22 +54,14 @@ body {
 	box-sizing: border-box;
 }
 
-a {
-	@apply border-b-2 border-dotted border-grey-lighter no-underline text-white;
-}
-
-a:focus,
-a:hover {
-	@apply border-b-2 border-solid border-fac-orange text-fac-orange;
-}
-
 /* ******** Typography ********** */
 
+/*
 h1,
 h2,
 h3,
 h4 {
-	@apply font-raleway font-black text-white my-4;
+	@apply font-raleway my-4 font-black text-white;
 }
 
 h1 {
@@ -73,9 +83,9 @@ h4 {
 p {
 	@apply text-lg;
 }
+*/
 
-/* ************* Navigation ************** */
-
+/*
 .active-page > ul {
 	display: block;
 }
@@ -84,21 +94,6 @@ p {
 .active-subpage > a::after {
 	@apply pl-1;
 
-	content: '\203A';
+	content: "\203A";
 }
-
-.note {
-	@apply border-b border-dotted border-grey-lighter mb-4 pb-4;
-}
-
-/* *** styles for sawyer app *** */
-.sawyer-scroll-wrapper {
-	-webkit-overflow-scrolling: touch;
-	overflow: scroll;
-	height: 500px;
-}
-@media only screen and (max-width: 35.5em) {
-	.sawyer_frame {
-		width: 90vw;
-	}
-}
+*/
