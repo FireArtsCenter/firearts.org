@@ -1,0 +1,40 @@
+---
+import { cn } from '../utils/styles.ts'; // Adjust path as needed
+
+type TypeAllowedElements = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+
+// bug with Props getting type hint for "unused" when adding 'as'
+interface Props {
+	as?: TypeAllowedElements;
+}
+/**
+ * Get some default sizes for text size and weight as well as font-family
+ */
+function getElementClasses(elementType: TypeAllowedElements) {
+	switch (elementType) {
+		case 'h1':
+			return 'font-serif my-4 font-black text-white text-4xl';
+		case 'h2':
+			return 'font-serif my-4 font-black text-white text-3xl';
+		case 'h3':
+			return 'font-serif my-4 text-white text-2xl font-bold';
+		case 'h4':
+			return 'font-serif my-4 text-white text-xl font-bold';
+		case 'h5':
+		case 'h6':
+			return 'text-2xl font-bold my-2';
+		default:
+			return 'text-lg';
+	}
+}
+
+const { as: Element = 'p', class: addedClasses } = Astro.props;
+const generatedClasses = getElementClasses(Element);
+
+// twMerge handles the "text-*" and "font-*" overrides automatically
+const mergedClasses = cn(generatedClasses, addedClasses);
+---
+
+<Element class={mergedClasses}>
+	<slot />
+</Element>

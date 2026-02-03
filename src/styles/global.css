@@ -13,6 +13,7 @@
 	/* 'grey-lighter': '#f1f5f8', */
 	/* 'grey-lightest': '#f8fafc', */
 	/* white: '#ffffff', */
+	--font-serif: var(--font-raleway);
 }
 
 :root {
@@ -53,37 +54,6 @@ body {
 ::after {
 	box-sizing: border-box;
 }
-
-/* ******** Typography ********** */
-
-/*
-h1,
-h2,
-h3,
-h4 {
-	@apply font-raleway my-4 font-black text-white;
-}
-
-h1 {
-	@apply text-4xl;
-}
-
-h2 {
-	@apply text-3xl;
-}
-
-h3 {
-	@apply text-2xl font-bold;
-}
-
-h4 {
-	@apply text-xl font-bold;
-}
-
-p {
-	@apply text-lg;
-}
-*/
 
 /*
 .active-page > ul {
