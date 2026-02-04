@@ -34,7 +34,7 @@ const isClassPage = currentRoute.startsWith('/classes/');
 							class={`${item.class} ${isActivePage || hasActiveSubpage ? 'active-page' : ''} mt-4`}
 						>
 							<Link
-								class={`${item.linkClasses} border-b-0 hover:border-b-0 focus:border-b-0`}
+								class='border-b-0 hover:border-b-0 focus:border-b-0'
 								href={item.url}
 							>
 								{item.name}
