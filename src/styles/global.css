@@ -47,16 +47,3 @@ body {
 ::after {
 	box-sizing: border-box;
 }
-
-/*
-.active-page > ul {
-	display: block;
-}
-
-.active-page > a::after,
-.active-subpage > a::after {
-	@apply pl-1;
-
-	content: "\203A";
-}
-*/

@@ -1,4 +1,14 @@
-export const navItems = [
+interface TypeNavItemDetail {
+	name: string;
+	class: string;
+	url: string;
+}
+
+interface TypeNavItem extends TypeNavItemDetail {
+	subpages?: TypeNavItemDetail[];
+}
+
+export const navItems: TypeNavItem[] = [
 	{
 		name: 'Home',
 		class: 'home',

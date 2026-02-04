@@ -2,8 +2,7 @@
 import Link from '@/components/Link.astro';
 import Button from '@/components/Button.astro';
 import { navItems } from './constants';
-
-import { type TypeNavItem } from './types';
+import { clsx } from 'clsx';
 
 const currentPath = Astro.url.pathname;
 
@@ -13,64 +12,62 @@ const isRegisterPage = currentRoute === '/register/';
 const isClassPage = currentRoute.startsWith('/classes/');
 ---
 
-<aside class='col-span-1 col-start-1'>
-	<nav
-		class={`${isHomepage ? 'home' : ''} ${isRegisterPage ? 'register' : ''} ${
-			isClassPage ? 'classes' : ''
-		} navbar hidden md:block`}
-	>
-		<ul class='list-none p-0 pl-4 font-serif font-bold'>
-			{
-				navItems.map((item, index) => {
-					const subpagesUrls = item.subpages
-						? item.subpages.map((subpage) => subpage.url)
-						: [];
+<nav
+	class={`${clsx({
+		home: isHomepage,
+		register: isRegisterPage,
+		classes: isClassPage,
+	})} hidden md:block`}
+>
+	<ul class='list-none p-0 pl-4 font-serif font-bold'>
+		{
+			navItems.map((item, index) => {
+				const subpagesUrls = item.subpages
+					? item.subpages.map((subpage) => subpage.url)
+					: [];
 
-					const isActivePage = currentRoute === item.url;
-					const hasActiveSubpage = subpagesUrls.includes(currentRoute);
-					return (
-						<li
-							key={`navItem${index}`}
-							class={`${item.class} ${isActivePage || hasActiveSubpage ? 'active-page' : ''} mt-4`}
+				const isActivePage = currentRoute === item.url;
+				const hasActiveSubpage = subpagesUrls.includes(currentRoute);
+				const containsOrIsActivePage = hasActiveSubpage || isActivePage;
+				return (
+					<li class={`${item.class} mt-4`}>
+						<Link
+							class={clsx({ "after:pl-1 after:content-['›']": isActivePage })}
+							href={item.url}
 						>
-							<Link
-								class='border-b-0 hover:border-b-0 focus:border-b-0'
-								href={item.url}
+							{item.name}
+						</Link>
+						{item.subpages && (
+							<ul
+								class={`${
+									containsOrIsActivePage ? 'block' : 'hidden'
+								} list-none p-0 pl-4 font-sans text-sm font-normal`}
 							>
-								{item.name}
-							</Link>
-							{item.subpages && (
-								<ul
-									class={`${
-										hasActiveSubpage ? 'block' : 'hidden'
-									} list-none p-0 pl-4 font-sans text-sm font-normal`}
-								>
-									{item.subpages.map((subpage, index) => (
-										<li
-											key={`subNavItem${index}`}
-											class={`${subpage.class} ${currentRoute === subpage.url ? 'active-subpage' : ''} mt-4`}
-										>
+								{item.subpages.map((subpage, index) => {
+									const isActiveSubpage = currentRoute === subpage.url;
+									return (
+										<li class={`${subpage.class} mt-4`}>
 											<Link
-												class='border-b-0 hover:border-b-0 focus:border-b-0'
+												class={`${clsx({ "after:pl-1 after:content-['›']": isActiveSubpage })}`}
 												href={subpage.url}
 											>
 												{subpage.name}
 											</Link>
 										</li>
-									))}
-								</ul>
-							)}
-						</li>
-					);
-				})
-			}
-			{
-				!isRegisterPage && (
-					<li class='pt-4'>
-						<Button href='/register/'>Register</Button>
+									);
+								})}
+							</ul>
+						)}
 					</li>
-				)
-			}
-		</ul>
-	</nav>
-</aside>
+				);
+			})
+		}
+		{
+			!isRegisterPage && (
+				<li class='pt-4'>
+					<Button href='/register/'>Register</Button>
+				</li>
+			)
+		}
+	</ul>
+</nav>
