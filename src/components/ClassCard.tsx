@@ -1,11 +1,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {type TypeImage} from '@/lib/classes/constants';
+import { type TypeImage } from '@/lib/classes/constants';
 
-export default function ClassCard({title, link, image}: {title: string; link: string; image?: TypeImage}) {
+export default function ClassCard({
+	title,
+	link,
+	image,
+}: {
+	title: string;
+	link: string;
+	image?: TypeImage;
+}) {
 	return (
 		<Link
-			className='block hover:bg-black border-b-0 hover:border-b-0 focus:border-b-0 overflow-hidden rounded shadow-lg shadow-black hover:shadow-grey-darkest'
+			className='hover:shadow-grey-darkest block overflow-hidden rounded border-b-0 shadow-lg shadow-black hover:border-b-0 hover:bg-black focus:border-b-0'
 			href={link}
 		>
 			<div className='h-full'>

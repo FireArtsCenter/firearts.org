@@ -3,23 +3,33 @@ import Link from '@/components/Link.astro';
 import Button from '@/components/Button.astro';
 import { navItems } from './constants';
 import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-const currentPath = Astro.url.pathname;
+interface Props {
+	class: string;
+	isMobile?: boolean;
+}
 
-const currentRoute = currentPath;
+const currentRoute = Astro.url.pathname;
 const isHomepage = currentRoute === '/';
 const isRegisterPage = currentRoute === '/register/';
 const isClassPage = currentRoute.startsWith('/classes/');
+
+const { class: className, isMobile = false } = Astro.props;
 ---
 
 <nav
-	class={`${clsx({
-		home: isHomepage,
-		register: isRegisterPage,
-		classes: isClassPage,
-	})} hidden md:block`}
+	class={`${twMerge(
+		clsx({
+			home: isHomepage,
+			register: isRegisterPage,
+			classes: isClassPage,
+			'flex flex-col justify-start': isMobile,
+		}),
+		className
+	)}`}
 >
-	<ul class='list-none p-0 pl-4 font-serif font-bold'>
+	<ul class='h-full w-full list-none font-serif text-2xl font-extrabold'>
 		{
 			navItems.map((item, index) => {
 				const subpagesUrls = item.subpages
@@ -30,9 +40,13 @@ const isClassPage = currentRoute.startsWith('/classes/');
 				const hasActiveSubpage = subpagesUrls.includes(currentRoute);
 				const containsOrIsActivePage = hasActiveSubpage || isActivePage;
 				return (
-					<li class={`${item.class} mt-4`}>
+					<li class={`${item.class} ${index !== 0 ? 'mt-4' : ''}`}>
 						<Link
-							class={clsx({ "after:pl-1 after:content-['›']": isActivePage })}
+							class={clsx({
+								"text-fac-orange cursor-default after:pl-1 after:content-['›']":
+									isActivePage,
+								'no-underline': true,
+							})}
 							href={item.url}
 						>
 							{item.name}
@@ -41,14 +55,18 @@ const isClassPage = currentRoute.startsWith('/classes/');
 							<ul
 								class={`${
 									containsOrIsActivePage ? 'block' : 'hidden'
-								} list-none p-0 pl-4 font-sans text-sm font-normal`}
+								} list-none p-0 pl-4 font-sans text-xl font-bold md:text-lg`}
 							>
 								{item.subpages.map((subpage, index) => {
 									const isActiveSubpage = currentRoute === subpage.url;
 									return (
 										<li class={`${subpage.class} mt-4`}>
 											<Link
-												class={`${clsx({ "after:pl-1 after:content-['›']": isActiveSubpage })}`}
+												class={clsx({
+													"text-fac-orange cursor-default after:pl-1 after:content-['›']":
+														isActiveSubpage,
+													'no-underline': true,
+												})}
 												href={subpage.url}
 											>
 												{subpage.name}
@@ -62,12 +80,11 @@ const isClassPage = currentRoute.startsWith('/classes/');
 				);
 			})
 		}
-		{
-			!isRegisterPage && (
-				<li class='pt-4'>
-					<Button href='/register/'>Register</Button>
-				</li>
-			)
-		}
 	</ul>
+	<div class={isMobile ? 'mt-auto -mx-12' : 'mt-16'}>
+		<Button
+			class={`w-full md:block ${isMobile ? 'py-6 text-xl' : ''}`}
+			href='/register/'>Register</Button
+		>
+	</div>
 </nav>

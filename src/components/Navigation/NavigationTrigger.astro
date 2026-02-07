@@ -1,0 +1,28 @@
+---
+import { twMerge } from 'tailwind-merge';
+interface Props {
+	targetId: string;
+	class?: string;
+}
+const { targetId, class: className } = Astro.props;
+---
+
+<button
+	class={twMerge('cursor-pointer', className)}
+	data-modal-target={targetId}
+>
+	<slot />
+</button>
+
+<script>
+	// Select all trigger buttons on the page
+	const buttons = document.querySelectorAll('[data-modal-target]');
+
+	buttons.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const targetId = btn.getAttribute('data-modal-target');
+			// Dispatch the unique event for this specific target
+			window.dispatchEvent(new Event(`open-modal-${targetId}`));
+		});
+	});
+</script>

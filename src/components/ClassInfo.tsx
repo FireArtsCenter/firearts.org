@@ -1,12 +1,22 @@
 import Image from 'next/image';
 import TimeString from '@/app/components/TimeString';
 import Button from '@/app/components/Button';
-import {type TypePageData} from '@/lib/classes/constants';
+import { type TypePageData } from '@/lib/classes/constants';
 
-export default function ClassInfo({title, images, instructors, schedule, fee, description, disclaimer}: TypePageData) {
+export default function ClassInfo({
+	title,
+	images,
+	instructors,
+	schedule,
+	fee,
+	description,
+	disclaimer,
+}: TypePageData) {
 	return (
 		<div className='note'>
-			<h2 className='font-raleway font-black text-white my-4 text-3xl'>{title}</h2>
+			<h2 className='font-raleway my-4 text-3xl font-black text-white'>
+				{title}
+			</h2>
 			{/* eslint-disable-next-line jsx-a11y/alt-text */}
 			{images?.detail && <Image {...images.detail} />}
 			{instructors && (
@@ -36,7 +46,10 @@ export default function ClassInfo({title, images, instructors, schedule, fee, de
 					</p>
 				))}
 			{disclaimer && (
-				<div className='bg-orange-700 border-l-4 border-orange-300 text-white py-2 px-4 my-4' role='alert'>
+				<div
+					className='my-4 border-l-4 border-orange-300 bg-orange-700 px-4 py-2 text-white'
+					role='alert'
+				>
 					<p>{disclaimer}</p>
 				</div>
 			)}

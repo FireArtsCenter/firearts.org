@@ -1,0 +1,33 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<dialog
+	id={id}
+	class='m-0 h-screen max-h-none w-screen max-w-none border-none p-0'
+>
+	<div class='grid h-full w-full bg-black px-12 pt-12 text-white'>
+		<form method='dialog' class='absolute top-1 right-1'>
+			<button class='cursor-pointer p-2'>
+				<Icon size='36px' name='xmark' />
+				<span class='sr-only'>Close</span>
+			</button>
+		</form>
+		<slot />
+	</div>
+</dialog>
+
+<script define:vars={{ id }}>
+	const modal = document.getElementById(id);
+
+	// Listen for a specific event unique to this ID
+	window.addEventListener(`open-modal-${id}`, () => {
+		modal.showModal();
+	});
+</script>

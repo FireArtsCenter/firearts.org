@@ -2,30 +2,39 @@
 import HTMLHead from '../components/HTMLHead.astro';
 import Header from '@/components/Header.astro';
 import Navigation from '@/components/Navigation/Navigation.astro';
+import MobileNavContainer from '@/components/Navigation/MobileNavContainer.astro';
 // import Footer from '@/app/components/Footer';
 // import GTM from '@/app/components/GTM';
 ---
 
-<html lang='en'>
+<html lang='en' class='overflow-y-scroll scroll-smooth'>
 	<head>
 		<HTMLHead />
 	</head>
 	<body
-		class='bg-[#d6dbdc] bg-gradient-to-b from-transparent to-white text-black dark:bg-black dark:to-black dark:text-white'
+		class='min-h-screen bg-neutral-900 bg-gradient-to-b from-transparent to-black text-white'
 	>
-		{/*<GTM />*/}
-		<div id='top' class='mx-auto max-w-4xl md:grid md:grid-cols-4 md:gap-4'>
-			<Header />
-			<aside class='col-span-1 col-start-1'>
+		{/* TODO: REMOVE GTM?  <GTM /> */}
+		<div id='top' class='mx-auto grid max-w-4xl grid-cols-4 gap-4'>
+			<header
+				class='col-span-4 col-start-1 md:grid md:grid-cols-4 md:items-center'
+			>
+				<Header />
+			</header>
+			<MobileNavContainer id='mobileNav'>
+				<Navigation isMobile={true} />
+			</MobileNavContainer>
+			<aside class='col-span-1 col-start-1 row-start-2 hidden p-4 md:block'>
 				<Navigation />
 			</aside>
 			<main
 				id='content'
-				class='px-4 sm:py-4 md:col-span-3 md:col-start-2 md:py-4'
+				class='col-span-4 col-start-1 row-start-2 px-4 sm:py-4 md:col-span-3 md:col-start-2 md:py-4'
 			>
 				<slot />
 			</main>
+
+			{/*<Footer navItems={mainNav} />*/}
 		</div>
-		{/*<Footer navItems={mainNav} />*/}
 	</body>
 </html>

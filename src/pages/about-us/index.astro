@@ -4,6 +4,11 @@ import { org } from '../../constants/constants';
 import { getYearsSinceFounding } from '../../utils/orgData';
 const yearsSinceFounding = getYearsSinceFounding();
 
+// const metadata: Metadata = {
+// 	title: `About Us | ${org.name}`,
+// 	description: `The ${org.name} began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
+// };
+
 const sections = [
 	{
 		headline: 'Fire Arts Mission',
@@ -22,11 +27,6 @@ const sections = [
 		text: `Special projects are very important to the <strong>${org.name}</strong>'s mission and goals. We aim to facilitate&mdash;and participate in&mdash;public art projects through outreach and collaboration with other community organizations. Past projects have introduced adults and children with disabilities to the excitement of metal casting, and have taught high school students the joys of metalworking.`,
 	},
 ];
-
-// const metadata: Metadata = {
-// 	title: `About Us | ${org.name}`,
-// 	description: `The ${org.name} began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
-// };
 ---
 
 <Layout>
@@ -36,7 +36,7 @@ const sections = [
 				<h2 class='font-raleway my-4 text-3xl font-black text-white'>
 					{section.headline}
 				</h2>
-				<p>{section.text}</p>
+				<p set:html={section.text} />
 			</section>
 		))
 	}

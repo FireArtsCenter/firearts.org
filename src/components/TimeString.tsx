@@ -1,6 +1,6 @@
-import {type TypeScheduleIds} from '@/lib/classes/constants';
+import { type TypeScheduleIds } from '@/lib/classes/constants';
 
-const scheduler: {days: Record<string, string>} = {
+const scheduler: { days: Record<string, string> } = {
 	days: {
 		mo: 'Monday',
 		tu: 'Tuesday',
@@ -12,7 +12,11 @@ const scheduler: {days: Record<string, string>} = {
 };
 
 // not sure why this is the way it is
-export default function TimeString({weirdString}: {weirdString: TypeScheduleIds}) {
+export default function TimeString({
+	weirdString,
+}: {
+	weirdString: TypeScheduleIds;
+}) {
 	if (weirdString === 'call') {
 		return 'Call for availablilty';
 	}
@@ -38,8 +42,12 @@ export default function TimeString({weirdString}: {weirdString: TypeScheduleIds}
 						separator = ', ';
 					}
 					return `${acc}${separator}${availableTimes[curr]}`;
-			  }, '');
+				}, '');
 	};
 
-	return <li className={`day-${dow}`}>{`${scheduler.days[dow]} at ${generateTimeString(moreTimes)}`}</li>;
+	return (
+		<li
+			className={`day-${dow}`}
+		>{`${scheduler.days[dow]} at ${generateTimeString(moreTimes)}`}</li>
+	);
 }

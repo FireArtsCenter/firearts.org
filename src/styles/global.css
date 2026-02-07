@@ -1,49 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-	--color-fac-red: #990000;
-	--color-fac-orange: #ff9900;
+	--color-fac-red: var(--color-red-800); /* old #990000 */
+	--color-fac-orange: var(--color-amber-600); /* old #ff9900 */
 	--font-serif: var(--font-raleway);
-}
-
-/* I think these are all in place in the Layout.astro now 
-   body has class='bg-[#d6dbdc] bg-gradient-to-b from-transparent to-white text-black dark:bg-black dark:to-black dark:text-white'
-:root {
-	--foreground-rgb: 0, 0, 0;
-	--background-start-rgb: 214, 219, 220;
-	--background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--foreground-rgb: 255, 255, 255;
-		--background-start-rgb: 0, 0, 0;
-		--background-end-rgb: 0, 0, 0;
-	}
-}
-
-body {
-	color: rgb(var(--foreground-rgb));
-	background: linear-gradient(
-			to bottom,
-			transparent,
-			rgb(var(--background-end-rgb))
-		)
-		rgb(var(--background-start-rgb));
-}
-*/
-
-html {
-	text-rendering: optimizeLegibility;
-}
-
-html,
-body {
-	scroll-behavior: smooth;
-}
-
-*,
-::before,
-::after {
-	box-sizing: border-box;
 }

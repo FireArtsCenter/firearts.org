@@ -3,22 +3,24 @@ import react from '@astrojs/react';
 
 import tailwindcss from '@tailwindcss/vite';
 
-export default defineConfig({
-	integrations: [react()],
+import icon from 'astro-icon';
 
-	vite: {
-		plugins: [tailwindcss()],
-	},
-	experimental: {
-		fonts: [
-			{
-				provider: fontProviders.google(),
-				name: 'Raleway',
-				weights: [700,900],
-				styles: ['normal'], // just loading normal for now but this would allow italic
-				display: 'swap',
-				cssVariable: '--font-raleway',
-			},
-		],
-	},
+export default defineConfig({
+    integrations: [react(), icon()],
+
+    vite: {
+        plugins: [tailwindcss()],
+    },
+    experimental: {
+        fonts: [
+            {
+                provider: fontProviders.google(),
+                name: 'Raleway',
+                weights: [700,900],
+                styles: ['normal'], // just loading normal for now but this would allow italic
+                display: 'swap',
+                cssVariable: '--font-raleway',
+            },
+        ],
+    },
 });
