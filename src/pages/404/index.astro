@@ -1,0 +1,28 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { type TypePageMetaData } from '@/layouts/types';
+
+import Link from '@/components/Link.astro';
+import Text from '@/components/Text.astro';
+import { org } from '@/constants';
+import PageSection from '@/components/PageSection.astro';
+
+const metaData: TypePageMetaData = {
+	title: '404: Page not found',
+};
+---
+
+<Layout metaData={metaData}>
+	<PageSection title='Page not found'>
+		<Text>
+			It looks like the page you are trying to find is no longer available.
+		</Text>
+		<Text>
+			If you have questions or need help, return to the <Link href='/'
+				>home page</Link
+			> or <Link href='/context-us/'
+				>contact the {org.name} with your questions</Link
+			>.
+		</Text>
+	</PageSection>
+</Layout>

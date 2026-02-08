@@ -14,16 +14,16 @@ interface Props {
 function getElementClasses(elementType: TypeAllowedElements) {
 	switch (elementType) {
 		case 'h1':
-			return 'font-serif my-4 font-black text-white text-4xl';
+			return 'font-serif font-black text-white text-4xl';
 		case 'h2':
-			return 'font-serif my-4 font-black text-white text-3xl';
+			return 'font-serif font-black text-white text-3xl';
 		case 'h3':
-			return 'font-serif my-4 text-white text-2xl font-bold';
+			return 'font-serif text-white text-2xl font-bold';
 		case 'h4':
-			return 'font-serif my-4 text-white text-xl font-bold';
+			return 'font-serif text-white text-xl font-bold';
 		case 'h5':
 		case 'h6':
-			return 'text-2xl font-bold my-2';
+			return 'text-2xl font-bold';
 		default:
 			return 'text-xl md:text-lg';
 	}

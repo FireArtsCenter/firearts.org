@@ -1,0 +1,21 @@
+---
+import Text from '@/components/Text.astro';
+import { twMerge } from 'tailwind-merge';
+interface Props {
+	title?: string;
+	level?: 'h2' | 'h3';
+	class?: string;
+}
+const { title, level = 'h2', class: overrideClasses } = Astro.props;
+---
+
+<section class={twMerge('flex flex-col gap-4', overrideClasses)}>
+	{
+		title && (
+			<Text as={level} class={level === 'h2' ? 'md:mt-0' : ''}>
+				{title}
+			</Text>
+		)
+	}
+	<slot />
+</section>

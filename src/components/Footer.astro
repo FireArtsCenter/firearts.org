@@ -23,25 +23,25 @@ const gallerySubPages = getSubnavItemsByClass('artists');
 <footer class={cn('px-4 py-8', overrideClasses)}>
 	<nav class='flex flex-wrap justify-between'>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h2'>
+			<Text as='h2' class='mt-4 md:mt-0'>
 				<Link isNavLink href='/'>Home</Link>
 			</Text>
 			{homeSubPages && <FooterNavFocused subNavItems={homeSubPages} />}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h2'>
+			<Text as='h2' class='mt-4 md:mt-0'>
 				<Link isNavLink href='/classes/'>Classes</Link>
 			</Text>
 			{classesSubPages && <FooterNavFocused subNavItems={classesSubPages} />}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h2'>
+			<Text as='h2' class='mt-4 md:mt-0'>
 				<Link isNavLink href='/artists/'>Artists</Link>
 			</Text>
 			{gallerySubPages && <FooterNavFocused subNavItems={gallerySubPages} />}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h2'>Other Links</Text>
+			<Text as='h2' class='mt-4 md:mt-0'>Other Links</Text>
 			<ul class='list-none p-0'>
 				<li>
 					<Link isNavLink href='/events/'>Events</Link>

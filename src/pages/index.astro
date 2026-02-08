@@ -5,6 +5,7 @@ import Note from '@/components/Note.astro';
 import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 import { getYearsSinceFounding } from '@/utils/orgData';
+import PageSection from '@/components/PageSection.astro';
 
 export const metaData: Metadata = {
 	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
@@ -14,7 +15,7 @@ const yearsSinceFounding = getYearsSinceFounding();
 ---
 
 <Layout metaData={metaData}>
-	<section>
+	<PageSection>
 		<Text>
 			The {org.name} began {yearsSinceFounding} years ago as a not-for-profit school
 			for sculptors. Our primary mission is the <strong
@@ -38,10 +39,9 @@ const yearsSinceFounding = getYearsSinceFounding();
 				allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
 				allowfullscreen={true}></iframe>
 		</div>
-	</section>
+	</PageSection>
 
-	<section>
-		<Text as='h2'>What’s New</Text>
+	<PageSection title='What’s New' class='mt-8'>
 		<Note>
 			<Text as='h3'> We’ve got a new address </Text>
 			<Text>The {org.name} has moved to a new location. Our new address is</Text
@@ -96,5 +96,5 @@ const yearsSinceFounding = getYearsSinceFounding();
 				<Link href='/classes/'>Check out all of our classes.</Link>
 			</Text>
 		</Note>
-	</section>
+	</PageSection>
 </Layout>

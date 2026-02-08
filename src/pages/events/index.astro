@@ -1,22 +1,29 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Link from '../../components/Link.astro';
+import Layout from '@/layouts/Layout.astro';
+import Link from '@/components/Link.astro';
+import Text from '@/components/Text.astro';
+import { org } from '@/constants';
+import PageSection from '@/components/PageSection.astro';
 ---
 
-<Layout>
-	<section>
-		<div class='note'>
-			<p>
-				There are no events currently scheduled, but that doesn’t mean you can’t
-				stop by. Visit the Fire Arts Center of Chicago today and make your own
-				event.
-			</p>
-			<p class='mt-4'>
-				If you are looking for class schedules, please visit our <Link
-					href='/classes/'>classes page</Link
-				> where you can see the days for each class. The schedule is rolling for many
-				of our classes so please contact us with any other questions about updates.
-			</p>
-		</div>
-	</section>
+<Layout metaData={{}}>
+	<PageSection title={`${org.name} Events`}>
+		<Text>
+			There are no events currently scheduled, but that doesn’t mean you can’t
+			stop by.
+		</Text>
+		<Text>
+			<Link href='/location/'
+				>Visit the {org.name} today and make your own event.</Link
+			>
+		</Text>
+		<Text>
+			If you are looking for class schedules, please visit our <Link
+				href='/classes/'>classes page</Link
+			>. The schedule is rolling for some of our classes so please <Link
+				href='/contact-us/'
+				>contact us with any other questions about updates</Link
+			>.
+		</Text>
+	</PageSection>
 </Layout>

@@ -1,14 +1,17 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Link from '../../components/Link.astro';
+import Layout from '@/layouts/Layout.astro';
+import Link from '@/components/Link.astro';
+import Text from '@/components/Text.astro';
+import PageSection from '@/components/PageSection.astro';
+import { org } from '@/constants';
 ---
 
-<Layout>
-	<section>
-		<p>
-			<Link href='/contact-us/'
-				>Contact us with any questions about course offerings.</Link
-			>
-		</p>
-	</section>
+<Layout metaData={{}}>
+	<PageSection title='Register for classes'>
+		<Text>
+			The best way to get signed up for a class at the {org.name} is to <Link
+				href='/contact-us/'>contact us directly</Link
+			>. We can help you find the best way to get started.</Text
+		>
+	</PageSection>
 </Layout>

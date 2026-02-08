@@ -4,6 +4,8 @@ import { type TypePageMetaData } from '@/layouts/types';
 import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 import { getYearsSinceFounding } from '@/utils/orgData';
+import PageSection from '@/components/PageSection.astro';
+import Note from '@/components/Note.astro';
 const yearsSinceFounding = getYearsSinceFounding();
 
 const metaData: TypePageMetaData = {
@@ -32,21 +34,14 @@ const sections = [
 ---
 
 <Layout metaData={metaData}>
-	<section>
-		<Text as='h2' class='md:mt-0'>About the {org.name}</Text>
+	<PageSection title={`About the ${org.name}`}>
 		{
-			sections.map((section, index) => (
-				<section
-					class={
-						index !== sections.length - 1
-							? 'border-border-default mb-4 border-b pb-4'
-							: ''
-					}
-				>
+			sections.map((section) => (
+				<Note>
 					<Text as='h3'>{section.headline}</Text>
 					<Text as='p' set:html={section.text} />
-				</section>
+				</Note>
 			))
 		}
-	</section>
+	</PageSection>
 </Layout>
