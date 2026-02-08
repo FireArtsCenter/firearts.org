@@ -1,10 +1,10 @@
-interface TypeNavItemDetail {
+export interface TypeNavItemDetail {
 	name: string;
 	class: string;
 	url: string;
 }
 
-interface TypeNavItem extends TypeNavItemDetail {
+export interface TypeNavItem extends TypeNavItemDetail {
 	subpages?: TypeNavItemDetail[];
 }
 

@@ -3,7 +3,8 @@ import HTMLHead from '../components/HTMLHead.astro';
 import Header from '@/components/Header.astro';
 import Navigation from '@/components/Navigation/Navigation.astro';
 import MobileNavContainer from '@/components/Navigation/MobileNavContainer.astro';
-// import Footer from '@/app/components/Footer';
+import { navItems } from '@/components/Navigation/constants.ts';
+import Footer from '@/components/Footer.astro';
 // import GTM from '@/app/components/GTM';
 ---
 
@@ -22,10 +23,10 @@ import MobileNavContainer from '@/components/Navigation/MobileNavContainer.astro
 				<Header />
 			</header>
 			<MobileNavContainer id='mobileNav'>
-				<Navigation isMobile={true} />
+				<Navigation isMobile={true} navItems={navItems} />
 			</MobileNavContainer>
 			<aside class='col-span-1 col-start-1 row-start-2 hidden p-4 md:block'>
-				<Navigation />
+				<Navigation navItems={navItems} />
 			</aside>
 			<main
 				id='content'
@@ -33,8 +34,7 @@ import MobileNavContainer from '@/components/Navigation/MobileNavContainer.astro
 			>
 				<slot />
 			</main>
-
-			{/*<Footer navItems={mainNav} />*/}
+			<Footer navItems={navItems} />
 		</div>
 	</body>
 </html>

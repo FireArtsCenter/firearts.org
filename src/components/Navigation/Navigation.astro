@@ -1,11 +1,12 @@
 ---
 import Link from '@/components/Link.astro';
 import Button from '@/components/Button.astro';
-import { navItems } from './constants';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { type TypeNavItem } from '../Navigation/constants.ts';
 
 interface Props {
+	navItems: TypeNavItem[];
 	class: string;
 	isMobile?: boolean;
 }
@@ -15,7 +16,7 @@ const isHomepage = currentRoute === '/';
 const isRegisterPage = currentRoute === '/register/';
 const isClassPage = currentRoute.startsWith('/classes/');
 
-const { class: className, isMobile = false } = Astro.props;
+const { navItems, class: className, isMobile = false } = Astro.props;
 ---
 
 <nav
