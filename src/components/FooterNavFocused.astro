@@ -4,12 +4,13 @@ import { type TypeNavItemDetail } from '@/components/Navigation/constants';
 
 interface Props {
 	subNavItems: TypeNavItemDetail[];
+	class: string;
 }
 
-const { subNavItems } = Astro.props;
+const { subNavItems, class: additionalClasses } = Astro.props;
 ---
 
-<ul class='mt-4 list-none p-0'>
+<ul class={additionalClasses}>
 	{
 		subNavItems.map((subpage) => (
 			<li class={subpage.class}>

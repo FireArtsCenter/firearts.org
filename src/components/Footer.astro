@@ -26,23 +26,44 @@ const gallerySubPages = getSubnavItemsByClass('artists');
 			<Text as='h2' class='mt-4 md:mt-0'>
 				<Link isNavLink href='/'>Home</Link>
 			</Text>
-			{homeSubPages && <FooterNavFocused subNavItems={homeSubPages} />}
+			{
+				homeSubPages && (
+					<FooterNavFocused
+						subNavItems={homeSubPages}
+						class='mt-4 list-none p-0'
+					/>
+				)
+			}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
 			<Text as='h2' class='mt-4 md:mt-0'>
 				<Link isNavLink href='/classes/'>Classes</Link>
 			</Text>
-			{classesSubPages && <FooterNavFocused subNavItems={classesSubPages} />}
+			{
+				classesSubPages && (
+					<FooterNavFocused
+						subNavItems={classesSubPages}
+						class='mt-4 list-none p-0'
+					/>
+				)
+			}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
 			<Text as='h2' class='mt-4 md:mt-0'>
 				<Link isNavLink href='/artists/'>Artists</Link>
 			</Text>
-			{gallerySubPages && <FooterNavFocused subNavItems={gallerySubPages} />}
+			{
+				gallerySubPages && (
+					<FooterNavFocused
+						subNavItems={gallerySubPages}
+						class='mt-4 list-none p-0'
+					/>
+				)
+			}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
 			<Text as='h2' class='mt-4 md:mt-0'>Other Links</Text>
-			<ul class='list-none p-0'>
+			<ul class='mt-4 list-none p-0'>
 				<li>
 					<Link isNavLink href='/events/'>Events</Link>
 				</li>

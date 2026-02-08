@@ -1,0 +1,70 @@
+---
+import Link from '@/components/Link.astro';
+import Button from '@/components/Button.astro';
+// import { Image } from 'astro:assets';
+// import { type TypeImage } from '@/lib/classes/constants';
+
+interface Props {
+	title: string;
+	link: string;
+	// image?: TypeImage;
+}
+
+const { title, link } = Astro.props;
+---
+
+{
+	/*
+<Link
+	class='block overflow-hidden rounded border-b-0 shadow-lg shadow-black hover:border-b-0 hover:bg-black hover:shadow-neutral-900 focus:border-b-0'
+	href={link}
+>
+	<div class='h-full'>
+		{
+			image?.src && (
+				<Image
+					src={image.src}
+					class='w-full'
+					alt={image.alt || ''}
+					width={image.width || '720'}
+					height={image.height || '405'}
+				/>
+			)
+		}
+		<div class='px-6 py-4'>
+			<h3 class='m-0 text-xl'>{title}</h3>
+		</div>
+	</div>
+</Link>
+  */
+}
+
+<div
+	class='group relative my-6 flex w-1/2 cursor-pointer flex-col rounded-lg border border-slate-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg'
+>
+	<div class='relative m-2.5 h-56 overflow-hidden rounded-md text-white'>
+		<img
+			class='ease-[cubic-bezier(0.25, 1, 0.5, 1)] transform transition-transform duration-500 group-hover:scale-110'
+			src='https://images.unsplash.com/photo-1496436818536-e239445d3327?q=80&w=1200'
+			alt='investment-seed-round'
+		/>
+	</div>
+	<div class='p-4'>
+		<h6 class='mb-2 text-xl font-semibold text-slate-800'>
+			{title}
+		</h6>
+		<p class='leading-normal font-light text-slate-600'>
+			We are thrilled to announce the completion of our seed round, securing $2M
+			in investment to fuel product development and market expansion.
+		</p>
+	</div>
+	<div class='mt-2 px-4 pt-0 pb-4'>
+		<Button
+			href={link}
+			class='rounded-md border border-transparent bg-slate-800 px-4 py-2 text-center text-sm text-white shadow-md transition-all hover:bg-slate-700 hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
+			type='button'
+		>
+			Learn more <span class='sr-only'>about {title}</span>
+		</Button>
+	</div>
+</div>
