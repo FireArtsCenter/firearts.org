@@ -13,7 +13,9 @@
 		"paths": {
 			"@/components/*": ["./src/components/*"],
 			"@/layouts/*": ["./src/layouts/*"],
-			"@/vendors/*": ["./src/vendors/*"]
+			"@/vendors/*": ["./src/vendors/*"],
+			"@/utils/*": ["./src/utils/*"],
+			"@/constants": ["./src/constants.ts"]
 		},
 		"resolveJsonModule": true
 	}

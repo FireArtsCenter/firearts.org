@@ -1,13 +1,15 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { org } from '../../constants/constants';
-import { getYearsSinceFounding } from '../../utils/orgData';
+import Layout from '@/layouts/Layout.astro';
+import { type TypePageMetaData } from '@/layouts/types';
+import Text from '@/components/Text.astro';
+import { org } from '@/constants';
+import { getYearsSinceFounding } from '@/utils/orgData';
 const yearsSinceFounding = getYearsSinceFounding();
 
-// const metadata: Metadata = {
-// 	title: `About Us | ${org.name}`,
-// 	description: `The ${org.name} began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
-// };
+const metaData: TypePageMetaData = {
+	title: 'About Us',
+	description: `The ${org.name} began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
+};
 
 const sections = [
 	{
@@ -29,15 +31,22 @@ const sections = [
 ];
 ---
 
-<Layout>
-	{
-		sections.map((section) => (
-			<section class='border-grey-lighter mb-4 border-b border-dotted pb-4'>
-				<h2 class='font-raleway my-4 text-3xl font-black text-white'>
-					{section.headline}
-				</h2>
-				<p set:html={section.text} />
-			</section>
-		))
-	}
+<Layout metaData={metaData}>
+	<section>
+		<Text as='h2' class='md:mt-0'>About the {org.name}</Text>
+		{
+			sections.map((section, index) => (
+				<section
+					class={
+						index !== sections.length - 1
+							? 'border-border-default mb-4 border-b pb-4'
+							: ''
+					}
+				>
+					<Text as='h3'>{section.headline}</Text>
+					<Text as='p' set:html={section.text} />
+				</section>
+			))
+		}
+	</section>
 </Layout>

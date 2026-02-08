@@ -3,7 +3,7 @@ import Link from '@/components/Link.astro';
 import Text from '@/components/Text.astro';
 import { type TypeNavItem } from '@/components/Navigation/constants';
 import FooterNavFocused from '@/components/FooterNavFocused.astro';
-import { org } from '../constants/constants';
+import { org } from '@/constants';
 import { cn } from '../utils/styles.ts';
 interface Props {
 	navItems: TypeNavItem[];
@@ -23,37 +23,37 @@ const gallerySubPages = getSubnavItemsByClass('artists');
 <footer class={cn('px-4 py-8', overrideClasses)}>
 	<nav class='flex flex-wrap justify-between'>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h3'>
-				<Link href='/'>Home</Link>
+			<Text as='h2'>
+				<Link isNavLink href='/'>Home</Link>
 			</Text>
 			{homeSubPages && <FooterNavFocused subNavItems={homeSubPages} />}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h3'>
-				<Link href='/classes/'>Classes</Link>
+			<Text as='h2'>
+				<Link isNavLink href='/classes/'>Classes</Link>
 			</Text>
 			{classesSubPages && <FooterNavFocused subNavItems={classesSubPages} />}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h3'>
-				<Link href='/artists/'>Artists</Link>
+			<Text as='h2'>
+				<Link isNavLink href='/artists/'>Artists</Link>
 			</Text>
 			{gallerySubPages && <FooterNavFocused subNavItems={gallerySubPages} />}
 		</div>
 		<div class='w-1/2 md:w-1/4'>
-			<Text as='h3'>Other Links</Text>
+			<Text as='h2'>Other Links</Text>
 			<ul class='list-none p-0'>
 				<li>
-					<Link href='/events/'>Events</Link>
+					<Link isNavLink href='/events/'>Events</Link>
 				</li>
 				<li>
-					<Link href='/contact-us/'>Contact Us</Link>
+					<Link isNavLink href='/contact-us/'>Contact Us</Link>
 				</li>
 				<li>
-					<Link href='/donate/'>Donate</Link>
+					<Link isNavLink href='/donate/'>Donate</Link>
 				</li>
 				<li>
-					<Link href='/register/'>Register</Link>
+					<Link isNavLink href='/register/'>Register</Link>
 				</li>
 			</ul>
 		</div>
@@ -63,6 +63,6 @@ const gallerySubPages = getSubnavItemsByClass('artists');
 		{org.zip}
 		<br />
 		Tel: {org.phone} | Email:{' '}
-		<a href={`mailto:${org.email}`}>{org.email}</a>
+		<Link href={`mailto:${org.email}`}>{org.email}</Link>
 	</Text>
 </footer>

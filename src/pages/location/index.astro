@@ -1,37 +1,43 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Link from '../../components/Link.astro';
-import { org } from '../../constants/constants';
+import Layout from '@/layouts/Layout.astro';
+import { type TypePageMetaData } from '@/layouts/types';
+import Link from '@/components/Link.astro';
+import Text from '@/components/Text.astro';
+import { org } from '@/constants';
+
+const metaData: TypePageMetaData = {
+	title: 'Location',
+	description: `Plan your visit to the ${org.name}.`,
+};
 ---
 
-<Layout>
-	<section>
-		<p>
-			The Fire Arts Center is located at{' '}
-			<Link href={org.mapLink} isExternal={true}>
-				<em>
-					{org.address} ({org.zip})
-				</em>
-			</Link>
-			.
-		</p>
-		<p class='mt-4'>
-			The entrance is behind the building on Cortland and Kenneth. Call us if
-			you have any problems getting in{' '}
-			{org.phone}.
-		</p>
+<Layout metaData={metaData}>
+	<Text as='h2' class='md:mt-0'>{org.name} Location</Text>
+	<Text>
+		The {org.name} is located at{' '}
+		<Link href={org.mapLink} isExternal={true}>
+			<em>
+				{org.address} ({org.zip})
+			</em>
+		</Link>
+		.
+	</Text>
+	<Text class='mt-4'>
+		The entrance is behind the building on Cortland and Kenneth. Call us if you
+		have any problems getting in{' '}
+		{org.phone}.
+	</Text>
 
-		<iframe
-			src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11875.969711659201!2d-87.7366736!3d41.9145215!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd24099688cbf%3A0xcd3e91ca38693007!2sFire%20Arts%20Center%20of%20Chicago!5e0!3m2!1sen!2sus!4v1693780062444!5m2!1sen!2sus'
-			width='600'
-			height='450'
-			class='mt-4 w-full'
-			style={{ border: 0 }}
-			allowfullscreen
-			loading='lazy'
-			referrerpolicy='no-referrer-when-downgrade'></iframe>
-		<small>
-			<Link href={org.mapLink} isExternal={true}> View Larger Map </Link>
-		</small>
-	</section>
+	<iframe
+		src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11875.969711659201!2d-87.7366736!3d41.9145215!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd24099688cbf%3A0xcd3e91ca38693007!2sFire%20Arts%20Center%20of%20Chicago!5e0!3m2!1sen!2sus!4v1693780062444!5m2!1sen!2sus'
+		width='600'
+		height='450'
+		class='mt-4 w-full'
+		style={{ border: 0 }}
+		allowfullscreen
+		loading='lazy'
+		referrerpolicy='no-referrer-when-downgrade'></iframe>
+	<small>
+		<Link href={org.mapLink} isExternal={true}> View Larger Map </Link>
+	</small>
 </Layout>

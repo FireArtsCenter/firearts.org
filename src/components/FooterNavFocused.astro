@@ -13,7 +13,9 @@ const { subNavItems } = Astro.props;
 	{
 		subNavItems.map((subpage) => (
 			<li class={subpage.class}>
-				<Link href={subpage.url}>{subpage.name}</Link>
+				<Link isNavLink href={subpage.url}>
+					{subpage.name}
+				</Link>
 			</li>
 		))
 	}

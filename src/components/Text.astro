@@ -6,6 +6,7 @@ type TypeAllowedElements = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 // bug with Props getting type hint for "unused" when adding 'as'
 interface Props {
 	as?: TypeAllowedElements;
+	class?: string;
 }
 /**
  * Get some default sizes for text size and weight as well as font-family

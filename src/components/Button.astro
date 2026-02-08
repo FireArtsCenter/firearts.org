@@ -1,35 +1,42 @@
 ---
+import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../utils/styles';
 import Link from '@/components/Link.astro';
-interface Props {
-	href?: string;
-	isExternal?: boolean;
-	appearance?: 'primary' | 'secondary';
+
+const buttonVariants = cva(
+	// Base styles that always apply
+	'block border-1 px-8 py-3 text-center font-semibold text-white no-underline hover:brightness-150 md:inline-block md:rounded',
+	{
+		variants: {
+			appearance: {
+				primary:
+					'bg-fac-red border-fac-red text-white hover:text-white focus:text-white',
+				secondary: 'hover:border-fac-orange border-white bg-black',
+			},
+		},
+		defaultVariants: {
+			appearance: 'primary',
+		},
+	}
+);
+
+interface Props extends VariantProps<typeof buttonVariants> {
+	href: string;
 	class?: string;
 }
-const {
-	href,
-	appearance = 'primary',
-	class: overrideStyles,
-	isExternal = false,
-} = Astro.props;
-const appearanceClassNames =
-	appearance === 'primary'
-		? 'bg-fac-red text-white hover:text-white focus:text-white hover:brightness-150'
-		: 'bg-grey-darkest text-white hover:text-white focus:text-white hover:brightness-150';
-const buttonStyles = `border-b-0 font-semibold block text-center md:inline-block px-8 py-3 no-underline hover:border-b-0 focus:border-b-0 ${appearanceClassNames}`;
 
-const mergedButtonStyles = cn(buttonStyles, overrideStyles);
-if (!href) {
-	throw new Error(
-		'I do not have a real button yet. Supply an href or add one below'
-	);
-}
+const { href, appearance = 'primary', class: overrideStyles } = Astro.props;
+
+// @TODO: add a way to handle non-navigation buttons. for now error
+if (!href) throw new Error('Supply an href to the button.');
 ---
 
 {
 	href && (
-		<Link class={mergedButtonStyles} href={href} isExternal={isExternal}>
+		<Link
+			class={cn(buttonVariants({ appearance }), overrideStyles)}
+			href={href}
+		>
 			<slot />
 		</Link>
 	)

@@ -3,18 +3,17 @@ import Layout from '@/layouts/Layout.astro';
 import Link from '@/components/Link.astro';
 import Note from '@/components/Note.astro';
 import Text from '@/components/Text.astro';
-import { org } from '../constants/constants';
-import { getYearsSinceFounding } from '../utils/orgData';
-//
-// export const metadata: Metadata = {
-// 	title: org.name,
-// 	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
-// };
-//
+import { org } from '@/constants';
+import { getYearsSinceFounding } from '@/utils/orgData';
+
+export const metaData: Metadata = {
+	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
+};
+
 const yearsSinceFounding = getYearsSinceFounding();
 ---
 
-<Layout>
+<Layout metaData={metaData}>
 	<section>
 		<Text>
 			The {org.name} began {yearsSinceFounding} years ago as a not-for-profit school

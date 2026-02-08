@@ -1,20 +1,23 @@
 ---
-import GTMScript from '@/vendors/GTM/Script.astro';
 import { Font } from 'astro:assets';
+import { type TypePageMetaData } from '@/layouts/types';
+import GTMScript from '@/vendors/GTM/Script.astro';
 import '../styles/global.css';
-import { org } from '../constants/constants.ts';
+import { org } from '@/constants';
 
 interface Props {
-	title?: string;
-	description?: string;
-	ogImageUrl?: string;
-	type?: 'website' | 'article';
+	metaData: TypePageMetaData;
 	gtmId?: string;
 }
 
-const { title = org.name, type = 'website', gtmId } = Astro.props;
+const { metaData, gtmId } = Astro.props;
 
 const canonicalUrl = Astro.url.href;
+const pathName = Astro.url.pathname;
+
+const { title = org.name, description, type = 'website' } = metaData || {};
+
+const pageTitle = title === org.name ? title : `${title} | ${org.name}`;
 ---
 
 <meta charset='UTF-8' />
@@ -25,8 +28,10 @@ const canonicalUrl = Astro.url.href;
 
 <Font cssVariable='--font-raleway' preload />
 
-<title></title>
-<meta name='title' content={title} />
+<title>{pageTitle}</title>
+<meta name='title' content={pageTitle} />
+
+{description && <meta name='description' content={description} />}
 
 <link rel='canonical' href={canonicalUrl} />
 

@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 interface Props {
@@ -18,11 +19,15 @@ const {
 
 <a
 	class={twMerge(
-		clsx({ 'underline-offset-4 underline': !isNavLink }),
-		' hover:text-fac-orange font-bold',
+		clsx({
+			'font-bold underline underline-offset-4': !isNavLink,
+			'inline-flex items-center gap-1': isExternal,
+		}),
+		'hover:text-fac-orange',
 		overrideClasses
 	)}
 	target={isExternal ? '_blank' : undefined}
 	rel={isExternal ? 'noopener noreferrer' : undefined}
-	href={href}><slot /></a
+	href={href}
+	><slot />{isExternal && <Icon name='arrow-up-right-from-square' />}</a
 >

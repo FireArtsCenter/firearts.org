@@ -24,11 +24,6 @@ export const navItems: TypeNavItem[] = [
 				class: 'location',
 				url: '/location/',
 			},
-			{
-				name: 'Membership',
-				class: 'membership',
-				url: '/membership/',
-			},
 		],
 	},
 	{
