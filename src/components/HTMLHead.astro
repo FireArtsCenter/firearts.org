@@ -1,4 +1,5 @@
 ---
+import GTMScript from '@/vendors/GTM/Script.astro';
 import { Font } from 'astro:assets';
 import '../styles/global.css';
 import { org } from '../constants/constants.ts';
@@ -8,9 +9,10 @@ interface Props {
 	description?: string;
 	ogImageUrl?: string;
 	type?: 'website' | 'article';
+	gtmId?: string;
 }
 
-const { title = org.name, type = 'website' } = Astro.props;
+const { title = org.name, type = 'website', gtmId } = Astro.props;
 
 const canonicalUrl = Astro.url.href;
 ---
@@ -18,6 +20,8 @@ const canonicalUrl = Astro.url.href;
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1.0' />
 <meta name='generator' content={Astro.generator} />
+
+{gtmId && <GTMScript gtmId={gtmId} />}
 
 <Font cssVariable='--font-raleway' preload />
 

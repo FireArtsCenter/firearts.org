@@ -10,7 +10,6 @@ import { type TypeNavItem } from '../Navigation/constants.ts';
 interface Props {
 	navItems: TypeNavItem[];
 	class: string;
-	isMobile?: boolean;
 }
 
 const currentRoute = Astro.url.pathname;
@@ -18,7 +17,7 @@ const isHomepage = currentRoute === '/';
 const isRegisterPage = currentRoute === '/register/';
 const isClassPage = currentRoute.startsWith('/classes/');
 
-const { navItems, class: className, isMobile = false } = Astro.props;
+const { navItems, class: className } = Astro.props;
 ---
 
 <nav

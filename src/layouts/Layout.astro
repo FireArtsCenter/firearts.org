@@ -1,21 +1,23 @@
 ---
-import HTMLHead from '../components/HTMLHead.astro';
+import HTMLHead from '@/components/HTMLHead.astro';
+import GTMNoscript from '@/vendors/GTM/Noscript.astro';
 import Header from '@/components/Header.astro';
 import Navigation from '@/components/Navigation/Navigation.astro';
 import MobileNavContainer from '@/components/Navigation/MobileNavContainer.astro';
 import { navItems } from '@/components/Navigation/constants.ts';
 import Footer from '@/components/Footer.astro';
-// import GTM from '@/app/components/GTM';
+
+import { GTM_ID } from 'astro:env/client';
 ---
 
 <html lang='en' class='overflow-y-scroll scroll-smooth'>
 	<head>
-		<HTMLHead />
+		<HTMLHead gtmId={GTM_ID} />
 	</head>
 	<body
 		class='min-h-screen bg-neutral-900 bg-gradient-to-b from-transparent to-black text-white'
 	>
-		{/* TODO: REMOVE GTM?  <GTM /> */}
+		<GTMNoscript gtmId={GTM_ID} />
 		<div id='top' class='mx-auto grid max-w-4xl grid-cols-4 gap-4'>
 			<header
 				class='col-span-4 col-start-1 md:grid md:grid-cols-4 md:items-center'
