@@ -4,4 +4,6 @@
 	--color-fac-red: var(--color-red-800); /* old #990000 */
 	--color-fac-orange: var(--color-amber-600); /* old #ff9900 */
 	--font-serif: var(--font-raleway);
+
+	--color-border-default: var(--color-neutral-500);
 }

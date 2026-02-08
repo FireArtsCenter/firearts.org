@@ -1,8 +1,10 @@
 ---
-import Link from '@/components/Link.astro';
-import Button from '@/components/Button.astro';
+import { Icon } from 'astro-icon/components';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+import Link from '@/components/Link.astro';
+import Button from '@/components/Button.astro';
 import { type TypeNavItem } from '../Navigation/constants.ts';
 
 interface Props {
@@ -25,12 +27,14 @@ const { navItems, class: className, isMobile = false } = Astro.props;
 			home: isHomepage,
 			register: isRegisterPage,
 			classes: isClassPage,
-			'flex flex-col justify-start': isMobile,
 		}),
+		'flex flex-col justify-start',
 		className
 	)}`}
 >
-	<ul class='h-full w-full list-none font-serif text-2xl font-extrabold'>
+	<ul
+		class='flex h-full w-full list-none flex-col gap-5 font-serif text-2xl font-extrabold'
+	>
 		{
 			navItems.map((item, index) => {
 				const subpagesUrls = item.subpages
@@ -41,16 +45,17 @@ const { navItems, class: className, isMobile = false } = Astro.props;
 				const hasActiveSubpage = subpagesUrls.includes(currentRoute);
 				const containsOrIsActivePage = hasActiveSubpage || isActivePage;
 				return (
-					<li class={`${item.class} ${index !== 0 ? 'mt-4' : ''}`}>
+					<li class={item.class}>
 						<Link
+							isNavLink={true}
 							class={clsx({
-								"text-fac-orange cursor-default after:pl-1 after:content-['›']":
+								'text-fac-orange flex cursor-default items-center gap-1':
 									isActivePage,
-								'no-underline': true,
 							})}
 							href={item.url}
 						>
 							{item.name}
+							{isActivePage ? <Icon size='20px' name='caret-right' /> : null}
 						</Link>
 						{item.subpages && (
 							<ul
@@ -63,14 +68,17 @@ const { navItems, class: className, isMobile = false } = Astro.props;
 									return (
 										<li class={`${subpage.class} mt-4`}>
 											<Link
+												isNavLink={true}
 												class={clsx({
-													"text-fac-orange cursor-default after:pl-1 after:content-['›']":
+													'text-fac-orange flex cursor-default items-center gap-1':
 														isActiveSubpage,
-													'no-underline': true,
 												})}
 												href={subpage.url}
 											>
 												{subpage.name}
+												{isActiveSubpage ? (
+													<Icon size='16px' name='caret-right' />
+												) : null}
 											</Link>
 										</li>
 									);
@@ -82,9 +90,9 @@ const { navItems, class: className, isMobile = false } = Astro.props;
 			})
 		}
 	</ul>
-	<div class={isMobile ? 'mt-auto -mx-12' : 'mt-16'}>
+	<div class='-mx-12 mt-auto md:mx-0 md:mt-16'>
 		<Button
-			class={`w-full md:block ${isMobile ? 'py-6 text-xl' : ''}`}
+			class='w-full py-6 text-xl md:block md:py-3 md:text-lg'
 			href='/register/'>Register</Button
 		>
 	</div>
