@@ -1,29 +1,11 @@
 ---
-import { contentfulClient } from '@/lib/contentful';
-import { type EntryFieldTypes } from 'contentful';
+import { contentfulClient, selectImageDataFromResponse, type Class } from '@/lib/contentful';
 
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
 import Text from '@/components/Text.astro';
 import Link from '@/components/Link.astro';
 import ClassCard from '@/components/ClassCard.astro';
-// import FigureStudyPrefix from '@/app/components/FigureStudyPrefix';
-
-interface Class {
-	contentTypeId: 'class';
-	fields: {
-		slug: EntryFieldTypes.Text;
-		name: EntryFieldTypes.Text;
-		description: EntryFieldTypes.RichText;
-		disclaimers: EntryFieldTypes.Text[];
-		scheduleStrategy: EntryFieldTypes.Boolean;
-		scheduledTimes: any[];
-		instructors: any[];
-		fee: any[];
-		isRolling: EntryFieldTypes.Boolean;
-		images: any[];
-	};
-}
 
 const classes = await contentfulClient.getEntries<Class>({
 	content_type: 'class',
@@ -40,15 +22,14 @@ const metaData = {
 			classes?.items ? (
 				<div class='grid-row-auto grid grid-cols-2 items-stretch gap-4'>
 					{classes.items.map(({ fields }) => {
-						const firstImage: any = fields.images?.[0];
-						const firstImageObject = firstImage?.fields;
+						const imageData = selectImageDataFromResponse(fields.images || [])
 						return (
 							<ClassCard
 								title={fields.name}
 								link={`/classes/${fields.slug}/`}
 								slug={fields.slug}
 								summary='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor'
-								image={firstImageObject}
+								image={imageData[0]}
 							/>
 						);
 					})}
@@ -64,37 +45,3 @@ const metaData = {
 		}
 	</PageSection>
 </Layout>
-
-{
-	/*
-import ClassCard from '@/app/components/ClassCard';
-import { getAllClasses } from '@/lib/classes';
-
-export default async function ClassHomepage() {
-	const classes = getAllClasses();
-
-	if (!classes)
-		return (
-			<p>There was a problem getting the class list. Please try again later.</p>
-		);
-
-	return (
-		<>
-			<h1>Classes</h1>
-			{classes && (
-				<div className='grid-row-auto grid grid-cols-3 items-stretch gap-4'>
-					{classes.map(({ id, title, images: { thumbnail } }) => (
-						<ClassCard
-							key={id}
-							title={title}
-							link={`/classes/${id}/`}
-							image={thumbnail}
-						/>
-					))}
-				</div>
-			)}
-		</>
-	);
-}
-  */
-}

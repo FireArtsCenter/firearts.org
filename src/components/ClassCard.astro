@@ -2,38 +2,31 @@
 import Link from '@/components/Link.astro';
 import Text from '@/components/Text.astro';
 import { Image } from 'astro:assets';
+import { type TypeContentfulImage } from '@/lib/contentful';
 
 interface Props {
 	title: string;
 	link: string;
 	slug: string;
 	summary: string;
-	image?: any;
-	// image?: TypeImage;
+	image?: TypeContentfulImage;
 }
 
-const { title, link, slug, summary, image } = Astro.props;
-
-// @TODO:
-// - make a utility for this mess and improved typing
-// - create a fallback image if none provided in the CMS?
-const imageSrc = image?.file?.url;
-const imageWidth = image?.file?.details?.image?.width;
-const imageHeight = image?.file?.details?.image?.height;
+const { title, link, summary, image } = Astro.props;
 ---
 
 <div
 	class='group ring-fac-orange relative rounded ring-1 transition-shadow duration-300 focus-within:ring-4 hover:ring-4'
 >
 	{
-		imageSrc && (
+		image && (
 			<div class='overflow-hidden rounded'>
 				<Image
-					src={imageSrc}
+					src={image.src}
 					class='w-full duration-500 ease-in-out group-hover:scale-110 group-focus:scale-110'
 					alt=''
-					width={imageWidth || '700'}
-					height={imageHeight || '467'}
+					width={image.width}
+					height={image.height}
 				/>
 			</div>
 		)

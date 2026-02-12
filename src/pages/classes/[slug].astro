@@ -1,0 +1,55 @@
+---
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { contentfulClient, type Class } from '@/lib/contentful';
+import Layout from '@/layouts/Layout.astro';
+import PageSection from '@/components/PageSection.astro';
+import ClassInfo from '@/components/ClassInfo.astro';
+
+export async function getStaticPaths() {
+	const classes = await contentfulClient.getEntries<Class>({
+		content_type: 'class',
+	});
+
+	const pages = classes.items.map((item) => ({
+		params: {
+			slug: item.fields.slug,
+		},
+		props: {
+			name: item.fields.name,
+			fee: item.fields.fee,
+			instructors: item.fields.instructors,
+			scheduleStrategy: item.fields.scheduleStrategy,
+			scheduledTimes: item.fields.scheduledTimes,
+			description: documentToHtmlString(item.fields.description),
+			disclaimers: item.fields.disclaimers,
+		},
+	}));
+	return pages;
+}
+
+const {
+	name,
+	fee,
+	instructors,
+	scheduleStrategy,
+	scheduledTimes,
+	description,
+	disclaimers,
+} = Astro.props;
+const metaData = {
+	title: `${name} | Classes`,
+};
+---
+
+<Layout metaData={metaData}>
+	<PageSection title={name}>
+		<ClassInfo
+			fee={fee}
+			instructors={instructors}
+			scheduledTimes={scheduledTimes}
+			description={description}
+			disclaimers={disclaimers}
+			showScheduledTimes={scheduleStrategy}
+		/>
+	</PageSection>
+</Layout>

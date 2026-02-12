@@ -1,0 +1,11 @@
+---
+import Text from '@/components/Text.astro';
+interface Props {
+	time: any;
+}
+
+const { time } = Astro.props;
+const timeString = `${time.fields.dayOfWeek} ${time.fields.timeRange}`;
+---
+
+<Text as='span'>{timeString}</Text>

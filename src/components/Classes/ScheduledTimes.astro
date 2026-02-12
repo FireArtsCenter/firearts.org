@@ -1,0 +1,23 @@
+---
+import Text from '@/components/Text.astro';
+import TimeString from '@/components/TimeString.astro';
+
+interface Props {
+	scheduledTimes?: any[];
+	showScheduledTimes?: boolean;
+}
+const { scheduledTimes, showScheduledTimes } = Astro.props;
+---
+
+{!showScheduledTimes && <Text>Call for schedule</Text>}
+{
+	showScheduledTimes && scheduledTimes && (
+		<ul>
+			{scheduledTimes.map((time) => (
+				<li>
+					<TimeString time={time} />
+				</li>
+			))}
+		</ul>
+	)
+}
