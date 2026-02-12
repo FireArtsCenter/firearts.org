@@ -23,7 +23,7 @@ const {
 			'font-bold underline underline-offset-4': !isNavLink,
 			'inline-flex items-center gap-1': isExternal,
 		}),
-		'hover:text-fac-orange',
+		'hover:text-fac-orange focus:text-fac-orange transition-color duration-300',
 		overrideClasses
 	)}
 	target={isExternal ? '_blank' : undefined}
