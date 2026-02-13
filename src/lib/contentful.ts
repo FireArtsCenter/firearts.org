@@ -3,7 +3,33 @@ import {
 	type EntryFieldTypes,
 	type EntrySkeletonType,
 	type Asset,
+	type Entry,
 } from 'contentful';
+
+type ContentfulType = 'Entry' | 'Asset';
+
+function isContentfulObject<T>(item: unknown, type: ContentfulType): item is T {
+	// 1. Strict object check first
+	if (typeof item !== 'object' || item === null) {
+		return false;
+	}
+
+	// 2. Safe narrowing for property access
+	const candidate = item as Record<string, unknown>;
+	const sys = candidate.sys as Record<string, unknown> | undefined;
+
+	// 3. Logic check
+	return sys?.type === type && candidate.fields !== undefined;
+}
+
+// Your guards remain clean and strict
+export const isEntry = <T extends EntrySkeletonType>(
+	item: unknown
+): item is Entry<T, undefined, string> =>
+	isContentfulObject<Entry<T, undefined, string>>(item, 'Entry');
+
+export const isAsset = (item: unknown): item is Asset<undefined, string> =>
+	isContentfulObject<Asset<undefined, string>>(item, 'Asset');
 
 // 1. Define Skeletons instead of just Fields
 export interface ScheduleSlotSkeleton extends EntrySkeletonType {
@@ -111,13 +137,14 @@ export const selectImageDataFromResponse = (
 export const getClassesByListTitle = async (listTitle: string) => {
 	const response = await contentfulClient.getEntries<ClassListSkeleton>({
 		content_type: 'classList',
-		'fields.title': listTitle, // Query by your hyphenated ID
+		'fields.title': listTitle,
 		include: 2,
 	});
 
 	if (response.items.length === 0) return [];
 
-	// Extract the classes.
-	// Note: The SDK returns them as 'Entry' objects when 'include' is used.
-	return response.items[0].fields.classes;
+	const rawClasses = response.items[0].fields.classes || [];
+
+	// TypeScript now knows exactly what is being returned
+	return rawClasses.filter(isEntry<ClassSkeleton>);
 };
