@@ -3,7 +3,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { contentfulClient, type Class } from '@/lib/contentful';
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
-import ClassInfo from '@/components/ClassInfo.astro';
+import Details from '@/components/Classes/Details.astro';
 
 export async function getStaticPaths() {
 	const classes = await contentfulClient.getEntries<Class>({
@@ -45,7 +45,7 @@ const metaData = {
 
 <Layout metaData={metaData}>
 	<PageSection title={name}>
-		<ClassInfo
+		<Details
 			fee={fee}
 			instructors={instructors}
 			scheduledTimes={scheduledTimes}

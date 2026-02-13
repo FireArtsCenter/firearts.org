@@ -57,6 +57,15 @@ export interface TypeContentfulImage {
 	height: number;
 }
 
+export interface ClassListSkeleton extends EntrySkeletonType {
+	contentTypeId: 'classList';
+	fields: {
+		// This is your hyphenated name field
+		title: EntryFieldTypes.Symbol;
+		classes: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<ClassSkeleton>>;
+	};
+}
+
 export const contentfulClient = createClient({
 	space: import.meta.env.CONTENTFUL_SPACE_ID,
 	accessToken: import.meta.env.DEV
@@ -98,25 +107,17 @@ export const selectImageDataFromResponse = (
 	});
 };
 
-// export const selectImageDataFromResponse = (
-// 	contentfulImagesArray: Asset[]
-// ): TypeContentfulImage[] => {
-// 	return contentfulImagesArray.map((imageData) => {
-// 		const file = imageData.fields?.file;
-//
-// 		// Safely extract dimensions only if they exist
-// 		let width = 0;
-// 		let height = 0;
-//
-// 		if (file?.details && 'image' in file.details) {
-// 			width = file.details.image?.width ?? 0;
-// 			height = file.details.image?.height ?? 0;
-// 		}
-//
-// 		return {
-// 			src: file?.url ? `https:${file.url}` : '', // Contentful URLs often start with //
-// 			width,
-// 			height,
-// 		};
-// 	});
-// };
+// Fetching a specific list by its slug/name
+export const getClassesByListTitle = async (listTitle: string) => {
+	const response = await contentfulClient.getEntries<ClassListSkeleton>({
+		content_type: 'classList',
+		'fields.title': listTitle, // Query by your hyphenated ID
+		include: 2,
+	});
+
+	if (response.items.length === 0) return [];
+
+	// Extract the classes.
+	// Note: The SDK returns them as 'Entry' objects when 'include' is used.
+	return response.items[0].fields.classes;
+};
