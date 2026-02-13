@@ -1,0 +1,15 @@
+{
+	"coc.preferences.formatOnSave": true,
+	"prettier.enable": true,
+	"eslint.autoFixOnSave": true,
+	"eslint.probe": ["javascript", "typescript", "astro", "typescriptreact"],
+	"[astro]": {
+		"coc.preferences.formatOnSave": true
+	},
+	"[typescript]": {
+		"coc.preferences.formatOnSave": true
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	}
+}
