@@ -5,13 +5,17 @@ import Link from '@/components/Link.astro';
 
 const buttonVariants = cva(
 	// Base styles that always apply
-	'block border-1 px-8 py-3 text-center font-semibold text-white no-underline hover:brightness-150 md:inline-block md:rounded',
+	'block border-1 text-center font-semibold text-white no-underline hover:brightness-150 md:inline md:rounded',
 	{
 		variants: {
 			appearance: {
 				primary:
 					'bg-fac-red border-fac-red text-white hover:text-white focus:text-white',
 				secondary: 'hover:border-fac-orange border-white bg-black',
+			},
+			size: {
+				large: 'px-10 py-5 text-2xl',
+				normal: 'px-8 py-3',
 			},
 		},
 		defaultVariants: {
@@ -25,7 +29,12 @@ interface Props extends VariantProps<typeof buttonVariants> {
 	class?: string;
 }
 
-const { href, appearance = 'primary', class: overrideStyles } = Astro.props;
+const {
+	href,
+	appearance = 'primary',
+	size = 'normal',
+	class: overrideStyles,
+} = Astro.props;
 
 // @TODO: add a way to handle non-navigation buttons. for now error
 if (!href) throw new Error('Supply an href to the button.');
@@ -34,7 +43,7 @@ if (!href) throw new Error('Supply an href to the button.');
 {
 	href && (
 		<Link
-			class={cn(buttonVariants({ appearance }), overrideStyles)}
+			class={cn(buttonVariants({ appearance, size }), overrideStyles)}
 			href={href}
 		>
 			<slot />

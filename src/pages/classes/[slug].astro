@@ -22,6 +22,7 @@ export async function getStaticPaths() {
 			scheduledTimes: item.fields.scheduledTimes,
 			description: documentToHtmlString(item.fields.description),
 			disclaimers: item.fields.disclaimers,
+			images: item.fields.images,
 		},
 	}));
 	return pages;
@@ -35,6 +36,7 @@ const {
 	scheduledTimes,
 	description,
 	disclaimers,
+	images,
 } = Astro.props;
 const metaData = {
 	title: `${name} | Classes`,
@@ -50,6 +52,7 @@ const metaData = {
 			description={description}
 			disclaimers={disclaimers}
 			showScheduledTimes={scheduleStrategy}
+			images={images}
 		/>
 	</PageSection>
 </Layout>

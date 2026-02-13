@@ -17,6 +17,9 @@ const isHomepage = currentRoute === '/';
 const isRegisterPage = currentRoute === '/register/';
 const isClassPage = currentRoute.startsWith('/classes/');
 
+const shouldShowRegisterCTA =
+	!isClassPage && !isRegisterPage && !currentRoute.includes('/contact-us');
+
 const { navItems, class: className } = Astro.props;
 ---
 
@@ -89,10 +92,16 @@ const { navItems, class: className } = Astro.props;
 			})
 		}
 	</ul>
-	<div class='-mx-12 mt-auto md:mx-0 md:mt-16'>
-		<Button
-			class='w-full py-6 text-xl md:block md:py-3 md:text-lg'
-			href='/register/'>Register</Button
-		>
-	</div>
+	{
+		shouldShowRegisterCTA && (
+			<div class='-mx-12 mt-auto md:mx-0 md:mt-16'>
+				<Button
+					class='w-full py-6 text-xl md:block md:py-3 md:text-lg'
+					href='/register/'
+				>
+					Register
+				</Button>
+			</div>
+		)
+	}
 </nav>

@@ -1,17 +1,18 @@
 ---
-// import { Image } from 'astro:assets';
+import { Image } from 'astro:assets';
 import ScheduleTimes from '@/components/Classes/ScheduledTimes.astro';
 import Button from '@/components/Button.astro';
 import Text from '@/components/Text.astro';
+import { selectImageDataFromResponse } from '@/lib/contentful';
 
 interface Props {
-	images?: any[];
 	instructors?: any[];
 	showScheduledTimes?: boolean;
 	scheduledTimes: any[];
 	fee?: string[];
 	description?: any;
 	disclaimers?: string[];
+	images?: any[];
 }
 
 const {
@@ -21,6 +22,7 @@ const {
 	fee,
 	description,
 	disclaimers,
+	images,
 } = Astro.props;
 const instructorsString = instructors?.reduce(
 	(instructorNames, currentInstructor, index) => {
@@ -34,20 +36,12 @@ const instructorsString = instructors?.reduce(
 	},
 	''
 );
+
+const imageData = images ? selectImageDataFromResponse(images) : [];
+const firstImage = imageData[0];
 ---
 
-{
-	/* @// TODO:  <12-02-26, john> add image back //
-	images?.detail && <Image {...images.detail} />*/
-}
-{
-	instructorsString && (
-		<>
-			<Text as='h3'>Instructors</Text>
-			<Text>{instructorsString}</Text>
-		</>
-	)
-}
+{firstImage && <Image {...firstImage} alt='' />}
 
 <Text as='h3'>Schedule</Text>
 <ScheduleTimes
@@ -64,7 +58,14 @@ const instructorsString = instructors?.reduce(
 	)
 }
 
-<div set:html={description} class='flex flex-col gap-4 text-lg' />
+{
+	instructorsString && (
+		<>
+			<Text as='h3'>Instructors</Text>
+			<Text>{instructorsString}</Text>
+		</>
+	)
+}
 
 {
 	disclaimers && (
@@ -78,5 +79,12 @@ const instructorsString = instructors?.reduce(
 		</div>
 	)
 }
-<Button appearance='primary' class='mt-4' href='/register/'>Register Now</Button
+
+<div set:html={description} class='flex flex-col gap-4 text-lg' />
+
+<Button
+	appearance='primary'
+	size='large'
+	class='mt-16 md:self-center'
+	href='/register/'>Register Now</Button
 >
