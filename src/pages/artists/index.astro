@@ -1,0 +1,42 @@
+---
+import { contentfulClient, type InstructorSkeleton } from '@/lib/contentful';
+
+import Layout from '@/layouts/Layout.astro';
+import PageSection from '@/components/PageSection.astro';
+import Link from '@/components/Link.astro';
+import Text from '@/components/Text.astro';
+import { org } from '@/constants';
+
+const artists = await contentfulClient.getEntries<InstructorSkeleton>({
+	content_type: 'instructors',
+	'fields.role[in]': 'Instructor',
+});
+---
+
+<Layout metaData={{}}>
+	<PageSection title='Artist Instructors'>
+		{
+			!artists ? (
+				<Text>
+					There was a problem getting the artist list. Please try again later.
+				</Text>
+			) : (
+				<>
+					<Text>
+						Here are a few of the artists instructors who have helped make the{' '}
+						{org.name} what it is today.
+					</Text>
+					<ul class='mt-4 list-disc pl-16'>
+						{artists.items.map(({ fields }) => {
+							return (
+								<li class='mt-2'>
+									<Link href={`/artists/${fields.slug}`}>{fields.name}</Link>
+								</li>
+							);
+						})}
+					</ul>
+				</>
+			)
+		}
+	</PageSection>
+</Layout>

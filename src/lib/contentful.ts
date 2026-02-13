@@ -43,12 +43,16 @@ export interface ScheduleSlotSkeleton extends EntrySkeletonType {
 export interface InstructorSkeleton extends EntrySkeletonType {
 	contentTypeId: 'instructors';
 	fields: {
-		fullName: EntryFieldTypes.Symbol;
-		// Add other fields from your instructors content type here
+		name: EntryFieldTypes.Symbol;
+		slug: EntryFieldTypes.Symbol;
+		bio: EntryFieldTypes.RichText;
+		roles: EntryFieldTypes.Array<
+			EntryFieldTypes.Symbol<'Artist' | 'Instructor'>
+		>;
 	};
 }
 
-// 2. Update your main Class skeleton
+// 2. Update your main Class and Artist skeleton
 export interface ClassSkeleton extends EntrySkeletonType {
 	contentTypeId: 'class';
 	fields: {

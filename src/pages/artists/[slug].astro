@@ -1,0 +1,32 @@
+---
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { contentfulClient, type InstructorSkeleton } from '@/lib/contentful';
+import Layout from '@/layouts/Layout.astro';
+import PageSection from '@/components/PageSection.astro';
+
+export async function getStaticPaths() {
+	const artists = await contentfulClient.getEntries<InstructorSkeleton>({
+		content_type: 'instructors',
+		'fields.role[in]': 'Instructor',
+	});
+	console.log({ artists });
+	const pages = artists.items.map((item) => ({
+		params: {
+			slug: item.fields.slug,
+		},
+		props: {
+			name: item.fields.name,
+			bio: documentToHtmlString(item.fields.bio),
+		},
+	}));
+	return pages;
+}
+
+const { name, bio } = Astro.props;
+---
+
+<Layout metaData={{}}>
+	<PageSection title={`About ${name}`}>
+		<div set:html={bio} class='flex flex-col gap-4 text-lg' />
+	</PageSection>
+</Layout>

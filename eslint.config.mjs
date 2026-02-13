@@ -16,7 +16,9 @@ export default tseslint.config(
 				'warn',
 				{ argsIgnorePattern: '^_' },
 			],
-			'astro/no-set-html-directive': 'error',
+			// I am using Contentful's rich text parser which should address the main
+			// security risks here. For now just set to warn to try to avoid using this
+			'astro/no-set-html-directive': 'warn',
 		},
 	},
 	{
