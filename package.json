@@ -11,7 +11,8 @@
 		"lint": "eslint .",
 		"format": "prettier --write .",
 		"typecheck": "astro check",
-		"prepare": "husky"
+		"prepare": "husky",
+		"generate:types": "./scripts/generate-contentful-types.sh"
 	},
 	"lint-staged": {
 		"*.{js,ts,jsx,tsx,astro}": [
@@ -46,6 +47,7 @@
 	},
 	"devDependencies": {
 		"astro-eslint-parser": "^1.2.2",
+		"cf-content-types-generator": "^2.16.1",
 		"eslint": "^9.39.2",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-astro": "^1.5.0",
