@@ -32,4 +32,7 @@ npx cf-content-types-generator \
   -t "$CONTENTFUL_MANAGEMENT_TOKEN" \
   -o src/types/contentful
 
+# 4. Clean up the files to avoid whitespace diffs
+npx prettier --write src/types/contentful
+
 echo "🎉 Types generated successfully in src/types/contentful"
