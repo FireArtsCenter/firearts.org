@@ -19,6 +19,7 @@ export default tseslint.config(
 			// I am using Contentful's rich text parser which should address the main
 			// security risks here. For now just set to warn to try to avoid using this
 			'astro/no-set-html-directive': 'warn',
+			'no-console': 'error',
 		},
 	},
 	{

@@ -8,6 +8,8 @@ import {
 import type {
 	TypeClassSkeleton,
 	TypeClassListSkeleton,
+	TypeArtistsSkeleton,
+	TypeArtistListSkeleton,
 } from '@/types/contentful';
 
 type ContentfulType = 'Entry' | 'Asset';
@@ -96,4 +98,20 @@ export const getClassesByListTitle = async (listTitle: string) => {
 
 	// TypeScript now knows exactly what is being returned
 	return rawClasses.filter(isEntry<TypeClassSkeleton>);
+};
+
+// Fetching a specific list by its slug/name
+export const getArtistsByListTitle = async (listTitle: string) => {
+	const response = await contentfulClient.getEntries<TypeArtistListSkeleton>({
+		content_type: 'artistList',
+		'fields.title': listTitle,
+		include: 2,
+	});
+
+	if (response.items.length === 0) return [];
+
+	const rawClasses = response.items[0].fields.artists || [];
+
+	// TypeScript now knows exactly what is being returned
+	return rawClasses.filter(isEntry<TypeArtistsSkeleton>);
 };

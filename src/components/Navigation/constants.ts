@@ -1,4 +1,5 @@
 export const CLASS_LIST_TITLE = 'main-class-list';
+export const ARTIST_LIST_TITLE = 'main-artist-list';
 export interface TypeNavItemDetail {
 	name: string;
 	class: string;

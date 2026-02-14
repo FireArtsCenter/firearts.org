@@ -1,16 +1,40 @@
 ---
+import { type Entry } from 'contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 import { contentfulClient } from '@/lib/contentful';
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
-import { type TypeArtistsSkeleton } from '@/types/contentful';
+import Text from '@/components/Text.astro';
+import Link from '@/components/Link.astro';
+import { isEntry } from '@/lib/contentful';
+import {} from '@/types/contentful';
+import type {
+	TypeArtistLinksSkeleton,
+	TypeArtistsSkeleton,
+} from '@/types/contentful';
 
 export async function getStaticPaths() {
 	const artists = await contentfulClient.getEntries<TypeArtistsSkeleton>({
 		content_type: 'artists',
-		'fields.role[in]': ['Instructor'],
+		include: 2,
 	});
-	console.log({ artists });
+
+	/* eslint-disable @typescript-eslint/no-explicit-any */
+	const options = {
+		renderNode: {
+			[BLOCKS.PARAGRAPH]: (node: any, next: any) =>
+				`<p class="text-xl md:text-lg">${next(node.content)}</p>`,
+			[BLOCKS.UL_LIST]: (node: any, next: any) =>
+				`<ul class="text-xl md:text-lg list-disc pl-3">${next(node.content)}</ul>`,
+			[BLOCKS.HEADING_3]: (node: any, next: any) =>
+				`<h3 class="font-serif text-white text-2xl font-bold">${next(node.content)}</h3>`,
+			[BLOCKS.HEADING_4]: (node: any, next: any) =>
+				`<h4 class="font-serif text-white text-xl font-bold">${next(node.content)}</h4>`,
+		},
+	};
+	/* eslint-enable @typescript-eslint/no-explicit-any */
+
 	const pages = artists.items
 		.filter((item) => Boolean(item.fields.bio)) // if no bio, don't make a page
 		.map((item) => ({
@@ -20,18 +44,45 @@ export async function getStaticPaths() {
 			props: {
 				name: item.fields.name,
 				bio: item.fields.bio
-					? documentToHtmlString(item.fields.bio)
+					? documentToHtmlString(item.fields.bio, options)
 					: undefined,
+				additionalLinks: item.fields.additionalLinks,
 			},
 		}));
 	return pages;
 }
 
-const { name, bio } = Astro.props;
+const { name, bio, additionalLinks } = Astro.props;
+
+const isEntryOfTypeArtistLink = (
+	/* eslint-disable @typescript-eslint/no-explicit-any */
+	link: any
+	/* eslint-enable @typescript-eslint/no-explicit-any */
+): link is Entry<TypeArtistLinksSkeleton, undefined, string> => {
+	return isEntry<TypeArtistLinksSkeleton>(link);
+};
 ---
 
 <Layout metaData={{}}>
 	<PageSection title={`About ${name}`}>
 		<div set:html={bio} class='flex flex-col gap-4 text-lg' />
+		{
+			additionalLinks?.length && (
+				<>
+					<Text as='h3'>Additional Links</Text>
+					<ul class='list-disc pl-8'>
+						{additionalLinks
+							?.filter(isEntryOfTypeArtistLink)
+							.map(({ fields }) => (
+								<li>
+									<Link isExternal={true} href={fields.linkUrl}>
+										{fields.linkText}
+									</Link>
+								</li>
+							))}
+					</ul>
+				</>
+			)
+		}
 	</PageSection>
 </Layout>

@@ -1,11 +1,18 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Link from '@/components/Link.astro';
-import Text from '@/components/Text.astro';
-import PageSection from '@/components/PageSection.astro';
-import { org } from '@/constants';
+// We may want to eventually have a register form/page, but for now just get people
+// to contact. So if you hit /register/ it should just render /contact-us/ but
+// keep the URL
+return Astro.rewrite('/contact-us/');
+
+// import Layout from '@/layouts/Layout.astro';
+// import Link from '@/components/Link.astro';
+// import Text from '@/components/Text.astro';
+// import PageSection from '@/components/PageSection.astro';
+// import { org } from '@/constants';
 ---
 
+{
+	/*
 <Layout metaData={{}}>
 	<PageSection title='Register for classes'>
 		<Text>
@@ -15,3 +22,5 @@ import { org } from '@/constants';
 		>
 	</PageSection>
 </Layout>
+*/
+}

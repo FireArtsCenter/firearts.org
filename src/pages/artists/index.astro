@@ -1,21 +1,26 @@
 ---
-import { contentfulClient } from '@/lib/contentful';
-import { type TypeArtistsSkeleton } from '@/types/contentful';
+import { getArtistsByListTitle } from '@/lib/contentful';
 
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
 import Link from '@/components/Link.astro';
 import Text from '@/components/Text.astro';
 import { org } from '@/constants';
+import { ARTIST_LIST_TITLE } from '@/components/Navigation/constants';
 
-const artists = await contentfulClient.getEntries<TypeArtistsSkeleton>({
-	content_type: 'artists',
-	'fields.role[in]': ['Instructor'],
-});
+const artists = await getArtistsByListTitle(ARTIST_LIST_TITLE);
+
+const artistInstructors = artists.filter((artist) =>
+	artist?.fields?.role?.includes('Instructor')
+);
+const artistMembers = artists.filter(
+	(artist) =>
+		!artist?.fields?.role?.includes('Instructor') && Boolean(artist.fields.bio)
+);
 ---
 
 <Layout metaData={{}}>
-	<PageSection title='Artist Instructors'>
+	<PageSection title='Artists'>
 		{
 			!artists ? (
 				<Text>
@@ -27,15 +32,44 @@ const artists = await contentfulClient.getEntries<TypeArtistsSkeleton>({
 						Here are a few of the artists instructors who have helped make the{' '}
 						{org.name} what it is today.
 					</Text>
-					<ul class='mt-4 list-disc pl-16'>
-						{artists.items.map(({ fields }) => {
-							return (
-								<li class='mt-2'>
-									<Link href={`/artists/${fields.slug}`}>{fields.name}</Link>
-								</li>
-							);
-						})}
-					</ul>
+					{artistInstructors && (
+						<>
+							<Text as='h3'>Instructors</Text>
+							<ul class='list-disc pl-16'>
+								{artistInstructors.map(({ fields }) => {
+									return (
+										<li class='mt-2'>
+											{fields.bio ? (
+												<Link href={`/artists/${fields.slug}/`}>
+													{fields.name}
+												</Link>
+											) : (
+												fields.name
+											)}
+										</li>
+									);
+								})}
+							</ul>
+						</>
+					)}
+					{artistMembers && (
+						<>
+							<Text as='h3' class='mt-8'>
+								Past and Current Members
+							</Text>
+							<ul class='list-disc pl-16'>
+								{artistMembers.map(({ fields }) => {
+									return (
+										<li class='mt-2'>
+											<Link href={`/artists/${fields.slug}/`}>
+												{fields.name}
+											</Link>
+										</li>
+									);
+								})}
+							</ul>
+						</>
+					)}
 				</>
 			)
 		}

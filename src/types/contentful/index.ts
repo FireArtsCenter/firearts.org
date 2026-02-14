@@ -1,4 +1,14 @@
 export type {
+	TypeArtistLinks,
+	TypeArtistLinksFields,
+	TypeArtistLinksSkeleton,
+} from './TypeArtistLinks';
+export type {
+	TypeArtistList,
+	TypeArtistListFields,
+	TypeArtistListSkeleton,
+} from './TypeArtistList';
+export type {
 	TypeArtists,
 	TypeArtistsFields,
 	TypeArtistsSkeleton,
