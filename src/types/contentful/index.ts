@@ -1,4 +1,9 @@
 export type {
+	TypeArtists,
+	TypeArtistsFields,
+	TypeArtistsSkeleton,
+} from './TypeArtists';
+export type {
 	TypeClass,
 	TypeClassFields,
 	TypeClassSkeleton,
@@ -8,11 +13,6 @@ export type {
 	TypeClassListFields,
 	TypeClassListSkeleton,
 } from './TypeClassList';
-export type {
-	TypeInstructors,
-	TypeInstructorsFields,
-	TypeInstructorsSkeleton,
-} from './TypeInstructors';
 export type {
 	TypeScheduleSlot,
 	TypeScheduleSlotFields,

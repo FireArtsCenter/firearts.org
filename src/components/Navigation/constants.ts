@@ -99,11 +99,6 @@ export const navItems: TypeNavItem[] = [
 				url: '/artists/eli-sotelo/',
 				name: 'Eli Sotelo',
 			},
-			{
-				class: 'student',
-				url: '/artists/student-work/',
-				name: 'Student Work',
-			},
 		],
 	},
 	{

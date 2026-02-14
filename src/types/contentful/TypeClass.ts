@@ -5,7 +5,7 @@ import type {
 	EntrySkeletonType,
 	LocaleCode,
 } from 'contentful';
-import type { TypeInstructorsSkeleton } from './TypeInstructors';
+import type { TypeArtistsSkeleton } from './TypeArtists';
 import type { TypeScheduleSlotSkeleton } from './TypeScheduleSlot';
 
 export interface TypeClassFields {
@@ -18,7 +18,7 @@ export interface TypeClassFields {
 	>;
 	description: EntryFieldTypes.RichText;
 	instructors?: EntryFieldTypes.Array<
-		EntryFieldTypes.EntryLink<TypeInstructorsSkeleton>
+		EntryFieldTypes.EntryLink<TypeArtistsSkeleton>
 	>;
 	fee: EntryFieldTypes.Array<
 		EntryFieldTypes.Symbol<
