@@ -1,24 +1,29 @@
 ---
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { contentfulClient, type InstructorSkeleton } from '@/lib/contentful';
+import { contentfulClient } from '@/lib/contentful';
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
+import type { TypeInstructorsSkeleton } from '@/types/contentful';
 
 export async function getStaticPaths() {
-	const artists = await contentfulClient.getEntries<InstructorSkeleton>({
+	const artists = await contentfulClient.getEntries<TypeInstructorsSkeleton>({
 		content_type: 'instructors',
-		'fields.role[in]': 'Instructor',
+		'fields.role[in]': ['Instructor'],
 	});
 	console.log({ artists });
-	const pages = artists.items.map((item) => ({
-		params: {
-			slug: item.fields.slug,
-		},
-		props: {
-			name: item.fields.name,
-			bio: documentToHtmlString(item.fields.bio),
-		},
-	}));
+	const pages = artists.items
+		.filter((item) => Boolean(item.fields.bio)) // if no bio, don't make a page
+		.map((item) => ({
+			params: {
+				slug: item.fields.slug,
+			},
+			props: {
+				name: item.fields.name,
+				bio: item.fields.bio
+					? documentToHtmlString(item.fields.bio)
+					: undefined,
+			},
+		}));
 	return pages;
 }
 

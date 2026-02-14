@@ -5,15 +5,18 @@ import Button from '@/components/Button.astro';
 import Text from '@/components/Text.astro';
 import { selectImageDataFromResponse } from '@/lib/contentful';
 
+// @// TODO:  <14-02-26, john> - ignoring 'any' until I refactor this component
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface Props {
 	instructors?: any[];
 	showScheduledTimes?: boolean;
-	scheduledTimes: any[];
+	scheduledTimes?: any[];
 	fee?: string[];
 	description?: any;
 	disclaimers?: string[];
 	images?: any[];
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 const {
 	instructors,

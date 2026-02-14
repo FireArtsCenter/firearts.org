@@ -1,12 +1,13 @@
 ---
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { contentfulClient, type ClassSkeleton } from '@/lib/contentful';
+import { contentfulClient } from '@/lib/contentful';
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
 import Details from '@/components/Classes/Details.astro';
+import { type TypeClassSkeleton } from '@/types/contentful';
 
 export async function getStaticPaths() {
-	const classes = await contentfulClient.getEntries<ClassSkeleton>({
+	const classes = await contentfulClient.getEntries<TypeClassSkeleton>({
 		content_type: 'class',
 	});
 

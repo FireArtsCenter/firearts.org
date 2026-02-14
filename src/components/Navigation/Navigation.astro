@@ -9,7 +9,7 @@ import { type TypeNavItem } from '../Navigation/constants.ts';
 
 interface Props {
 	navItems: TypeNavItem[];
-	class: string;
+	class?: string;
 }
 
 const currentRoute = Astro.url.pathname;
@@ -38,7 +38,7 @@ const { navItems, class: className } = Astro.props;
 		class='flex h-full w-full list-none flex-col gap-5 font-serif text-2xl font-extrabold'
 	>
 		{
-			navItems.map((item, index) => {
+			navItems.map((item) => {
 				const subpagesUrls = item.subpages
 					? item.subpages.map((subpage) => subpage.url)
 					: [];
@@ -51,7 +51,7 @@ const { navItems, class: className } = Astro.props;
 						<Link
 							isNavLink={true}
 							class={clsx({
-								'text-fac-orange flex cursor-default items-center gap-1':
+								'flex cursor-default items-center gap-1 text-fac-orange':
 									isActivePage,
 							})}
 							href={item.url}
@@ -65,14 +65,14 @@ const { navItems, class: className } = Astro.props;
 									containsOrIsActivePage ? 'block' : 'hidden'
 								} list-none p-0 pl-4 font-sans text-xl font-bold md:text-lg`}
 							>
-								{item.subpages.map((subpage, index) => {
+								{item.subpages.map((subpage) => {
 									const isActiveSubpage = currentRoute === subpage.url;
 									return (
 										<li class={`${subpage.class} mt-4`}>
 											<Link
 												isNavLink={true}
 												class={clsx({
-													'text-fac-orange flex cursor-default items-center gap-1':
+													'flex cursor-default items-center gap-1 text-fac-orange':
 														isActiveSubpage,
 												})}
 												href={subpage.url}

@@ -13,9 +13,8 @@ interface Props {
 const { metaData, gtmId } = Astro.props;
 
 const canonicalUrl = Astro.url.href;
-const pathName = Astro.url.pathname;
 
-const { title = org.name, description, type = 'website' } = metaData || {};
+const { title = org.name, description } = metaData || {};
 
 const pageTitle = title === org.name ? title : `${title} | ${org.name}`;
 ---

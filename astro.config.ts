@@ -1,12 +1,11 @@
 import { defineConfig, envField, fontProviders } from 'astro/config';
-import react from '@astrojs/react';
 
 import tailwindcss from '@tailwindcss/vite';
 
 import icon from 'astro-icon';
 
 export default defineConfig({
-	integrations: [react(), icon()],
+	integrations: [icon()],
 
 	env: {
 		schema: {
@@ -34,4 +33,3 @@ export default defineConfig({
 		],
 	},
 });
-

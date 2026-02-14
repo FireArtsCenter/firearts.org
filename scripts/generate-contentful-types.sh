@@ -28,6 +28,7 @@ echo "📡 Fetching schema for Space: $CONTENTFUL_SPACE_ID..."
 
 # 3. Run the generator
 npx cf-content-types-generator \
+  --v10 \
   -s "$CONTENTFUL_SPACE_ID" \
   -t "$CONTENTFUL_MANAGEMENT_TOKEN" \
   -o src/types/contentful

@@ -1,5 +1,6 @@
 ---
-import { contentfulClient, type InstructorSkeleton } from '@/lib/contentful';
+import { contentfulClient } from '@/lib/contentful';
+import { type TypeInstructorsSkeleton } from '@/types/contentful';
 
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
@@ -7,9 +8,9 @@ import Link from '@/components/Link.astro';
 import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 
-const artists = await contentfulClient.getEntries<InstructorSkeleton>({
+const artists = await contentfulClient.getEntries<TypeInstructorsSkeleton>({
 	content_type: 'instructors',
-	'fields.role[in]': 'Instructor',
+	'fields.role[in]': ['Instructor'],
 });
 ---
 

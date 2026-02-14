@@ -1,10 +1,14 @@
 import {
 	createClient,
-	type EntryFieldTypes,
 	type EntrySkeletonType,
 	type Asset,
 	type Entry,
 } from 'contentful';
+
+import type {
+	TypeClassSkeleton,
+	TypeClassListSkeleton,
+} from '@/types/contentful';
 
 type ContentfulType = 'Entry' | 'Asset';
 
@@ -31,69 +35,10 @@ export const isEntry = <T extends EntrySkeletonType>(
 export const isAsset = (item: unknown): item is Asset<undefined, string> =>
 	isContentfulObject<Asset<undefined, string>>(item, 'Asset');
 
-// 1. Define Skeletons instead of just Fields
-export interface ScheduleSlotSkeleton extends EntrySkeletonType {
-	contentTypeId: 'scheduleSlot';
-	fields: {
-		title: EntryFieldTypes.Symbol;
-		// Add other fields from your scheduleSlot content type here
-	};
-}
-
-export interface InstructorSkeleton extends EntrySkeletonType {
-	contentTypeId: 'instructors';
-	fields: {
-		name: EntryFieldTypes.Symbol;
-		slug: EntryFieldTypes.Symbol;
-		bio: EntryFieldTypes.RichText;
-		roles: EntryFieldTypes.Array<
-			EntryFieldTypes.Symbol<'Artist' | 'Instructor'>
-		>;
-	};
-}
-
-// 2. Update your main Class and Artist skeleton
-export interface ClassSkeleton extends EntrySkeletonType {
-	contentTypeId: 'class';
-	fields: {
-		name: EntryFieldTypes.Symbol;
-		slug: EntryFieldTypes.Symbol;
-		scheduleStrategy: EntryFieldTypes.Boolean;
-		isRolling: EntryFieldTypes.Boolean;
-		description: EntryFieldTypes.RichText;
-		summary: EntryFieldTypes.Symbol;
-		fee: EntryFieldTypes.Array<
-			EntryFieldTypes.Symbol<
-				'$350 for 10 weeks' | '$450 for 16 weeks' | '$350 for 8 weeks'
-			>
-		>;
-		disclaimers: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
-
-		// Pass the Skeletons into EntryLink
-		scheduledTimes: EntryFieldTypes.Array<
-			EntryFieldTypes.EntryLink<ScheduleSlotSkeleton>
-		>;
-		instructors: EntryFieldTypes.Array<
-			EntryFieldTypes.EntryLink<InstructorSkeleton>
-		>;
-		images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
-	};
-}
-
-// 3. Defined mapped types for simpler use in the code
 export interface TypeContentfulImage {
 	src: string;
 	width: number;
 	height: number;
-}
-
-export interface ClassListSkeleton extends EntrySkeletonType {
-	contentTypeId: 'classList';
-	fields: {
-		// This is your hyphenated name field
-		title: EntryFieldTypes.Symbol;
-		classes: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<ClassSkeleton>>;
-	};
 }
 
 export const contentfulClient = createClient({
@@ -139,7 +84,7 @@ export const selectImageDataFromResponse = (
 
 // Fetching a specific list by its slug/name
 export const getClassesByListTitle = async (listTitle: string) => {
-	const response = await contentfulClient.getEntries<ClassListSkeleton>({
+	const response = await contentfulClient.getEntries<TypeClassListSkeleton>({
 		content_type: 'classList',
 		'fields.title': listTitle,
 		include: 2,
@@ -150,5 +95,5 @@ export const getClassesByListTitle = async (listTitle: string) => {
 	const rawClasses = response.items[0].fields.classes || [];
 
 	// TypeScript now knows exactly what is being returned
-	return rawClasses.filter(isEntry<ClassSkeleton>);
+	return rawClasses.filter(isEntry<TypeClassSkeleton>);
 };

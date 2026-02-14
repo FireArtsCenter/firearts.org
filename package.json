@@ -33,8 +33,6 @@
 	},
 	"homepage": "https://github.com/FireArtsCenter/firearts.org#readme",
 	"dependencies": {
-		"@astrojs/react": "^4.4.2",
-		"@astrojs/ts-plugin": "^1.10.6",
 		"@contentful/rich-text-html-renderer": "^17.1.6",
 		"@tailwindcss/vite": "^4.1.18",
 		"astro": "^5.17.1",
@@ -42,10 +40,11 @@
 		"class-variance-authority": "^0.7.1",
 		"contentful": "^11.10.3",
 		"tailwind-merge": "^3.4.0",
-		"tailwindcss": "^4.1.18",
-		"typescript": "^5.9.3"
+		"tailwindcss": "^4.1.18"
 	},
 	"devDependencies": {
+		"@astrojs/check": "^0.9.6",
+		"@astrojs/ts-plugin": "^1.10.6",
 		"astro-eslint-parser": "^1.2.2",
 		"cf-content-types-generator": "^2.16.1",
 		"eslint": "^9.39.2",
@@ -56,6 +55,10 @@
 		"prettier": "^3.8.1",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
+		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.55.0"
+	},
+	"overrides": {
+		"vite": "^6.0.0"
 	}
 }

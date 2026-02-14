@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { clsx, type ClassValue } from 'clsx';
+import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 interface Props {
 	href: string;
@@ -23,7 +23,7 @@ const {
 			'font-bold underline underline-offset-4': !isNavLink,
 			'inline-flex items-center gap-1': isExternal,
 		}),
-		'hover:text-fac-orange focus:text-fac-orange transition-color duration-300',
+		'transition-color duration-300 hover:text-fac-orange focus:text-fac-orange',
 		overrideClasses
 	)}
 	target={isExternal ? '_blank' : undefined}
