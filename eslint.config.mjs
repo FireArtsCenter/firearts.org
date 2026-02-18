@@ -1,14 +1,14 @@
 import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default tseslint.config(
+export default defineConfig(
 	eslint.configs.recommended,
-	...tseslint.configs.recommended,
-	...eslintPluginAstro.configs.recommended,
-	// Disables ESLint rules that might conflict with Prettier
-	eslintConfigPrettier,
+	tseslint.configs.recommended,
+	// Astro's flat config is an array, so we spread it here
+	...eslintPluginAstro.configs['flat/recommended'],
 	{
 		rules: {
 			// Custom rules for your workflow
@@ -16,12 +16,13 @@ export default tseslint.config(
 				'warn',
 				{ argsIgnorePattern: '^_' },
 			],
-			// I am using Contentful's rich text parser which should address the main
-			// security risks here. For now just set to warn to try to avoid using this
+			// Using Contentful's rich text parser which should address the main
+			// security risks here. We should avoid still where possible so just warn
 			'astro/no-set-html-directive': 'warn',
 			'no-console': 'error',
 		},
 	},
+	eslintConfigPrettier,
 	{
 		ignores: ['dist/', '.astro/', 'node_modules/', 'src/vendors/*'],
 	}
