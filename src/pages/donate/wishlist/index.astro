@@ -2,7 +2,6 @@
 import Layout from '@/layouts/Layout.astro';
 import { type TypePageMetaData } from '@/layouts/types';
 import Link from '@/components/Link.astro';
-import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 import PageSection from '@/components/PageSection.astro';
 
@@ -14,22 +13,22 @@ const metaData: TypePageMetaData = {
 
 <Layout metaData={metaData}>
 	<PageSection title='Wish list'>
-		<Text>
+		<p>
 			What do you get a community arts education center that has it all? Well,
 			we at the {org.name} will let you know if we do get it all. In the meantime,
 			please check out what we <em>don’t</em> have.
-		</Text>
-		<Text>
+		</p>
+		<p>
 			Below is a list of items that we are trying to obtain for the studio. We
 			are constantly striving to offer more options for our students, but that
 			requires essential equipment and supplies. We are working on a list of
 			items that the studio needs.
-		</Text>
-		<Text
-			>If you have any leads on any of this equipment please <Link
+		</p>
+		<p>
+			If you have any leads on any of this equipment please <Link
 				href='/contact-us/'>contact us</Link
 			>. We prefer donations, but if you know of any discounted equipment that
 			might be helpful, let us know.
-		</Text>
+		</p>
 	</PageSection>
 </Layout>

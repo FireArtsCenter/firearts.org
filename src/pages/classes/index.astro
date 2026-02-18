@@ -8,7 +8,6 @@ import { CLASS_LIST_TITLE } from '@/components/Navigation/constants';
 
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
-import Text from '@/components/Text.astro';
 import Link from '@/components/Link.astro';
 import Card from '@/components/Classes/Card.astro';
 
@@ -40,14 +39,14 @@ const metaData = {
 				</div>
 			) : (
 				<>
-					<Text>
+					<p>
 						There was a problem getting the class list. Please try again later.
-					</Text>
-					<Text>
+					</p>
+					<p>
 						<Link href='/contact-us/'>
 							Contact us if the problem continues.
 						</Link>
-					</Text>
+					</p>
 				</>
 			)
 		}

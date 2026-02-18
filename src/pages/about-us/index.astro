@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { type TypePageMetaData } from '@/layouts/types';
-import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 import { getYearsSinceFounding } from '@/utils/orgData';
 import PageSection from '@/components/PageSection.astro';
@@ -38,8 +37,8 @@ const sections = [
 		{
 			sections.map((section) => (
 				<Note>
-					<Text as='h3'>{section.headline}</Text>
-					<Text as='p' set:html={section.text} />
+					<h3>{section.headline}</h3>
+					<div set:html={section.text} />
 				</Note>
 			))
 		}

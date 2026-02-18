@@ -1,5 +1,4 @@
 ---
-import Text from '@/components/Text.astro';
 import { twMerge } from 'tailwind-merge';
 interface Props {
 	title?: string;
@@ -7,14 +6,15 @@ interface Props {
 	class?: string;
 }
 const { title, level = 'h1', class: overrideClasses } = Astro.props;
+const HeadingElement = level;
 ---
 
 <section class={twMerge('flex flex-col gap-4', overrideClasses)}>
 	{
 		title && (
-			<Text as={level} class={level === 'h2' ? 'md:mt-0' : ''}>
+			<HeadingElement class={level === 'h2' ? 'md:mt-0' : undefined}>
 				{title}
-			</Text>
+			</HeadingElement>
 		)
 	}
 	<slot />

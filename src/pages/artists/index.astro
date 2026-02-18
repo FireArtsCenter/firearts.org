@@ -4,7 +4,6 @@ import { getArtistsByListTitle } from '@/lib/contentful';
 import Layout from '@/layouts/Layout.astro';
 import PageSection from '@/components/PageSection.astro';
 import Link from '@/components/Link.astro';
-import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 import { ARTIST_LIST_TITLE } from '@/components/Navigation/constants';
 
@@ -23,18 +22,18 @@ const artistMembers = artists.filter(
 	<PageSection title='Artists'>
 		{
 			!artists ? (
-				<Text>
+				<p>
 					There was a problem getting the artist list. Please try again later.
-				</Text>
+				</p>
 			) : (
 				<>
-					<Text>
+					<p>
 						Here are a few of the artists instructors who have helped make the{' '}
 						{org.name} what it is today.
-					</Text>
+					</p>
 					{artistInstructors && (
 						<>
-							<Text as='h3'>Instructors</Text>
+							<h3>Instructors</h3>
 							<ul class='list-disc pl-16'>
 								{artistInstructors.map(({ fields }) => {
 									return (
@@ -54,9 +53,7 @@ const artistMembers = artists.filter(
 					)}
 					{artistMembers && (
 						<>
-							<Text as='h3' class='mt-8'>
-								Past and Current Members
-							</Text>
+							<h3 class='mt-8'>Past and Current Members</h3>
 							<ul class='list-disc pl-16'>
 								{artistMembers.map(({ fields }) => {
 									return (

@@ -3,7 +3,6 @@ import Layout from '@/layouts/Layout.astro';
 import { type TypePageMetaData } from '@/layouts/types';
 
 import Link from '@/components/Link.astro';
-import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 import PageSection from '@/components/PageSection.astro';
 
@@ -14,15 +13,13 @@ const metaData: TypePageMetaData = {
 
 <Layout metaData={metaData}>
 	<PageSection title='Page not found'>
-		<Text>
-			It looks like the page you are trying to find is no longer available.
-		</Text>
-		<Text>
+		<p>It looks like the page you are trying to find is no longer available.</p>
+		<p>
 			If you have questions or need help, return to the <Link href='/'
 				>home page</Link
 			> or <Link href='/context-us/'
 				>contact the {org.name} with your questions</Link
 			>.
-		</Text>
+		</p>
 	</PageSection>
 </Layout>

@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import ScheduleTimes from '@/components/Classes/ScheduledTimes.astro';
 import Button from '@/components/Button.astro';
-import Text from '@/components/Text.astro';
 import { selectImageDataFromResponse } from '@/lib/contentful';
 
 // @// TODO:  <14-02-26, john> - ignoring 'any' until I refactor this component
@@ -46,7 +45,7 @@ const firstImage = imageData[0];
 
 {firstImage && <Image {...firstImage} alt='' />}
 
-<Text as='h3'>Schedule</Text>
+<h3>Schedule</h3>
 <ScheduleTimes
 	showScheduledTimes={showScheduledTimes}
 	scheduledTimes={scheduledTimes}
@@ -55,8 +54,8 @@ const firstImage = imageData[0];
 {
 	fee && (
 		<>
-			<Text as='h3'>Fee</Text>
-			<Text>{fee.join(', ')}</Text>
+			<h3>Fee</h3>
+			<p>{fee.join(', ')}</p>
 		</>
 	)
 }
@@ -64,8 +63,8 @@ const firstImage = imageData[0];
 {
 	instructorsString && (
 		<>
-			<Text as='h3'>Instructors</Text>
-			<Text>{instructorsString}</Text>
+			<h3>Instructors</h3>
+			<p>{instructorsString}</p>
 		</>
 	)
 }
@@ -77,7 +76,7 @@ const firstImage = imageData[0];
 			role='alert'
 		>
 			{disclaimers.map((disclaimer) => (
-				<Text class='text-sm md:text-sm'>{disclaimer}</Text>
+				<p class='text-sm md:text-sm'>{disclaimer}</p>
 			))}
 		</div>
 	)

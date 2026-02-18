@@ -4,7 +4,6 @@ import Layout from '@/layouts/Layout.astro';
 import { type TypePageMetaData } from '@/layouts/types';
 
 import Button from '@/components/Button.astro';
-import Text from '@/components/Text.astro';
 import { org } from '@/constants';
 import PageSection from '@/components/PageSection.astro';
 
@@ -16,12 +15,12 @@ const metaData: TypePageMetaData = {
 
 <Layout metaData={metaData}>
 	<PageSection title={`Contact the ${org.name}`}>
-		<Text>
+		<p>
 			Whether you are interested in bronze or iron casting (using the lost-wax
 			method), metal furniture design, armor forging, stone carving, figure
 			sculpture, figure drawing or just want to check out the {org.name}’s
 			studio, please contact us and let us know.
-		</Text>
+		</p>
 		<div class='mt-6 flex flex-col justify-around gap-4 md:flex-row'>
 			<Button
 				href={`mailto:${org.email}`}
