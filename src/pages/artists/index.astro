@@ -38,13 +38,9 @@ const artistMembers = artists.filter(
 								{artistInstructors.map(({ fields }) => {
 									return (
 										<li class='mt-2'>
-											{fields.bio ? (
-												<Link href={`/artists/${fields.slug}/`}>
-													{fields.name}
-												</Link>
-											) : (
-												fields.name
-											)}
+											<Link href={`/artists/${fields.slug}/`}>
+												{fields.name}
+											</Link>
 										</li>
 									);
 								})}
