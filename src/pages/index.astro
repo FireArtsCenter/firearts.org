@@ -6,7 +6,6 @@ import { org } from '@/constants';
 import { getYearsSinceFounding } from '@/utils/orgData';
 import PageSection from '@/components/PageSection.astro';
 import VideoIframe from '@/components/VideoIframe.astro';
-import LoadingSpinner from '@/components/LoadingSpinner.astro';
 
 export const metaData = {
 	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
@@ -17,7 +16,6 @@ const yearsSinceFounding = getYearsSinceFounding();
 
 <Layout metaData={metaData}>
 	<PageSection>
-		<LoadingSpinner />
 		<p>
 			The {org.name} began {yearsSinceFounding} years ago as a not-for-profit school
 			for sculptors. Our primary mission is the <strong

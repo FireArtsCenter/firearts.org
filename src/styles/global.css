@@ -9,7 +9,7 @@
 
 	--loading-spinner-warm: var(--color-fac-red);
 	--loading-spinner-warmer: var(--color-fac-orange);
-	--loading-spinner-hotest: var(--color-white);
+	--loading-spinner-hottest: var(--color-white);
 }
 
 @layer base {
