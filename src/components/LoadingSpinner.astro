@@ -1,6 +1,5 @@
 ---
 /* Fire Arts Center - Centrifugal Forge Spinner */
-
 interface Props {
 	sparkCount?: number;
 	loadingLabel?: string;
@@ -21,7 +20,10 @@ const sparks = Array.from({ length: sparkCount }).map(() => {
 	const angle = Math.random() * 2 * Math.PI;
 	const startX = 70 + radius * Math.cos(angle);
 	const startY = 70 + radius * Math.sin(angle);
-	const throwDistance = Math.random() * 40 + 20;
+
+	// SCALE THE THROW: This keeps sparks proportional to the size prop
+	// We calculate it relative to the 140px base, then the CSS scale handles the rest
+	const throwDistance = Math.random() * 30 + 15;
 	const tx = Math.cos(angle) * throwDistance + 'px';
 	const ty = Math.sin(angle) * throwDistance + 'px';
 
@@ -30,8 +32,8 @@ const sparks = Array.from({ length: sparkCount }).map(() => {
 		top: startY + 'px',
 		tx,
 		ty,
-		duration: (Math.random() * 0.4 + 0.4).toFixed(2) + 's',
-		delay: (Math.random() * 2).toFixed(2) + 's',
+		duration: (Math.random() * 0.4 + 0.3).toFixed(2) + 's',
+		delay: (Math.random() * 1.5).toFixed(2) + 's',
 	};
 });
 ---
@@ -70,10 +72,14 @@ const sparks = Array.from({ length: sparkCount }).map(() => {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
+		/* Align with the middle of the text line */
 		vertical-align: middle;
 		position: relative;
+		/* Hidden prevents sparks from "leaking" out of buttons if you prefer a clean look */
 		overflow: visible;
 		pointer-events: none;
+		/* Add a small negative margin to prevent adding extra height to buttons */
+		margin-top: -1px;
 	}
 
 	.forge-container {
