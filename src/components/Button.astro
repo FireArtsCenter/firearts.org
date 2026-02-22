@@ -5,13 +5,13 @@ import Link from '@/components/Link.astro';
 
 const buttonVariants = cva(
 	// Base styles that always apply
-	'block border-1 text-center font-semibold text-white no-underline hover:brightness-150 md:inline md:rounded',
+	'block border text-center font-semibold text-white no-underline hover:brightness-150 md:inline md:rounded',
 	{
 		variants: {
 			appearance: {
 				primary:
-					'bg-fac-red border-fac-red text-white hover:text-white focus:text-white',
-				secondary: 'hover:border-fac-orange border-white bg-black',
+					'border-fac-red bg-fac-red text-white hover:text-white focus:text-white',
+				secondary: 'border-white bg-black hover:border-fac-orange',
 			},
 			size: {
 				large: 'px-10 py-5 text-2xl',
