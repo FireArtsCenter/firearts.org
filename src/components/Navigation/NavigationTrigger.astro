@@ -10,6 +10,7 @@ const { targetId, class: className } = Astro.props;
 <button
 	class={twMerge('cursor-pointer', className)}
 	data-modal-target={targetId}
+	aria-label='Open menu'
 >
 	<slot />
 </button>

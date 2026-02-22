@@ -12,7 +12,7 @@ const { title = 'Fire Arts Center of Chicago' } = Astro.props;
 ---
 
 <a
-	class='bg-fac-red sr-only text-xs font-bold focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:px-3 focus:py-2'
+	class='sr-only bg-fac-red text-xs font-bold focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:px-3 focus:py-2'
 	href='#content'
 >
 	Skip to content
@@ -21,7 +21,7 @@ const { title = 'Fire Arts Center of Chicago' } = Astro.props;
 <div class='md:col-span-3 md:col-start-1'>
 	<Image
 		src='/images/bronze-pouring-header.jpg'
-		class='block md:w-auto md:w-full'
+		class='block md:w-auto'
 		alt='A crucible of molten bronze being poured in a ceramic mold'
 		priority={true}
 		width='720'
@@ -33,11 +33,11 @@ const { title = 'Fire Arts Center of Chicago' } = Astro.props;
 	class='hidden border-b-0 hover:border-b-0 focus:border-b-0 md:block'
 	href='/'
 >
-	{/* same text as title below, so no alt */}
 	<Image src='/fac-logo.svg' alt='' width={241} height={251} priority />
+	<span class='sr-only'>Return to the Fire Arts Center homepage</span>
 </Link>
 <div
-	class='bg-fac-red flex w-full items-center justify-between gap-4 px-4 py-2 md:col-span-5 md:col-start-1 md:block'
+	class='flex w-full items-center justify-between gap-4 bg-fac-red px-4 py-2 md:col-span-5 md:col-start-1 md:block'
 >
 	<NavigationTrigger class='block md:hidden' targetId='mobileNav'>
 		<Icon size='36px' name='bars' />
