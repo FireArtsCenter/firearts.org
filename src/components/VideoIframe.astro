@@ -4,12 +4,12 @@ import PlayButton from './PlayButton.astro';
 
 interface Props {
 	id: string;
-	videoUrl?: string; // Flexible prop, defaults to your Fire Arts Center URL
+	videoUrl?: string;
 }
 
 const {
 	id,
-	videoUrl = 'https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Ffireartscenterchicago%2Fvideos%2F10153899014125040%2F&show_text=false&width=560&t=0&autoplay=true&muted=true',
+	videoUrl = 'https://www.facebook.com/fireartscenterchicago/videos/10153899014125040/',
 } = Astro.props;
 ---
 
@@ -18,7 +18,7 @@ const {
 	class='video-container relative mt-4 aspect-video w-full overflow-hidden rounded-lg bg-[#1a1a1a]'
 	data-video-src={videoUrl}
 >
-	{/* Placeholder / Poster State */}
+	{/* 1. Placeholder Layer */}
 	<div
 		class='video-placeholder absolute inset-0 z-20 flex items-center justify-center transition-opacity duration-500'
 	>
@@ -27,18 +27,26 @@ const {
 			style="background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1000 562%27%3E%3Crect width=%271000%27 height=%27562%27 fill=%27%232a1b2a%27/%3E%3Cpath d=%27M-50 450 L400 50 L500 100 L0 550Z%27 fill=%27%23d35400%27 fill-opacity=%270.8%27/%3E%3Crect x=%27100%27 y=%2760%27 width=%27800%27 height=%2760%27 rx=%2730%27 fill=%27%2346acc2%27/%3E%3Crect x=%270%27 y=%27250%27 width=%271000%27 height=%2770%27 fill=%27%238e44ad%27 fill-opacity=%270.7%27/%3E%3Crect x=%27350%27 y=%27480%27 width=%27600%27 height=%2760%27 rx=%2730%27 fill=%27%2327ae60%27/%3E%3Crect x=%27400%27 y=%27380%27 width=%27550%27 height=%2750%27 rx=%2725%27 fill=%27%23c0392b%27/%3E%3Cpath d=%27M300 600 L950 0 L1050 50 L400 650Z%27 fill=%27%23f1c40f%27 fill-opacity=%270.8%27/%3E%3C/svg%3E'); background-size: cover;"
 		>
 		</div>
-
 		<PlayButton />
 	</div>
 
-	{/* Loading Spinner State (Hidden by default) */}
+	{/* 2. Loading State */}
 	<div
 		class='video-loading absolute inset-0 z-10 hidden items-center justify-center bg-[#1a1a1a]'
 	>
 		<LoadingSpinner />
 	</div>
 
-	{/* Iframe will be injected here on click */}
+	{/* 3. Target Div for SDK Player */}
+	<div
+		id={`fb-player-${id}`}
+		class='fb-video'
+		data-href={videoUrl}
+		data-allowfullscreen='true'
+		data-autoplay='true'
+		data-show-captions='false'
+	>
+	</div>
 </div>
 
 <script is:inline define:vars={{ id }}>
@@ -46,45 +54,62 @@ const {
 		const container = document.getElementById(id);
 		const placeholder = container?.querySelector('.video-placeholder');
 		const loadingState = container?.querySelector('.video-loading');
-		let videoSrc = container?.dataset.videoSrc;
 
-		if (!container || !placeholder || !loadingState || !videoSrc) return;
+		if (!container || !placeholder || !loadingState) return;
 
-		placeholder.addEventListener('click', () => {
+		const startVideo = () => {
+			// Show loading immediately
 			placeholder.classList.add('opacity-0');
 			placeholder.style.pointerEvents = 'none';
 			loadingState.classList.remove('hidden');
 			loadingState.classList.add('flex');
 
-			const iframe = document.createElement('iframe');
+			const setupPlayer = () => {
+				// Use FB Event to detect when the player is ready
+				FB.Event.subscribe('xfbml.ready', function (msg) {
+					if (msg.type === 'video' && msg.id === `fb-player-${id}`) {
+						const player = msg.instance;
 
-			// Use '1' instead of 'true' for Facebook parameters
-			// Ensure both autoplay and muted are present
-			if (!videoSrc.includes('autoplay')) videoSrc += '&autoplay=1';
-			if (!videoSrc.includes('muted')) videoSrc += '&muted=1';
+						// API-driven play command bypasses Chrome's autoplay restrictions
+						player.unmute();
+						player.play();
 
-			iframe.src = videoSrc;
-			iframe.title = 'Video player';
-			iframe.className = 'aspect-video h-full w-full relative z-30';
-			iframe.style.border = 'none';
+						// Hide loading once video confirms it is playing
+						loadingState.classList.add('opacity-0');
+						setTimeout(() => {
+							placeholder.remove();
+							loadingState.remove();
+						}, 500);
+					}
+				});
 
-			// Critical: The 'allow' string must be precise for the browser to pass the gesture
-			// to the Facebook player inside the iframe.
-			iframe.setAttribute(
-				'allow',
-				'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
-			);
-			iframe.allowFullscreen = true;
+				// Re-parse only this container
+				FB.XFBML.parse(container);
+			};
 
-			iframe.addEventListener('load', () => {
-				loadingState.classList.add('opacity-0');
-				setTimeout(() => {
-					placeholder.remove();
-					loadingState.remove();
-				}, 500);
-			});
+			if (window.FB) {
+				setupPlayer();
+			} else {
+				// Initialize SDK if not already on page
+				window.fbAsyncInit = function () {
+					FB.init({
+						xfbml: true,
+						version: 'v25.0',
+					});
+					setupPlayer();
+				};
 
-			container.appendChild(iframe);
-		});
+				// Load the SDK dynamically
+				const script = document.createElement('script');
+				script.src =
+					'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v25.0';
+				script.async = true;
+				script.defer = true;
+				script.crossOrigin = 'anonymous';
+				document.body.appendChild(script);
+			}
+		};
+
+		placeholder.addEventListener('click', startVideo);
 	})();
 </script>
