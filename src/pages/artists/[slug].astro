@@ -91,7 +91,7 @@ const isEntryOfTypeArtistLink = (
 		{
 			classes && classes.length > 0 && (
 				<PageSection title={`Classes Taught by ${name}`} level='h3'>
-					<div class='grid-row-auto grid grid-cols-2 items-stretch gap-4'>
+					<div class='grid-row-auto grid items-stretch gap-4 md:grid-cols-2'>
 						{classes.map(({ fields }) => {
 							const resolvedImages = (fields.images || []).filter(isAsset);
 							const imageData = selectImageDataFromResponse(resolvedImages);

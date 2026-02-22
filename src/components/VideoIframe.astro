@@ -1,0 +1,69 @@
+---
+import LoadingSpinner from './LoadingSpinner.astro';
+
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div
+	id={id}
+	class='relative mt-4 aspect-video w-full overflow-hidden rounded-lg bg-[#1a1a1a]'
+>
+	<div
+		class='video-placeholder absolute inset-0 z-20 transition-opacity duration-700 ease-in-out'
+	>
+		<div
+			class='absolute inset-0 scale-110 blur-xl'
+			style="background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1000 562%27%3E%3Crect width=%271000%27 height=%27562%27 fill=%27%232a1b2a%27/%3E%3Cpath d=%27M-50 450 L400 50 L500 100 L0 550Z%27 fill=%27%23d35400%27 fill-opacity=%270.8%27/%3E%3Crect x=%27100%27 y=%2760%27 width=%27800%27 height=%2760%27 rx=%2730%27 fill=%27%2346acc2%27/%3E%3Crect x=%270%27 y=%27250%27 width=%271000%27 height=%2770%27 fill=%27%238e44ad%27 fill-opacity=%270.7%27/%3E%3Crect x=%27350%27 y=%27480%27 width=%27600%27 height=%2760%27 rx=%2730%27 fill=%27%2327ae60%27/%3E%3Crect x=%27400%27 y=%27380%27 width=%27550%27 height=%2750%27 rx=%2725%27 fill=%27%23c0392b%27/%3E%3Cpath d=%27M300 600 L950 0 L1050 50 L400 650Z%27 fill=%27%23f1c40f%27 fill-opacity=%270.8%27/%3E%3C/svg%3E'); background-size: cover;"
+		>
+		</div>
+
+		<div class='relative z-30 flex h-full items-center justify-center'>
+			<LoadingSpinner />
+		</div>
+	</div>
+
+	<iframe
+		src='https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Ffireartscenterchicago%2Fvideos%2F10153899014125040%2F&show_text=false&width=560&t=0'
+		width='560'
+		height='315'
+		class='aspect-video h-full w-full'
+		style={{ border: 'none', overflow: 'hidden' }}
+		allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
+		allowfullscreen={true}
+		loading='eager'></iframe>
+</div>
+
+<script is:inline define:vars={{ id }}>
+	(function () {
+		const container = document.getElementById(id);
+		const iframe = container?.querySelector('iframe');
+		const placeholder = container?.querySelector('.video-placeholder');
+
+		if (!iframe || !placeholder) return;
+
+		const handleLoad = () => {
+			placeholder.classList.add('opacity-0');
+			// Wait for transition before DOM cleanup
+			setTimeout(() => placeholder.remove(), 700);
+		};
+
+		// If the iframe is already loaded (from cache)
+		try {
+			if (
+				iframe.contentDocument &&
+				iframe.contentDocument.readyState === 'complete'
+			) {
+				handleLoad();
+			} else {
+				iframe.addEventListener('load', handleLoad);
+			}
+		} catch (e) {
+			// Fallback for cross-origin security restrictions
+			iframe.addEventListener('load', handleLoad);
+		}
+	})();
+</script>

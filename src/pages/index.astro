@@ -5,6 +5,8 @@ import Note from '@/components/Note.astro';
 import { org } from '@/constants';
 import { getYearsSinceFounding } from '@/utils/orgData';
 import PageSection from '@/components/PageSection.astro';
+import VideoIframe from '@/components/VideoIframe.astro';
+import LoadingSpinner from '@/components/LoadingSpinner.astro';
 
 export const metaData = {
 	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
@@ -15,6 +17,7 @@ const yearsSinceFounding = getYearsSinceFounding();
 
 <Layout metaData={metaData}>
 	<PageSection>
+		<LoadingSpinner />
 		<p>
 			The {org.name} began {yearsSinceFounding} years ago as a not-for-profit school
 			for sculptors. Our primary mission is the <strong
@@ -28,16 +31,7 @@ const yearsSinceFounding = getYearsSinceFounding();
 		<p class='mt-2'>
 			<Link href='/about-us/'>Read more about the {org.name}</Link>
 		</p>
-		<div class='relative mt-4 w-full'>
-			<iframe
-				src='https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Ffireartscenterchicago%2Fvideos%2F10153899014125040%2F&show_text=false&width=560&t=0'
-				width='560'
-				height='315'
-				class='aspect-video h-full w-full'
-				style={{ border: 'none', overflow: 'hidden' }}
-				allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
-				allowfullscreen={true}></iframe>
-		</div>
+		<VideoIframe id='video-iframe' />
 	</PageSection>
 
 	<PageSection title='What’s New' class='mt-8' level='h2'>

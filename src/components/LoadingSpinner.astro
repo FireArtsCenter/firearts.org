@@ -1,0 +1,190 @@
+---
+/* Fire Arts Center - Molten Forge Spinner
+  Themed for black backgrounds with FAC Red and Orange.
+*/
+
+interface Props {
+	sparkCount?: number;
+	loadingLabel?: string;
+}
+
+const { sparkCount = 12, loadingLabel = 'Loading...' } = Astro.props;
+const sparks = Array.from({ length: sparkCount });
+---
+
+<div class='forge-container' role='status' aria-label={loadingLabel}>
+	<div class='vortex-ring'></div>
+
+	{sparks.map((_, i) => <div class={`spark s${i + 1}`} />)}
+</div>
+
+<style>
+	.forge-container {
+		position: relative;
+		width: 140px;
+		height: 140px;
+		display: grid;
+		place-items: center;
+		background: transparent;
+	}
+
+	/* The Molten Ring */
+	.vortex-ring {
+		position: absolute;
+		inset: 35px;
+		border-radius: 50%;
+		background: conic-gradient(
+			from 0deg,
+			transparent 15%,
+			var(--loading-spinner-warm) 45%,
+			var(--loading-spinner-warmer) 85%,
+			var(--loading-spinner-hotest) 100%
+		);
+		-webkit-mask: radial-gradient(
+			farthest-side,
+			transparent calc(100% - 5px),
+			#000 0
+		);
+		mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0);
+		animation: molten-spin 1.8s linear infinite;
+		z-index: 2;
+	}
+
+	/* White-hot lead point */
+	.vortex-ring::after {
+		content: '';
+		position: absolute;
+		top: -4px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 12px;
+		height: 12px;
+		background: var(--loading-spinner-hotest);
+		border-radius: 50%;
+		box-shadow:
+			0 0 15px 4px var(--loading-spinner-warmer),
+			0 0 30px 8px var(--loading-spinner-warm);
+	}
+
+	.spark {
+		position: absolute;
+		width: 3px;
+		height: 3px;
+		background: var(--loading-spinner-hotest);
+		border-radius: 50%;
+		opacity: 0;
+		z-index: 1;
+	}
+
+	@keyframes molten-spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes ignite {
+		0% {
+			transform: translate(0, 0) scale(1);
+			opacity: 0;
+		}
+		5% {
+			opacity: 1;
+			background: var(--loading-spinner-hotest);
+		}
+		60% {
+			background: var(--loading-spinner-warmer);
+			opacity: 1;
+		}
+		100% {
+			transform: translate(var(--tx), var(--ty)) scale(0);
+			opacity: 0;
+		}
+	}
+
+	/* Manual Randomization of 12 sparks */
+	/* Logic: Vary top/left, translate directions (tx/ty), and duration/delay */
+	.s1 {
+		top: 20%;
+		left: 40%;
+		--tx: -20px;
+		--ty: -40px;
+		animation: ignite 0.8s infinite 0.1s;
+	}
+	.s2 {
+		top: 15%;
+		left: 65%;
+		--tx: 30px;
+		--ty: -30px;
+		animation: ignite 1.2s infinite 0.5s;
+	}
+	.s3 {
+		top: 40%;
+		left: 85%;
+		--tx: 40px;
+		--ty: 10px;
+		animation: ignite 0.6s infinite 0.2s;
+	}
+	.s4 {
+		top: 70%;
+		left: 80%;
+		--tx: 25px;
+		--ty: 35px;
+		animation: ignite 0.9s infinite 0.8s;
+	}
+	.s5 {
+		top: 85%;
+		left: 50%;
+		--tx: 0px;
+		--ty: 45px;
+		animation: ignite 1.1s infinite 0.4s;
+	}
+	.s6 {
+		top: 80%;
+		left: 25%;
+		--tx: -35px;
+		--ty: 30px;
+		animation: ignite 0.7s infinite 0.6s;
+	}
+	.s7 {
+		top: 50%;
+		left: 15%;
+		--tx: -45px;
+		--ty: 0px;
+		animation: ignite 1.3s infinite 0.1s;
+	}
+	.s8 {
+		top: 25%;
+		left: 20%;
+		--tx: -30px;
+		--ty: -35px;
+		animation: ignite 0.5s infinite 0.9s;
+	}
+	.s9 {
+		top: 30%;
+		left: 50%;
+		--tx: 10px;
+		--ty: -50px;
+		animation: ignite 0.9s infinite 1.2s;
+	}
+	.s10 {
+		top: 60%;
+		left: 60%;
+		--tx: 40px;
+		--ty: 40px;
+		animation: ignite 0.8s infinite 0.3s;
+	}
+	.s11 {
+		top: 75%;
+		left: 40%;
+		--tx: -10px;
+		--ty: 50px;
+		animation: ignite 1s infinite 0.7s;
+	}
+	.s12 {
+		top: 45%;
+		left: 35%;
+		--tx: -50px;
+		--ty: -10px;
+		animation: ignite 0.6s infinite 0.5s;
+	}
+</style>
