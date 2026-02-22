@@ -15,12 +15,12 @@ const {
 
 <div
 	id={id}
-	class='video-container relative mt-4 aspect-video w-full overflow-hidden rounded-lg bg-[#1a1a1a]'
+	class='video-container group relative mt-4 aspect-video w-full overflow-hidden rounded-lg bg-[#1a1a1a]'
 	data-video-src={videoUrl}
 >
 	{/* 1. Placeholder Layer */}
 	<div
-		class='video-placeholder absolute inset-0 z-20 flex items-center justify-center transition-opacity duration-500'
+		class='video-placeholder absolute inset-0 z-40 flex items-center justify-center transition-opacity duration-500'
 	>
 		<div
 			class='absolute inset-0 scale-110 blur-lg'
@@ -32,15 +32,37 @@ const {
 
 	{/* 2. Loading State */}
 	<div
-		class='video-loading absolute inset-0 z-10 hidden items-center justify-center bg-[#1a1a1a]'
+		class='video-loading absolute inset-0 z-30 hidden items-center justify-center bg-[#1a1a1a]'
 	>
 		<LoadingSpinner />
 	</div>
 
-	{/* 3. Target Div for SDK Player */}
+	{/* 3. Custom Unmute Button (Hidden until video starts) */}
+	<button
+		id={`unmute-${id}`}
+		class='absolute right-4 bottom-4 z-50 hidden items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:bg-black/80'
+	>
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			fill='none'
+			viewBox='0 0 24 24'
+			stroke-width='2'
+			stroke='currentColor'
+			class='h-5 w-5'
+		>
+			<path
+				stroke-linecap='round'
+				stroke-linejoin='round'
+				d='M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z'
+			></path>
+		</svg>
+		TAP FOR SOUND
+	</button>
+
+	{/* 4. Target Div for SDK Player */}
 	<div
 		id={`fb-player-${id}`}
-		class='fb-video'
+		class='fb-video relative z-10'
 		data-href={videoUrl}
 		data-allowfullscreen='true'
 		data-autoplay='true'
@@ -54,27 +76,35 @@ const {
 		const container = document.getElementById(id);
 		const placeholder = container?.querySelector('.video-placeholder');
 		const loadingState = container?.querySelector('.video-loading');
+		const unmuteBtn = document.getElementById(`unmute-${id}`);
 
-		if (!container || !placeholder || !loadingState) return;
+		if (!container || !placeholder || !loadingState || !unmuteBtn) return;
 
 		const startVideo = () => {
-			// Show loading immediately
 			placeholder.classList.add('opacity-0');
 			placeholder.style.pointerEvents = 'none';
 			loadingState.classList.remove('hidden');
 			loadingState.classList.add('flex');
 
 			const setupPlayer = () => {
-				// Use FB Event to detect when the player is ready
 				FB.Event.subscribe('xfbml.ready', function (msg) {
 					if (msg.type === 'video' && msg.id === `fb-player-${id}`) {
 						const player = msg.instance;
 
-						// API-driven play command bypasses Chrome's autoplay restrictions
-						player.unmute();
+						// Guarantee Play by Muting
+						player.mute();
 						player.play();
 
-						// Hide loading once video confirms it is playing
+						// Show our custom unmute button
+						unmuteBtn.classList.remove('hidden');
+						unmuteBtn.classList.add('flex');
+
+						unmuteBtn.addEventListener('click', (e) => {
+							e.stopPropagation();
+							player.unmute();
+							unmuteBtn.remove(); // Remove button once unmuted
+						});
+
 						loadingState.classList.add('opacity-0');
 						setTimeout(() => {
 							placeholder.remove();
@@ -83,23 +113,17 @@ const {
 					}
 				});
 
-				// Re-parse only this container
 				FB.XFBML.parse(container);
 			};
 
 			if (window.FB) {
 				setupPlayer();
 			} else {
-				// Initialize SDK if not already on page
 				window.fbAsyncInit = function () {
-					FB.init({
-						xfbml: true,
-						version: 'v25.0',
-					});
+					FB.init({ xfbml: true, version: 'v25.0' });
 					setupPlayer();
 				};
 
-				// Load the SDK dynamically
 				const script = document.createElement('script');
 				script.src =
 					'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v25.0';
