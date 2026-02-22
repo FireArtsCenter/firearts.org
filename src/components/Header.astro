@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import Link from '@/components/Link.astro';
+import NavigationTrigger from '../components/Navigation/NavigationTrigger.astro';
+
+interface Props {
+	title?: string;
+}
+
+const { title = 'Fire Arts Center of Chicago' } = Astro.props;
+---
+
+<a
+	class='sr-only bg-fac-red text-xs font-bold focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:px-3 focus:py-2'
+	href='#content'
+>
+	Skip to content
+</a>
+
+<div class='md:col-span-3 md:col-start-1'>
+	<Image
+		src='/images/bronze-pouring-header.jpg'
+		alt='A crucible of molten bronze being poured in a ceramic mold'
+		priority={true}
+		layout='constrained'
+		width='720'
+		height='263'
+	/>
+</div>
+
+<Link
+	class='hidden border-b-0 hover:border-b-0 focus:border-b-0 md:block'
+	href='/'
+>
+	<Image src='/fac-logo.svg' alt='' width={241} height={251} priority />
+	<span class='sr-only'>Return to the Fire Arts Center homepage</span>
+</Link>
+<div
+	class='flex w-full items-center justify-between gap-4 bg-fac-red px-4 py-2 md:col-span-5 md:col-start-1 md:block'
+>
+	<NavigationTrigger class='block md:hidden' targetId='mobileNav'>
+		<Icon size='36px' name='bars' />
+	</NavigationTrigger>
+	<h1
+		class='not-sr-only m-0 min-h-10 max-w-2/3 text-right font-serif text-3xl font-black text-white md:sr-only md:max-w-none md:text-4xl'
+	>
+		{title}
+	</h1>
+</div>

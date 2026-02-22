@@ -1,0 +1,54 @@
+---
+import {
+	isAsset,
+	getClassesByListTitle,
+	selectImageDataFromResponse,
+} from '@/lib/contentful';
+import { CLASS_LIST_TITLE } from '@/components/Navigation/constants';
+
+import Layout from '@/layouts/Layout.astro';
+import PageSection from '@/components/PageSection.astro';
+import Link from '@/components/Link.astro';
+import Card from '@/components/Classes/Card.astro';
+
+const classes = await getClassesByListTitle(CLASS_LIST_TITLE);
+
+const metaData = {
+	title: 'Class List',
+};
+---
+
+<Layout metaData={metaData}>
+	<PageSection title='Class list'>
+		{
+			classes?.length > 0 ? (
+				<div class='grid-row-auto grid grid-cols-2 items-stretch gap-4'>
+					{classes.map(({ fields }) => {
+						const resolvedImages = (fields.images || []).filter(isAsset);
+						const imageData = selectImageDataFromResponse(resolvedImages);
+						return (
+							<Card
+								title={fields.name}
+								link={`/classes/${fields.slug}/`}
+								slug={fields.slug}
+								summary={fields.summary}
+								image={imageData[0]}
+							/>
+						);
+					})}
+				</div>
+			) : (
+				<>
+					<p>
+						There was a problem getting the class list. Please try again later.
+					</p>
+					<p>
+						<Link href='/contact-us/'>
+							Contact us if the problem continues.
+						</Link>
+					</p>
+				</>
+			)
+		}
+	</PageSection>
+</Layout>

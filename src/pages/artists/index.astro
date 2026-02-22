@@ -1,0 +1,70 @@
+---
+import { getArtistsByListTitle } from '@/lib/contentful';
+
+import Layout from '@/layouts/Layout.astro';
+import PageSection from '@/components/PageSection.astro';
+import Link from '@/components/Link.astro';
+import { org } from '@/constants';
+import { ARTIST_LIST_TITLE } from '@/components/Navigation/constants';
+
+const artists = await getArtistsByListTitle(ARTIST_LIST_TITLE);
+
+const artistInstructors = artists.filter((artist) =>
+	artist?.fields?.role?.includes('Instructor')
+);
+const artistMembers = artists.filter(
+	(artist) =>
+		!artist?.fields?.role?.includes('Instructor') && Boolean(artist.fields.bio)
+);
+---
+
+<Layout metaData={{}}>
+	<PageSection title='Artists'>
+		{
+			!artists ? (
+				<p>
+					There was a problem getting the artist list. Please try again later.
+				</p>
+			) : (
+				<>
+					<p>
+						Here are a few of the artists instructors who have helped make the{' '}
+						{org.name} what it is today.
+					</p>
+					{artistInstructors && (
+						<>
+							<h3>Instructors</h3>
+							<ul class='list-disc pl-16'>
+								{artistInstructors.map(({ fields }) => {
+									return (
+										<li class='mt-2'>
+											<Link href={`/artists/${fields.slug}/`}>
+												{fields.name}
+											</Link>
+										</li>
+									);
+								})}
+							</ul>
+						</>
+					)}
+					{artistMembers && (
+						<>
+							<h3 class='mt-8'>Past and Current Members</h3>
+							<ul class='list-disc pl-16'>
+								{artistMembers.map(({ fields }) => {
+									return (
+										<li class='mt-2'>
+											<Link href={`/artists/${fields.slug}/`}>
+												{fields.name}
+											</Link>
+										</li>
+									);
+								})}
+							</ul>
+						</>
+					)}
+				</>
+			)
+		}
+	</PageSection>
+</Layout>

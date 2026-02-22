@@ -1,27 +1,24 @@
 {
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"],
 	"compilerOptions": {
-		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"incremental": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
 		"plugins": [
 			{
-				"name": "next"
+				"name": "@astrojs/ts-plugin"
 			}
 		],
 		"paths": {
-			"@/*": ["./src/*"]
-		}
-	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "build/types/**/*.ts"],
-	"exclude": ["node_modules"]
+			"@/types/*": ["./src/types/*"],
+			"@/components/*": ["./src/components/*"],
+			"@/layouts/*": ["./src/layouts/*"],
+			"@/vendors/*": ["./src/vendors/*"],
+			"@/utils/*": ["./src/utils/*"],
+			"@/lib/*": ["./src/lib/*"],
+			"@/constants": ["./src/constants.ts"]
+		},
+		"resolveJsonModule": true
+	}
 }

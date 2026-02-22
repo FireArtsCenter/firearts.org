@@ -1,0 +1,49 @@
+---
+import { type TypePageMetaData } from './types';
+import Head from '@/components/Head.astro';
+import GTMNoscript from '@/vendors/GTM/Noscript.astro';
+import Header from '@/components/Header.astro';
+import Navigation from '@/components/Navigation/Navigation.astro';
+import MobileNavContainer from '@/components/Navigation/MobileNavContainer.astro';
+import { navItems } from '@/components/Navigation/constants';
+import Footer from '@/components/Footer.astro';
+
+import { GTM_ID } from 'astro:env/client';
+
+interface Props {
+	metaData: TypePageMetaData;
+}
+
+const { metaData } = Astro.props;
+---
+
+<html lang='en' class='overflow-y-scroll scroll-smooth'>
+	<head>
+		<Head gtmId={GTM_ID} metaData={metaData} />
+	</head>
+	<body
+		class='min-h-screen bg-neutral-900 bg-gradient-to-b from-transparent to-black text-white'
+	>
+		<GTMNoscript gtmId={GTM_ID} />
+		<div id='top' class='mx-auto grid max-w-5xl grid-cols-4 gap-4'>
+			<header
+				class='col-span-4 col-start-1 md:grid md:grid-cols-4 md:items-center'
+			>
+				<Header />
+			</header>
+			<MobileNavContainer id='mobileNav'>
+				<Navigation navItems={navItems} />
+			</MobileNavContainer>
+			<aside class='col-span-1 col-start-1 row-start-2 hidden p-4 md:block'>
+				<Navigation navItems={navItems} />
+			</aside>
+			<main
+				id='content'
+				class='col-span-4 col-start-1 row-start-2 px-4 sm:py-4 md:col-span-3 md:col-start-2 md:py-4'
+			>
+				<slot />
+			</main>
+			<Footer class='col-span-4 mt-12' navItems={navItems} />
+		</div>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+	--color-fac-red: var(--color-red-800); /* old #990000 */
+	--color-fac-orange: var(--color-amber-600); /* old #ff9900 */
+	--font-serif: var(--font-raleway);
+
+	--color-border-default: var(--color-neutral-500);
+
+	--loading-spinner-warm: var(--color-fac-red);
+	--loading-spinner-warmer: var(--color-fac-orange);
+	--loading-spinner-hottest: var(--color-white);
+}
+
+@layer base {
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply font-serif;
+	}
+	h1 {
+		@apply text-4xl font-black text-white;
+	}
+	h2 {
+		@apply text-3xl font-black text-white;
+	}
+	h3 {
+		@apply text-2xl font-bold text-white;
+	}
+	h4 {
+		@apply text-xl font-bold text-white;
+	}
+	h5,
+	h6 {
+		@apply text-2xl font-bold;
+	}
+	p {
+		@apply text-xl md:text-lg;
+	}
+}

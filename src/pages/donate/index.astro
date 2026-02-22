@@ -1,0 +1,85 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { type TypePageMetaData } from '@/layouts/types';
+import Link from '@/components/Link.astro';
+import Note from '@/components/Note.astro';
+import { org } from '@/constants';
+import PageSection from '@/components/PageSection.astro';
+
+const metaData: TypePageMetaData = {
+	title: 'Support us with a donation',
+	description: `Find out how you can help support the ${org.name} today.`,
+};
+---
+
+<Layout metaData={metaData}>
+	<PageSection title={`Donate to the ${org.name}`}>
+		<Note>
+			<h2>Take a class</h2>
+			<p>
+				The best way to support us is to sign up for a class. We are excited to
+				share our knowledge with the community and love having the studio full
+				of creative people making art.
+			</p>
+			<p>
+				The money you pay for classes goes directly to support more classes! So <Link
+					href='/contact-us/'>contact the {org.name} today to sign up</Link
+				>
+				.
+			</p>
+		</Note>
+
+		<Note>
+			<h2>Donate money</h2>
+			<p>
+				Do you know someone that would like to take a class or maybe just want
+				to give a gift to support our programming in general? Ensure that others
+				in the community are able to experience the joys of the fire arts by
+				donating money.
+			</p>
+			<p>
+				<Link href='/contact-us/'>Contact us to learn how to donate</Link>.
+			</p>
+		</Note>
+
+		<Note>
+			<h2>Donate resources</h2>
+			<p>
+				We are always looking for supplies and equipment donations, too. <Link
+					href='/contact-us/'
+					>Contact us to find out the types of material we can use</Link
+				>. Businesses with equipment to donate (e.g. metal fabrication tools,
+				power saws, welding equipment, hand tools, cement mixers, buckets,
+				etc.), <Link href='/contact-us/'>contact us</Link>.
+			</p>
+			<p>
+				We are working on a <Link href='/donate/wishlist/'
+					>wish list of specific equipment</Link
+				>.
+			</p>
+		</Note>
+
+		<Note>
+			<h2>Spread the word</h2>
+			<p>
+				Do you know someone who might be interested in the {org.name}. Pass the
+				word along to them, or&mdash;better yet&mdash;surprise them with the
+				gift of fire in the form of a class...
+				<Link href='/contact-us/'
+					>Contact us to get them signed up for a class today</Link
+				>. They may even thank you by making you a full suit of armor, a
+				sculpture of you cast in bronze, or maybe that steel-frame desk you have
+				been hoping to get but couldn’t afford.
+			</p>
+		</Note>
+
+		<p>
+			There are many ways to help us pour another bronze sculpture, weld another
+			piece of furniture, forge another suit of armor, or sculpt another figure
+			in clay. But our favorite way to keep the place running is to fill up the
+			classroom. <Link href='/contact-us/'>
+				Contact us to sign up for a class</Link
+			> to help us do that.
+		</p>
+	</PageSection>
+</Layout>

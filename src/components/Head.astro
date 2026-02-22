@@ -1,0 +1,46 @@
+---
+import { Font } from 'astro:assets';
+import { type TypePageMetaData } from '@/layouts/types';
+import GTMScript from '@/vendors/GTM/Script.astro';
+import '../styles/global.css';
+import { org } from '@/constants';
+
+interface Props {
+	metaData: TypePageMetaData;
+	gtmId?: string;
+}
+
+const { metaData, gtmId } = Astro.props;
+
+const canonicalUrl = Astro.url.href;
+
+const { title = org.name, description } = metaData || {};
+
+const pageTitle = title === org.name ? title : `${title} | ${org.name}`;
+---
+
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<meta name='generator' content={Astro.generator} />
+
+{gtmId && <GTMScript gtmId={gtmId} />}
+
+<Font cssVariable='--font-raleway' preload />
+
+<title>{pageTitle}</title>
+<meta name='title' content={pageTitle} />
+
+{description && <meta name='description' content={description} />}
+
+<link rel='canonical' href={canonicalUrl} />
+
+<script>
+	// Default to dark mode and only alter if user has a theme in local storage or prefers light mode
+	if (
+		localStorage.theme === 'light' ||
+		(!('theme' in localStorage) &&
+			window.matchMedia('(prefers-color-scheme: light)').matches)
+	) {
+		document.body.removeAttribute('data-theme');
+	}
+</script>

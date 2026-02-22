@@ -1,0 +1,23 @@
+---
+import Link from '@/components/Link.astro';
+import { type TypeNavItemDetail } from '@/components/Navigation/constants';
+
+interface Props {
+	subNavItems: TypeNavItemDetail[];
+	class: string;
+}
+
+const { subNavItems, class: additionalClasses } = Astro.props;
+---
+
+<ul class={additionalClasses}>
+	{
+		subNavItems.map((subpage) => (
+			<li class={subpage.class}>
+				<Link isNavLink href={subpage.url}>
+					{subpage.name}
+				</Link>
+			</li>
+		))
+	}
+</ul>

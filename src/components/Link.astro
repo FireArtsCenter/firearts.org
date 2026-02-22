@@ -1,0 +1,33 @@
+---
+import { Icon } from 'astro-icon/components';
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+interface Props {
+	href: string;
+	class?: string;
+	isExternal?: boolean;
+	isNavLink?: boolean;
+}
+const {
+	href,
+	isExternal = false,
+	class: overrideClasses,
+	isNavLink,
+} = Astro.props;
+// border-border-neutral hover:border-fac-orange hover:text-fac-orange focus:border-fac-orange focus:text-fac-orange border-b-2 border-dotted text-white no-underline hover:border-b-2 hover:border-solid focus:border-b-2 focus:border-solid
+---
+
+<a
+	class={twMerge(
+		clsx({
+			'font-bold underline underline-offset-4': !isNavLink,
+			'inline-flex items-center gap-1': isExternal,
+		}),
+		'transition-color duration-300 hover:text-fac-orange focus:text-fac-orange',
+		overrideClasses
+	)}
+	target={isExternal ? '_blank' : undefined}
+	rel={isExternal ? 'noopener noreferrer' : undefined}
+	href={href}
+	><slot />{isExternal && <Icon name='arrow-up-right-from-square' />}</a
+>

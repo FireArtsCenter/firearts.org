@@ -1,27 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fire Arts Center website (firearts.org)
 
-> Going to convert to Astro with CMS backend to make this easier to update
+This is the main website for the Fire Arts Center
 
-## Getting Started
+## Tech Stack
 
-1. Install devDependencies with `npm install`
-2. Run the development server with `npm run dev`
+- Astro - SSG - for static site generation
+- Contentful - CMS - content saved there
+  - currently migrating content now, so it is a mix of content in code vs content on Contentful
+- Vercel - host
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Type Safety
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This repo uses TypeScript to help ensure type safe code. Because the content lives in Contentful, any time a model changes there, I don't want to remember to add it here too. So there is a shell script that accesses the content models and generates type files under `src/types/contentful/*`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This does not need to be run often, just when content models change.
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This relies on Vercel's GitHub CI pipeline. So once you create a PR it will fire of CI to build a preview. From there you can confirm it looks good, then merge your PR to `main` to trigger a production build.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Local Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone this repo
+2. `npm install`
+3. `npm run dev` - to work on the site locally
+4. Open browser to https://localhost:4321
 
-## Deploy on Vercel
+### Production build
 
-The new site is hosted on Vercel. To deploy, push to the `main` github branch. The site will be automatically built and deployed.
+If you need to test a production build locally you can run:
+
+1. `npm run build && npm run preview`
+2. Open browser to https://localhost:4321

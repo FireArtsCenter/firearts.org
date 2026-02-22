@@ -1,0 +1,113 @@
+---
+import { type Entry } from 'contentful';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import {
+	contentfulClient,
+	isAsset,
+	selectImageDataFromResponse,
+} from '@/lib/contentful';
+import Layout from '@/layouts/Layout.astro';
+import PageSection from '@/components/PageSection.astro';
+import Link from '@/components/Link.astro';
+import { isEntry } from '@/lib/contentful';
+import {} from '@/types/contentful';
+import type {
+	TypeArtistLinksSkeleton,
+	TypeArtistsSkeleton,
+	TypeClassSkeleton,
+} from '@/types/contentful';
+import Card from '@/components/Classes/Card.astro';
+
+export async function getStaticPaths() {
+	const artists = await contentfulClient.getEntries<TypeArtistsSkeleton>({
+		content_type: 'artists',
+		include: 2,
+	});
+
+	const classes = await contentfulClient.getEntries<TypeClassSkeleton>({
+		content_type: 'class',
+		include: 1, // We just need the class data, not deep nested refs
+	});
+
+	const pages = artists.items
+		// .filter((item) => Boolean(item.fields.bio)) // if no bio, don't make a page
+		.map((artist) => {
+			const taughtClasses = classes.items.filter((cls) => {
+				return cls.fields.instructors?.some(
+					(instructor) =>
+						isEntry(instructor) && instructor.sys.id === artist.sys.id
+				);
+			});
+
+			return {
+				params: {
+					slug: artist.fields.slug,
+				},
+				props: {
+					name: artist.fields.name,
+					bio: artist.fields.bio
+						? documentToHtmlString(artist.fields.bio)
+						: undefined,
+					additionalLinks: artist.fields.additionalLinks,
+					classes: taughtClasses,
+				},
+			};
+		});
+	return pages;
+}
+
+const { name, bio, additionalLinks, classes } = Astro.props;
+
+const isEntryOfTypeArtistLink = (
+	/* eslint-disable @typescript-eslint/no-explicit-any */
+	link: any
+	/* eslint-enable @typescript-eslint/no-explicit-any */
+): link is Entry<TypeArtistLinksSkeleton, undefined, string> => {
+	return isEntry<TypeArtistLinksSkeleton>(link);
+};
+---
+
+<Layout metaData={{}}>
+	<PageSection title={`About ${name}`}>
+		<div set:html={bio} class='flex flex-col gap-4 text-lg' />
+		{
+			additionalLinks?.length && (
+				<>
+					<h3>Additional Links</h3>
+					<ul class='list-disc pl-8'>
+						{additionalLinks
+							?.filter(isEntryOfTypeArtistLink)
+							.map(({ fields }) => (
+								<li>
+									<Link isExternal={true} href={fields.linkUrl}>
+										{fields.linkText}
+									</Link>
+								</li>
+							))}
+					</ul>
+				</>
+			)
+		}
+		{
+			classes && classes.length > 0 && (
+				<PageSection title={`Classes Taught by ${name}`} level='h3'>
+					<div class='grid-row-auto grid items-stretch gap-4 md:grid-cols-2'>
+						{classes.map(({ fields }) => {
+							const resolvedImages = (fields.images || []).filter(isAsset);
+							const imageData = selectImageDataFromResponse(resolvedImages);
+							return (
+								<Card
+									title={fields.name}
+									link={`/classes/${fields.slug}/`}
+									slug={fields.slug}
+									image={imageData[0]}
+									size='small'
+								/>
+							);
+						})}
+					</div>
+				</PageSection>
+			)
+		}
+	</PageSection>
+</Layout>

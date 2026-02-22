@@ -1,0 +1,107 @@
+---
+import { Icon } from 'astro-icon/components';
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+import Link from '@/components/Link.astro';
+import Button from '@/components/Button.astro';
+import { type TypeNavItem } from '../Navigation/constants.ts';
+
+interface Props {
+	navItems: TypeNavItem[];
+	class?: string;
+}
+
+const currentRoute = Astro.url.pathname;
+const isHomepage = currentRoute === '/';
+const isRegisterPage = currentRoute === '/register/';
+const isClassPage = currentRoute.startsWith('/classes/');
+
+const shouldShowRegisterCTA =
+	!isClassPage && !isRegisterPage && !currentRoute.includes('/contact-us');
+
+const { navItems, class: className } = Astro.props;
+---
+
+<nav
+	class={`${twMerge(
+		clsx({
+			home: isHomepage,
+			register: isRegisterPage,
+			classes: isClassPage,
+		}),
+		'flex flex-col justify-start',
+		className
+	)}`}
+>
+	<ul
+		class='flex h-full w-full list-none flex-col gap-5 font-serif text-2xl font-extrabold'
+	>
+		{
+			navItems.map((item) => {
+				const subpagesUrls = item.subpages
+					? item.subpages.map((subpage) => subpage.url)
+					: [];
+
+				const isActivePage = currentRoute === item.url;
+				const hasActiveSubpage = subpagesUrls.includes(currentRoute);
+				const containsOrIsActivePage = hasActiveSubpage || isActivePage;
+				return (
+					<li class={item.class}>
+						<Link
+							isNavLink={true}
+							class={clsx({
+								'flex cursor-default items-center gap-1 text-fac-orange':
+									isActivePage,
+							})}
+							href={item.url}
+						>
+							{item.name}
+							{isActivePage ? <Icon size='20px' name='caret-right' /> : null}
+						</Link>
+						{item.subpages && (
+							<ul
+								class={`${
+									containsOrIsActivePage ? 'block' : 'hidden'
+								} list-none p-0 pl-4 font-sans text-xl font-bold md:text-lg`}
+							>
+								{item.subpages.map((subpage) => {
+									const isActiveSubpage = currentRoute === subpage.url;
+									return (
+										<li class={`${subpage.class} mt-4`}>
+											<Link
+												isNavLink={true}
+												class={clsx({
+													'flex cursor-default items-center gap-1 text-fac-orange':
+														isActiveSubpage,
+												})}
+												href={subpage.url}
+											>
+												{subpage.name}
+												{isActiveSubpage ? (
+													<Icon size='16px' name='caret-right' />
+												) : null}
+											</Link>
+										</li>
+									);
+								})}
+							</ul>
+						)}
+					</li>
+				);
+			})
+		}
+	</ul>
+	{
+		shouldShowRegisterCTA && (
+			<div class='-mx-12 mt-auto md:mx-0 md:mt-16'>
+				<Button
+					class='w-full py-6 text-xl md:block md:py-3 md:text-lg'
+					href='/register/'
+				>
+					Register
+				</Button>
+			</div>
+		)
+	}
+</nav>

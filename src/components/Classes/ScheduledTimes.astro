@@ -1,0 +1,24 @@
+---
+import TimeString from '@/components/TimeString.astro';
+
+interface Props {
+	// @// TODO:  <18-02-26, john> - ignoring 'any' until I refactor this component
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	scheduledTimes?: any[];
+	showScheduledTimes?: boolean;
+}
+const { scheduledTimes, showScheduledTimes } = Astro.props;
+---
+
+{!showScheduledTimes && <p>Call for schedule</p>}
+{
+	showScheduledTimes && scheduledTimes && (
+		<ul>
+			{scheduledTimes.map((time) => (
+				<li>
+					<TimeString time={time} />
+				</li>
+			))}
+		</ul>
+	)
+}

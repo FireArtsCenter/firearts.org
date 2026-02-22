@@ -1,0 +1,46 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { type TypePageMetaData } from '@/layouts/types';
+import { org } from '@/constants';
+import { getYearsSinceFounding } from '@/utils/orgData';
+import PageSection from '@/components/PageSection.astro';
+import Note from '@/components/Note.astro';
+const yearsSinceFounding = getYearsSinceFounding();
+
+const metaData: TypePageMetaData = {
+	title: 'About Us',
+	description: `The ${org.name} began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
+};
+
+const sections = [
+	{
+		headline: 'Fire Arts Mission',
+		text: `The <strong>${org.name}</strong> began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
+	},
+	{
+		headline: 'Facilities',
+		text: `The <strong>${org.name}</strong> has a fully equipped foundry complete with equipment for forging, welding, bronze and iron casting including furnaces and kilns. We also offer courses in stone carving, figure sculpture, figure drawing, and more. We are very excited about our new larger facility, so come <a href="/location/">visit us</a> to check it out.`,
+	},
+	{
+		headline: 'Classes',
+		text: 'Regular classes are offered quarterly. As listed above our classes cover a wide range of topics including ferrous and non-ferrous casting, figure sculpture, stone carving, figure drawing, metal forging, metal furniture design, and more. Class size is kept small to provide individualized attention. New students may opt to join at the beginning of each month as the schedule allows. <a href="/contact-us/">Contact us</a> about class schedules and eligibility.',
+	},
+	{
+		headline: 'Community Outreach',
+		text: `Special projects are very important to the <strong>${org.name}</strong>'s mission and goals. We aim to facilitate&mdash;and participate in&mdash;public art projects through outreach and collaboration with other community organizations. Past projects have introduced adults and children with disabilities to the excitement of metal casting, and have taught high school students the joys of metalworking.`,
+	},
+];
+---
+
+<Layout metaData={metaData}>
+	<PageSection title={`About the ${org.name}`}>
+		{
+			sections.map((section) => (
+				<Note>
+					<h3>{section.headline}</h3>
+					<div set:html={section.text} />
+				</Note>
+			))
+		}
+	</PageSection>
+</Layout>

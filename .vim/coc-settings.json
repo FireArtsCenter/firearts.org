@@ -1,0 +1,17 @@
+{
+	"coc.preferences.formatOnSave": true,
+	"prettier.enable": true,
+	"prettier.statusItemText": "Prettier",
+	"eslint.probe": ["javascript", "typescript", "astro", "typescriptreact"],
+	"eslint.workingDirectories": [{ "mode": "auto" }],
+	"astro.typescript.tsdk": "node_modules/typescript/lib",
+	"coc.preferences.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"[astro]": {
+		"coc.preferences.formatOnSave": true
+	},
+	"[typescript]": {
+		"coc.preferences.formatOnSave": true
+	}
+}

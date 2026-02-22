@@ -1,0 +1,88 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Link from '@/components/Link.astro';
+import Note from '@/components/Note.astro';
+import { org } from '@/constants';
+import { getYearsSinceFounding } from '@/utils/orgData';
+import PageSection from '@/components/PageSection.astro';
+import VideoIframe from '@/components/VideoIframe.astro';
+
+export const metaData = {
+	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
+};
+
+const yearsSinceFounding = getYearsSinceFounding();
+---
+
+<Layout metaData={metaData}>
+	<PageSection>
+		<p>
+			The {org.name} began {yearsSinceFounding} years ago as a not-for-profit school
+			for sculptors. Our primary mission is the <strong
+				>preservation of traditional sculpture technique</strong
+			> by offering high-quality training to artists, students and others seeking
+			to learn or perfect their skills. Our secondary mission is to{' '}
+			<strong
+				>provide teaching, working, and exhibition opportunities for artists</strong
+			>, as well as technical advice and facilities to artists and institutions.
+		</p>
+		<p class='mt-2'>
+			<Link href='/about-us/'>Read more about the {org.name}</Link>
+		</p>
+		<VideoIframe id='video-iframe' />
+	</PageSection>
+
+	<PageSection title='What’s New' class='mt-8' level='h2'>
+		<Note>
+			<h3>We’ve got a new address</h3>
+			<p>The {org.name} has moved to a new location. Our new address is</p>
+			<p>
+				1830 N Kostner
+				<br />
+				Chicago, IL 60639
+			</p>
+			<p>Enter the building on Cortland and Kenneth.</p>
+			<p>Stop by and visit us and check out the great new space.</p>
+		</Note>
+
+		<Note>
+			<h3>Payment Plans and Discounts</h3>
+			<p>
+				We at the {org.name} are not immune to the challenges of a difficult economy.
+				Our mission has always been to preserve the traditional methods and techniques
+				of sculptors as well as the technical skills relevant to those just looking
+				to develop a new trade. In order for us to meet that mission we need to provide
+				our classes to as many people as we can. However, when times are tough, finding
+				the money to pay for classes like this is hard. For that reason we have been
+				offering a 1/2-down payment plan to make it easier to pay for classes. Now,
+				in addition to that discount, we are introducing a bartered services option
+				to reduce class prices.
+			</p>
+			<h4>How does it work?</h4>
+			<p>
+				Do you have experience with fund-raising and think you can lend a hand?
+				Maybe accounting or legal experience? Do you work somewhere that tosses
+				out scrap metal which could be reused by us? The possibilties are
+				endless. The {org.name} is always looking for tips and materials to help us
+				grow, and we want to offer you ways to learn for less.
+			</p>
+			<h4>How do I take advantage of the payment plans and discounts?</h4>
+			<p>
+				Call us at 773.544.9908. It’s as simple as that. Call and let us know
+				what you have to trade and we can work out a discount plan for you.
+			</p>
+		</Note>
+
+		<Note>
+			<h3>Class Lengths</h3>
+			<p>
+				We offer various class lengths to accommodate your schedule better. For
+				most classes, you can choose between{' '}
+				<strong>10 week</strong> and <strong>16 week</strong> courses.
+			</p>
+			<p>
+				<Link href='/classes/'>Check out all of our classes.</Link>
+			</p>
+		</Note>
+	</PageSection>
+</Layout>

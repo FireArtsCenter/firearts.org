@@ -1,0 +1,88 @@
+---
+import Link from '@/components/Link.astro';
+import { type TypeNavItem } from '@/components/Navigation/constants';
+import FooterNavFocused from '@/components/FooterNavFocused.astro';
+import { org } from '@/constants';
+import { cn } from '../utils/styles.ts';
+interface Props {
+	navItems: TypeNavItem[];
+	class: string;
+}
+
+const { navItems, class: overrideClasses } = Astro.props;
+function getSubnavItemsByClass(navItemClass: string) {
+	const navItem = navItems.find((item) => item.class === navItemClass);
+	return navItem?.subpages;
+}
+const homeSubPages = getSubnavItemsByClass('home');
+const classesSubPages = getSubnavItemsByClass('classes');
+const gallerySubPages = getSubnavItemsByClass('artists');
+---
+
+<footer class={cn('px-4 py-8', overrideClasses)}>
+	<nav class='flex flex-wrap justify-between'>
+		<div class='w-1/2 md:w-1/4'>
+			<h2 class='mt-4 md:mt-0'>
+				<Link isNavLink href='/'>Home</Link>
+			</h2>
+			{
+				homeSubPages && (
+					<FooterNavFocused
+						subNavItems={homeSubPages}
+						class='mt-4 list-none p-0'
+					/>
+				)
+			}
+		</div>
+		<div class='w-1/2 md:w-1/4'>
+			<h2 class='mt-4 md:mt-0'>
+				<Link isNavLink href='/classes/'>Classes</Link>
+			</h2>
+			{
+				classesSubPages && (
+					<FooterNavFocused
+						subNavItems={classesSubPages}
+						class='mt-4 list-none p-0'
+					/>
+				)
+			}
+		</div>
+		<div class='w-1/2 md:w-1/4'>
+			<h2 class='mt-4 md:mt-0'>
+				<Link isNavLink href='/artists/'>Artists</Link>
+			</h2>
+			{
+				gallerySubPages && (
+					<FooterNavFocused
+						subNavItems={gallerySubPages}
+						class='mt-4 list-none p-0'
+					/>
+				)
+			}
+		</div>
+		<div class='w-1/2 md:w-1/4'>
+			<h2 class='mt-4 md:mt-0'>Other Links</h2>
+			<ul class='mt-4 list-none p-0'>
+				<li>
+					<Link isNavLink href='/events/'>Events</Link>
+				</li>
+				<li>
+					<Link isNavLink href='/contact-us/'>Contact Us</Link>
+				</li>
+				<li>
+					<Link isNavLink href='/donate/'>Donate</Link>
+				</li>
+				<li>
+					<Link isNavLink href='/register/'>Register</Link>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<p class='mt-8 w-full border-t border-border-default pt-4 text-sm'>
+		{org.name} | {org.address} | {org.city}, {org.state}
+		{org.zip}
+		<br />
+		Tel: {org.phone} | Email:{' '}
+		<Link href={`mailto:${org.email}`}>{org.email}</Link>
+	</p>
+</footer>

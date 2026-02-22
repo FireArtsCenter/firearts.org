@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import ScheduleTimes from '@/components/Classes/ScheduledTimes.astro';
+import Button from '@/components/Button.astro';
+import { selectImageDataFromResponse } from '@/lib/contentful';
+
+// @// TODO:  <14-02-26, john> - ignoring 'any' until I refactor this component
+/* eslint-disable @typescript-eslint/no-explicit-any */
+interface Props {
+	instructors?: any[];
+	showScheduledTimes?: boolean;
+	scheduledTimes?: any[];
+	fee?: string[];
+	description?: any;
+	disclaimers?: string[];
+	images?: any[];
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
+const {
+	instructors,
+	showScheduledTimes,
+	scheduledTimes,
+	fee,
+	description,
+	disclaimers,
+	images,
+} = Astro.props;
+const instructorsString = instructors?.reduce(
+	(instructorNames, currentInstructor, index) => {
+		if (instructors.length === 1) {
+			return currentInstructor.fields.name;
+		} else {
+			return index === 0
+				? currentInstructor.fields.name
+				: [instructorNames, currentInstructor.fields.name].join(', ');
+		}
+	},
+	''
+);
+
+const imageData = images ? selectImageDataFromResponse(images) : [];
+const firstImage = imageData[0];
+---
+
+{firstImage && <Image {...firstImage} alt='' />}
+
+<h3>Schedule</h3>
+<ScheduleTimes
+	showScheduledTimes={showScheduledTimes}
+	scheduledTimes={scheduledTimes}
+/>
+
+{
+	fee && (
+		<>
+			<h3>Fee</h3>
+			<p>{fee.join(', ')}</p>
+		</>
+	)
+}
+
+{
+	instructorsString && (
+		<>
+			<h3>Instructors</h3>
+			<p>{instructorsString}</p>
+		</>
+	)
+}
+
+{
+	disclaimers && (
+		<div
+			class='my-4 border-l-4 border-orange-300 bg-orange-700 px-4 py-2 text-white'
+			role='alert'
+		>
+			{disclaimers.map((disclaimer) => (
+				<p class='text-sm md:text-sm'>{disclaimer}</p>
+			))}
+		</div>
+	)
+}
+
+<div set:html={description} class='flex flex-col gap-4 text-lg' />
+
+<Button
+	appearance='primary'
+	size='large'
+	class='mt-16 md:self-center'
+	href='/register/'>Register Now</Button
+>
