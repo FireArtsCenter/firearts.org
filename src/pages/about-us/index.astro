@@ -9,25 +9,23 @@ const yearsSinceFounding = getYearsSinceFounding();
 
 const metaData: TypePageMetaData = {
 	title: 'About Us',
-	description: `The ${org.name} began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
+	description: `The ${org.name} began as a non-for-profit school of sculpture ${yearsSinceFounding} years ago and seeks to pass on our knowledge and preserve these techniques. Hopefully those who learn from us will do the same.`,
 };
 
 const sections = [
 	{
-		headline: 'Fire Arts Mission',
-		text: `The <strong>${org.name}</strong> began ${yearsSinceFounding} years ago as a not-for-profit school for sculptors. Our primary mission is the preservation of traditional sculpture technique by offering high-quality training to artists, students and others seeking to learn or perfect their skills. Our secondary mission is to provide teaching, working, and exhibition opportunities for artists, as well as technical advice and facilities to artists and institutions.`,
+		text: `The ${org.name} began as a non-for-profit school of sculpture ${yearsSinceFounding} years ago and seeks to pass on our knowledge and preserve these techniques. Hopefully those who learn from us will do the same.`,
 	},
 	{
 		headline: 'Facilities',
-		text: `The <strong>${org.name}</strong> has a fully equipped foundry complete with equipment for forging, welding, bronze and iron casting including furnaces and kilns. We also offer courses in stone carving, figure sculpture, figure drawing, and more. We are very excited about our new larger facility, so come <a href="/location/">visit us</a> to check it out.`,
-	},
-	{
-		headline: 'Classes',
-		text: 'Regular classes are offered quarterly. As listed above our classes cover a wide range of topics including ferrous and non-ferrous casting, figure sculpture, stone carving, figure drawing, metal forging, metal furniture design, and more. Class size is kept small to provide individualized attention. New students may opt to join at the beginning of each month as the schedule allows. <a href="/contact-us/">Contact us</a> about class schedules and eligibility.',
+		text: [
+			'We have a fully equipped foundry with equipment for forging, welding, bronze and iron casting with furnaces and kilns so you can bring your ideas to life.',
+			'We also offer traditional art courses such as stone carving, figure sculpture, figure drawing, etc. <a href="/location/">Come check us out!</a>',
+		],
 	},
 	{
 		headline: 'Community Outreach',
-		text: `Special projects are very important to the <strong>${org.name}</strong>'s mission and goals. We aim to facilitate&mdash;and participate in&mdash;public art projects through outreach and collaboration with other community organizations. Past projects have introduced adults and children with disabilities to the excitement of metal casting, and have taught high school students the joys of metalworking.`,
+		text: `Community art projects are important to us at <strong>${org.name}</strong>. We aim to facilitate and participate in public art projects through outreach and collaboration with other community organizations. Past projects have introduced adults and children with disabilities to the excitement of metal casting, and teaching high school students the joy of metal working.`,
 	},
 ];
 ---
@@ -35,12 +33,23 @@ const sections = [
 <Layout metaData={metaData}>
 	<PageSection title={`About the ${org.name}`}>
 		{
-			sections.map((section) => (
-				<Note>
-					<h3>{section.headline}</h3>
-					<div set:html={section.text} />
-				</Note>
-			))
+			sections.map((section) => {
+				let paragraphs;
+				if (Array.isArray(section.text)) {
+					paragraphs = section.text.reduce((acc, cur, index) => {
+						const currentParagraph = `<p class="${index !== 0 ? 'mt-6' : ''}">${cur}</p>`;
+						return acc + currentParagraph;
+					}, '');
+				} else {
+					paragraphs = `<p>${section.text}<p>`;
+				}
+				return (
+					<Note>
+						{section.headline && <h3>{section.headline}</h3>}
+						<div set:html={paragraphs} />
+					</Note>
+				);
+			})
 		}
 	</PageSection>
 </Layout>

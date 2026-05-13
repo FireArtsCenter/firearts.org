@@ -1,88 +1,86 @@
 ---
+import Button from '@/components/Button.astro';
 import Layout from '@/layouts/Layout.astro';
 import Link from '@/components/Link.astro';
-import Note from '@/components/Note.astro';
 import { org } from '@/constants';
 import { getYearsSinceFounding } from '@/utils/orgData';
 import PageSection from '@/components/PageSection.astro';
 import VideoIframe from '@/components/VideoIframe.astro';
 
+const yearsSinceFounding = getYearsSinceFounding();
+const pageTitle = `${yearsSinceFounding} years of high quality training`;
+
 export const metaData = {
 	description: `The ${org.name} provides instruction in foundry, forging, welding, metalsmithing, figure sculpture, and more.`,
 };
-
-const yearsSinceFounding = getYearsSinceFounding();
 ---
 
 <Layout metaData={metaData}>
-	<PageSection>
-		<p>
-			The {org.name} began {yearsSinceFounding} years ago as a not-for-profit school
-			for sculptors. Our primary mission is the <strong
-				>preservation of traditional sculpture technique</strong
-			> by offering high-quality training to artists, students and others seeking
-			to learn or perfect their skills. Our secondary mission is to{' '}
-			<strong
-				>provide teaching, working, and exhibition opportunities for artists</strong
-			>, as well as technical advice and facilities to artists and institutions.
-		</p>
-		<p class='mt-2'>
-			<Link href='/about-us/'>Read more about the {org.name}</Link>
-		</p>
+	<PageSection title={pageTitle} class='pb-12'>
+		<div class='pt-1 md:flex md:items-center md:pt-8'>
+			<h2 class='px-0 text-xl font-semibold md:basis-7/12 md:pr-6 md:text-2xl'>
+				Get access to the instruction and facilities you need to learn and
+				perfect your skills now.
+			</h2>
+			<div class='mt-6 md:mt-0 md:basis-5/12 md:px-6'>
+				<Button
+					class='w-full py-6 text-xl font-bold md:block md:py-3 md:text-lg'
+					href='/register/'
+				>
+					Register for classes
+				</Button>
+			</div>
+		</div>
 		<VideoIframe id='video-iframe' />
 	</PageSection>
 
-	<PageSection title='What’s New' class='mt-8' level='h2'>
-		<Note>
-			<h3>We’ve got a new address</h3>
-			<p>The {org.name} has moved to a new location. Our new address is</p>
-			<p>
-				1830 N Kostner
-				<br />
-				Chicago, IL 60639
-			</p>
-			<p>Enter the building on Cortland and Kenneth.</p>
-			<p>Stop by and visit us and check out the great new space.</p>
-		</Note>
+	<PageSection
+		title='Our Mission'
+		class='border-t border-border-default py-12'
+		level='h2'
+	>
+		<div class='flex flex-col gap-6 md:flex-row'>
+			<div
+				class='flex basis-1/2 flex-col rounded bg-neutral-700 p-8 ring-1 ring-fac-orange'
+			>
+				<h3 class='pb-4'>Preserve traditional sculpture techniques</h3>
+				<p>
+					We offer high-quality training, technical advice, and professional
+					facilities to help you master your craft and perfect your creative
+					skills.
+				</p>
+			</div>
 
-		<Note>
-			<h3>Payment Plans and Discounts</h3>
-			<p>
-				We at the {org.name} are not immune to the challenges of a difficult economy.
-				Our mission has always been to preserve the traditional methods and techniques
-				of sculptors as well as the technical skills relevant to those just looking
-				to develop a new trade. In order for us to meet that mission we need to provide
-				our classes to as many people as we can. However, when times are tough, finding
-				the money to pay for classes like this is hard. For that reason we have been
-				offering a 1/2-down payment plan to make it easier to pay for classes. Now,
-				in addition to that discount, we are introducing a bartered services option
-				to reduce class prices.
-			</p>
-			<h4>How does it work?</h4>
-			<p>
-				Do you have experience with fund-raising and think you can lend a hand?
-				Maybe accounting or legal experience? Do you work somewhere that tosses
-				out scrap metal which could be reused by us? The possibilties are
-				endless. The {org.name} is always looking for tips and materials to help us
-				grow, and we want to offer you ways to learn for less.
-			</p>
-			<h4>How do I take advantage of the payment plans and discounts?</h4>
-			<p>
-				Call us at 773.544.9908. It’s as simple as that. Call and let us know
-				what you have to trade and we can work out a discount plan for you.
-			</p>
-		</Note>
-
-		<Note>
-			<h3>Class Lengths</h3>
-			<p>
-				We offer various class lengths to accommodate your schedule better. For
-				most classes, you can choose between{' '}
-				<strong>10 week</strong> and <strong>16 week</strong> courses.
-			</p>
-			<p>
-				<Link href='/classes/'>Check out all of our classes.</Link>
-			</p>
-		</Note>
+			<div
+				class='flex basis-1/2 flex-col rounded bg-neutral-700 p-8 ring-1 ring-fac-orange'
+			>
+				<h3 class='pb-4'>Empower artists with career opportunities</h3>
+				<p>
+					Many of our instructors began here as students. Others have used these
+					resources to establish thriving personal practices and careers.
+				</p>
+			</div>
+		</div>
+	</PageSection>
+	<PageSection
+		title='Payment Plans & Bartered Discounts'
+		level='h2'
+		class='border-t border-border-default py-12'
+	>
+		<p>
+			In order to fulfil our mission we want to provide our classes to as many
+			people as we can.
+		</p>
+		<p>
+			But we understand that times are tough and finding the money to pay for
+			these classes can be hard. That is why we offer split payments: half
+			upfront, half later.
+		</p>
+		<p><strong>or</strong></p>
+		<p>Do you have a skill, service, material, or equipment we can use?</p>
+		<p>
+			<Link href='/contact-us/'>Give us a call!</Link> let us know what you have to
+			trade and we will work out a discount for you.
+		</p>
 	</PageSection>
 </Layout>
